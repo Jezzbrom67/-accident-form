@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Accident/Incident KPI Dashboard CSS-HSA-001-KPI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+<style>
+body {
+max-width: 880px;
+margin: 0 auto;
+padding: 32px 80px;
+position: relative;
+box-sizing: border-box;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+font-size: 14px;
+line-height: 1.6;
+background: #f5f7fa;
+}
+
+.header {
+text-align: center;
+border: 2px solid #1e3a8a;
+padding: 20px;
+margin-bottom: 30px;
+background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header img {
+max-width: 280px;
+max-height: 140px;
+margin-bottom: 15px;
+}
+
+.header h1 {
+color: #1e3a8a;
+margin: 15px 0 10px 0;
+font-size: 20px;
+font-weight: bold;
+}
+
+.header .subtitle {
+font-size: 12px;
+color: #64748b;
+margin-bottom: 15px;
+}
+
+.period-selector {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+margin-top: 20px;
+padding-top: 20px;
+border-top: 2px solid #e2e8f0;
+}
+
+.period-field {
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+
+.period-field label {
+font-weight: bold;
+font-size: 11px;
+color: #64748b;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.period-field select,
+.period-field input {
+padding: 8px;
+border: 1px solid #cbd5e1;
+border-radius: 4px;
+font-size: 12px;
+}
+
+.consultant-info {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+padding: 8px;
+background: #f0f9ff;
+border-radius: 4px;
+border: 1px solid #0ea5e9;
+margin-top: 15px;
+}
+
+.consultant-info strong {
+color: #1e3a8a;
+}
+
+.consultant-info a {
+color: #0ea5e9;
+text-decoration: none;
+font-weight: 600;
+font-size: 11px;
+}
+
+.section-title {
+color: #1e3a8a;
+font-size: 16px;
+font-weight: bold;
+margin: 30px 0 15px 0;
+border-bottom: 3px solid #3b82f6;
+padding-bottom: 10px;
+background: linear-gradient(to right, #f0f9ff 0%, transparent 100%);
+padding-left: 12px;
+margin-left: -12px;
+padding-right: 12px;
+}
+
+.riddor-section {
+background: linear-gradient(to right, #fee2e2 0%, #fef2f2 100%);
+border-left: 4px solid #dc2626;
+border-right: 1px solid #dc2626;
+border-top: 1px solid #dc2626;
+border-bottom: 1px solid #dc2626;
+padding: 20px;
+margin: 20px 0;
+border-radius: 6px;
+box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
+}
+
+.riddor-title {
+color: #991b1b;
+font-size: 16px;
+font-weight: bold;
+margin-bottom: 15px;
+}
+
+.kpi-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+margin: 20px 0;
+}
+
+.kpi-card {
+background: white;
+border: 1px solid #e2e8f0;
+border-radius: 6px;
+padding: 15px;
+text-align: center;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.kpi-card.critical {
+border-left: 4px solid #dc2626;
+background: linear-gradient(to bottom, #fef2f2 0%, #ffffff 100%);
+}
+
+.kpi-card.warning {
+border-left: 4px solid #f59e0b;
+background: linear-gradient(to bottom, #fffbeb 0%, #ffffff 100%);
+}
+
+.kpi-card.good {
+border-left: 4px solid #10b981;
+background: linear-gradient(to bottom, #f0fdf4 0%, #ffffff 100%);
+}
+
+.kpi-number {
+font-size: 24px;
+font-weight: bold;
+color: #1e3a8a;
+}
+
+.kpi-label {
+font-size: 11px;
+color: #64748b;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 15px;
+margin: 20px 0;
+}
+
+.stats-card {
+background: white;
+border: 1px solid #e2e8f0;
+border-radius: 6px;
+padding: 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.stats-title {
+color: #1e3a8a;
+font-size: 14px;
+font-weight: bold;
+margin-bottom: 15px;
+}
+
+.metric-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 8px 0;
+border-bottom: 1px solid #f1f5f9;
+}
+
+.metric-row:last-child {
+border-bottom: none;
+}
+
+.metric-label {
+font-size: 12px;
+color: #374151;
+}
+
+.metric-value {
+font-weight: bold;
+font-size: 14px;
+color: #1e3a8a;
+}
+
+.formula {
+font-size: 10px;
+color: #64748b;
+font-style: italic;
+margin-top: 5px;
+}
+
+.table-responsive {
+width: 100%;
+border-collapse: collapse;
+margin: 15px 0;
+background: white;
+border-radius: 6px;
+overflow: hidden;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.table-responsive th {
+background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+color: white;
+padding: 12px;
+text-align: left;
+font-size: 11px;
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.table-responsive td {
+padding: 10px 12px;
+border-bottom: 1px solid #f1f5f9;
+font-size: 12px;
+}
+
+.table-responsive tr:nth-child(even) {
+background: #f8fafc;
+}
+
+.status-pending {
+background: #fef3c7;
+color: #92400e;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 10px;
+font-weight: bold;
+}
+
+.status-progress {
+background: #dbeafe;
+color: #1e40af;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 10px;
+font-weight: bold;
+}
+
+.status-complete {
+background: #d1fae5;
+color: #065f46;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 10px;
+font-weight: bold;
+}
+
+.status-overdue {
+background: #fee2e2;
+color: #991b1b;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 10px;
+font-weight: bold;
+}
+
+.priority-high {
+color: #dc2626;
+font-weight: bold;
+}
+
+.priority-medium {
+color: #f59e0b;
+font-weight: bold;
+}
+
+.priority-low {
+color: #10b981;
+font-weight: bold;
+}
+
+.chart-placeholder {
+background: #f8fafc;
+border: 2px dashed #cbd5e1;
+border-radius: 6px;
+padding: 40px 20px;
+text-align: center;
+color: #64748b;
+font-style: italic;
+margin: 15px 0;
+}
+
+.benchmarking {
+background: linear-gradient(to right, #f0f9ff 0%, #e0f2fe 100%);
+border-left: 4px solid #0ea5e9;
+border-right: 1px solid #0ea5e9;
+border-top: 1px solid #0ea5e9;
+border-bottom: 1px solid #0ea5e9;
+padding: 20px;
+margin: 20px 0;
+border-radius: 6px;
+box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+}
+
+.footer-actions {
+display: flex;
+justify-content: center;
+gap: 15px;
+margin: 30px 0 20px 0;
+padding: 20px 0;
+border-top: 2px solid #e2e8f0;
+}
+
+.action-button {
+padding: 12px 24px;
+background: white;
+color: #1e3a8a;
+border: 2px solid #1e3a8a;
+font-size: 13px;
+font-weight: bold;
+border-radius: 6px;
+text-decoration: none;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+}
+
+.action-button.primary {
+background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+color: white;
+box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+}
+
+.footer {
+text-align: center;
+font-size: 10px;
+color: #64748b;
+margin-top: 30px;
+padding-top: 20px;
+border-top: 2px solid #e2e8f0;
+}
+
+.last-updated {
+background: #f8fafc;
+border: 1px solid #e2e8f0;
+border-radius: 4px;
+padding: 10px;
+text-align: center;
+font-size: 11px;
+color: #64748b;
+margin: 20px 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+<img
+src="https://page.gensparksite.com/v1/base64_upload/65982c0f83dc8cbbe9020c7b0cf61502"
+alt="Common Sense Safety Logo - In Safe Hands"
+/>
+<h1>ACCIDENT/INCIDENT KPI DASHBOARD</h1>
+<div class="subtitle">Common Sense Safety | CSS-HSA-001-KPI</div>
+
+<div class="period-selector">
+<div class="period-field">
+<label>Reporting Period:</label>
+<select>
+<option value="monthly" selected>Monthly</option>
+<option value="quarterly">Quarterly</option>
+<option value="annual">Annual</option>
+</select>
+</div>
+<div class="period-field">
+<label>From Date:</label>
+<input type="text" value="01/01/2024" placeholder="DD/MM/YYYY" />
+</div>
+<div class="period-field">
+<label>To Date:</label>
+<input type="text" value="31/01/2024" placeholder="DD/MM/YYYY" />
+</div>
+</div>
+
+<div class="consultant-info">
+<strong>HSQE Consultant: Jeremy Bromley</strong>
+<span>|</span>
+<a href="/cdn-cgi/l/email-protection#fa909f889f9783ba999597979594899f94899f899b9c9f8e83d49995d48f91"><span class="__cf_email__" data-cfemail="ff959a8d9a9286bf9c90929290918c9a918c9a8c9e999a8b86d19c90d18a94">[email&#160;protected]</span></a>
+</div>
+</div>
+
+<div class="riddor-section">
+<div class="riddor-title">⚠️ RIDDOR COMPLIANCE STATUS</div>
+<div class="kpi-grid">
+<div class="kpi-card critical">
+<div class="kpi-number">0</div>
+<div class="kpi-label">Fatal Incidents</div>
+</div>
+<div class="kpi-card critical">
+<div class="kpi-number">2</div>
+<div class="kpi-label">Specified Injuries</div>
+</div>
+<div class="kpi-card critical">
+<div class="kpi-number">1</div>
+<div class="kpi-label">Over-7-Day Injuries</div>
+</div>
+<div class="kpi-card warning">
+<div class="kpi-number">0</div>
+<div class="kpi-label">Dangerous Occurrences</div>
+</div>
+<div class="kpi-card warning">
+<div class="kpi-number">1</div>
+<div class="kpi-label">Occupational Diseases</div>
+</div>
+<div class="kpi-card good">
+<div class="kpi-number">100%</div>
+<div class="kpi-label">HSE Reporting Compliance</div>
+</div>
+</div>
+<p style="font-size: 11px; color: #991b1b; font-weight: bold; margin: 0">
+All RIDDOR reportable incidents must be reported to HSE within statutory timeframes. Report online at:
+www.hse.gov.uk/riddor
+</p>
+</div>
+
+<div class="section-title">Incident Statistics</div>
+<div class="kpi-grid">
+<div class="kpi-card">
+<div class="kpi-number">12</div>
+<div class="kpi-label">Total Incidents</div>
+</div>
+<div class="kpi-card critical">
+<div class="kpi-number">4</div>
+<div class="kpi-label">RIDDOR Reportable</div>
+</div>
+<div class="kpi-card good">
+<div class="kpi-number">8</div>
+<div class="kpi-label">Non-RIDDOR Incidents</div>
+</div>
+<div class="kpi-card good">
+<div class="kpi-number">23</div>
+<div class="kpi-label">Near Misses Reported</div>
+</div>
+<div class="kpi-card warning">
+<div class="kpi-number">2</div>
+<div class="kpi-label">Environmental Incidents</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-number">3</div>
+<div class="kpi-label">Property Damage</div>
+</div>
+</div>
+
+<div class="section-title">Injury Metrics & KPI Calculations</div>
+<div class="stats-grid">
+<div class="stats-card">
+<div class="stats-title">Lost Time Injury Metrics</div>
+<div class="metric-row">
+<div class="metric-label">Lost Time Injuries (LTI)</div>
+<div class="metric-value">3</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Days Lost to Injury</div>
+<div class="metric-value">45 days</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Lost Time Injury Frequency Rate (LTIFR)</div>
+<div class="metric-value">2.14</div>
+</div>
+<div class="formula">Formula: (LTI × 100,000) ÷ Total hours worked</div>
+<div class="metric-row">
+<div class="metric-label">Average Severity Rate</div>
+<div class="metric-value">15.0 days</div>
+</div>
+</div>
+<div class="stats-card">
+<div class="stats-title">Recordable Incident Metrics</div>
+<div class="metric-row">
+<div class="metric-label">Total Recordable Incidents</div>
+<div class="metric-value">12</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Total Hours Worked</div>
+<div class="metric-value">140,280</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Total Recordable Incident Rate (TRIR)</div>
+<div class="metric-value">17.12</div>
+</div>
+<div class="formula">Formula: (Total recordable incidents × 200,000) ÷ Total hours worked</div>
+<div class="metric-row">
+<div class="metric-label">Medical Treatment Cases</div>
+<div class="metric-value">7</div>
+</div>
+</div>
+</div>
+
+<div class="section-title">Investigation Status Tracker</div>
+<div class="kpi-grid">
+<div class="kpi-card warning">
+<div class="kpi-number">2</div>
+<div class="kpi-label">Awaiting Investigation</div>
+</div>
+<div class="kpi-card warning">
+<div class="kpi-number">3</div>
+<div class="kpi-label">In Progress</div>
+</div>
+<div class="kpi-card good">
+<div class="kpi-number">7</div>
+<div class="kpi-label">Completed</div>
+</div>
+<div class="kpi-card critical">
+<div class="kpi-number">8</div>
+<div class="kpi-label">Outstanding Actions</div>
+</div>
+</div>
+
+<div class="section-title">Trending Analysis</div>
+<div class="chart-placeholder">
+<strong>Month-on-Month Incident Trends</strong><br />
+Line chart showing incident frequency over the last 12 months.<br />
+Data points: Total incidents, RIDDOR events, near misses, days lost.<br />
+Trend analysis identifies seasonal patterns and improvement/decline areas.
+</div>
+<div class="chart-placeholder">
+<strong>Incident Type Breakdown</strong><br />
+Pie chart categorizing incidents by type: Slips/Trips/Falls (35%), Manual Handling (25%), Cuts/Lacerations (20%),
+Struck by Object (15%), Other (5%).<br />
+Helps identify primary risk areas for targeted intervention.
+</div>
+<div class="chart-placeholder">
+<strong>Body Part Injury Frequency</strong><br />
+Bar chart showing injury distribution: Hands (40%), Back (20%), Legs/Feet (18%), Head/Neck (12%), Arms (10%).<br />
+Guides PPE requirements and training focus areas.
+</div>
+
+<div class="section-title">Root Cause Analysis Summary</div>
+<div class="stats-grid">
+<div class="stats-card">
+<div class="stats-title">Contributing Factor Distribution</div>
+<div class="metric-row">
+<div class="metric-label">Human Error</div>
+<div class="metric-value">45%</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Management Systems</div>
+<div class="metric-value">30%</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Technical/Equipment</div>
+<div class="metric-value">20%</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Miscellaneous</div>
+<div class="metric-value">5%</div>
+</div>
+</div>
+<div class="stats-card">
+<div class="stats-title">Top Contributing Factors</div>
+<div class="metric-row">
+<div class="metric-label">H02: Not paying attention</div>
+<div class="metric-value">18%</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">MC03: Inadequate training</div>
+<div class="metric-value">15%</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">H05: Not following procedure</div>
+<div class="metric-value">12%</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">T04: Inadequate maintenance</div>
+<div class="metric-value">10%</div>
+</div>
+</div>
+</div>
+
+<div class="section-title">Corrective Actions Tracker</div>
+<table class="table-responsive">
+<thead>
+<tr>
+<th>Action ID</th>
+<th>Description</th>
+<th>Responsible Person</th>
+<th>Target Date</th>
+<th>Status</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA-2024-001</td>
+<td>Implement additional slip-resistant flooring in workshop area</td>
+<td>Facilities Manager</td>
+<td>15/02/2024</td>
+<td><span class="status-progress">In Progress</span></td>
+<td><span class="priority-high">HIGH</span></td>
+</tr>
+<tr>
+<td>CA-2024-002</td>
+<td>Revise manual handling training program content</td>
+<td>Training Coordinator</td>
+<td>28/02/2024</td>
+<td><span class="status-pending">Pending</span></td>
+<td><span class="priority-medium">MEDIUM</span></td>
+</tr>
+<tr>
+<td>CA-2024-003</td>
+<td>Install additional safety signage in high-risk areas</td>
+<td>Site Supervisor</td>
+<td>31/01/2024</td>
+<td><span class="status-complete">Complete</span></td>
+<td><span class="priority-low">LOW</span></td>
+</tr>
+<tr>
+<td>CA-2023-045</td>
+<td>Replace defective ladder safety locks identified in incident</td>
+<td>Equipment Manager</td>
+<td>20/01/2024</td>
+<td><span class="status-overdue">Overdue</span></td>
+<td><span class="priority-high">HIGH</span></td>
+</tr>
+<tr>
+<td>CA-2024-004</td>
+<td>Conduct refresher PPE compliance training for all staff</td>
+<td>HSQE Consultant</td>
+<td>10/03/2024</td>
+<td><span class="status-pending">Pending</span></td>
+<td><span class="priority-medium">MEDIUM</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="section-title">Industry Benchmarking</div>
+<div class="benchmarking">
+<div class="stats-title">Performance Comparison</div>
+<div class="metric-row">
+<div class="metric-label">Our LTIFR vs Industry Average (Construction)</div>
+<div class="metric-value">2.14 vs 4.6 (53% better)</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">Our TRIR vs Industry Average</div>
+<div class="metric-value">17.12 vs 22.8 (25% better)</div>
+</div>
+<div class="metric-row">
+<div class="metric-label">HSE Best Practice Target LTIFR</div>
+<div class="metric-value">&lt; 1.0 (Target not yet achieved)</div>
+</div>
+<p style="font-size: 11px; color: #0369a1; margin: 10px 0 0 0; font-style: italic">
+<strong>Source:</strong> HSE Statistics 2023 - Construction Industry Fatal and Non-Fatal Injury Rates<br />
+<strong>Reference:</strong> HSE Labour Force Survey and RIDDOR data analysis
+</p>
+</div>
+
+<div class="last-updated">
+<strong>Dashboard Last Updated:</strong> 05/02/2024 09:30 GMT | <strong>Data Period:</strong> January 2024 |
+<strong>Next Review:</strong> 05/03/2024
+</div>
+
+<div class="footer-actions">
+<a href="#" class="action-button">🖨️ Print KPI Report</a>
+<a href="#" class="action-button">📊 Export Data</a>
+<a href="Accident_Report_Form_CSS-HSA-001.html" class="action-button primary">← Return to Accident Report Form</a>
+</div>
+
+<div class="footer">
+<strong>Dashboard Ref: CSS-HSA-001-KPI | Version 1.0 | February 2025 | Common Sense Safety</strong><br />
+CONFIDENTIAL - For Management Use Only<br />
+© 2025 Common Sense Safety<br />
+<div style="font-size: 10px; margin-top: 8px; color: #94a3b8">
+<strong>Compliance Notice:</strong> This dashboard complies with HSE RIDDOR reporting requirements and GDPR data
+protection legislation.<br />
+KPI calculations based on HSE guidance documents HSG65 and industry best practices.
+</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
