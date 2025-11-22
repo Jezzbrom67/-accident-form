@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Incident Report Form CSS-HSA-002</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 32px 80px;
+            position: relative;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #f5f7fa;
+        }
+
+        .info-corner {
+            position: fixed;
+            background: linear-gradient(135deg, #166534 0%, #22c55e 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .info-corner:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(22, 101, 52, 0.4);
+        }
+
+        .info-corner.top-left {
+            top: 0;
+            left: 0;
+            border-bottom-right-radius: 8px;
+        }
+
+        .info-corner.top-right {
+            top: 0;
+            right: 0;
+            border-bottom-left-radius: 8px;
+        }
+
+        .info-panel {
+            display: none;
+            position: fixed;
+            top: 60px;
+            background: white;
+            border: 2px solid #166534;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            z-index: 999;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .info-panel.show {
+            display: block;
+        }
+
+        .info-panel.left {
+            left: 20px;
+        }
+
+        .info-panel.right {
+            right: 20px;
+        }
+
+        .info-panel h3 {
+            margin: 0 0 15px 0;
+            color: #166534;
+            font-size: 16px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .info-panel p {
+            margin: 8px 0;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .info-panel .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #64748b;
+            padding: 5px;
+        }
+
+        .info-panel .close-btn:hover {
+            color: #166534;
+        }
+
+        /* Contact Info Popup Button */
+        .btn-info-small {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(to bottom, #22c55e 0%, #166534 100%);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.3em;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(22, 101, 52, 0.4);
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .btn-info-small:hover {
+            background: linear-gradient(to bottom, #4ade80 0%, #22c55e 100%);
+            box-shadow: 0 4px 8px rgba(22, 101, 52, 0.5);
+            transform: scale(1.1);
+        }
+
+        /* Contact Info Popup Panel */
+        .info-panel-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 1001;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            min-width: 400px;
+        }
+
+        /* Dark Overlay */
+        .info-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .info-overlay.show {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            border: 2px solid #166534;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .header-info .info-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .header-info .info-field label {
+            font-weight: bold;
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-info .info-field input {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .header-info .info-field.full-width {
+            grid-column: span 2;
+        }
+
+        .consultant-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #f0fdf4;
+            border-radius: 4px;
+            border: 1px solid #22c55e;
+        }
+
+        .consultant-info strong {
+            color: #166534;
+        }
+
+        .consultant-info a {
+            color: #16a34a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .consultant-info a:hover {
+            text-decoration: underline;
+        }
+
+        .header h1 {
+            color: #166534;
+            margin: 15px 0 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header .subtitle {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .tab-nav {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+        }
+
+        .tab-button {
+            padding: 12px 16px;
+            border: none;
+            background: linear-gradient(to bottom, #ffffff 0%, #f1f5f9 100%);
+            color: #475569;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #166534 0%, #22c55e 100%);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.3);
+            transform: translateY(0);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-top: -2px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            color: #166534;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #22c55e;
+            padding-bottom: 10px;
+            background: linear-gradient(to right, #f0fdf4 0%, transparent 100%);
+            padding-left: 12px;
+            margin-left: -12px;
+            padding-right: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #374151;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+            background: white;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px 20px;
+            margin-top: 10px;
+        }
+
+        .checkbox-grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px 15px;
+            margin-top: 10px;
+        }
+
+        .radio-stacked {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-item input, .checkbox-item input {
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .radio-item label, .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .textarea-large {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+            resize: vertical;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .textarea-large:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .warning-box {
+            background: linear-gradient(to right, #fff3cd 0%, #fffbeb 100%);
+            border-left: 4px solid #ffc107;
+            border-right: 1px solid #ffc107;
+            border-top: 1px solid #ffc107;
+            border-bottom: 1px solid #ffc107;
+            padding: 16px 18px;
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+        }
+
+        .danger-box {
+            background: linear-gradient(to right, #fee2e2 0%, #fef2f2 100%);
+            border-left: 4px solid #dc2626;
+            border-right: 1px solid #dc2626;
+            border-top: 1px solid #dc2626;
+            border-bottom: 1px solid #dc2626;
+            padding: 16px 18px;
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
+        }
+
+        .info-box {
+            background: linear-gradient(to right, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #22c55e;
+            border-right: 1px solid #22c55e;
+            border-top: 1px solid #22c55e;
+            border-bottom: 1px solid #22c55e;
+            padding: 16px 18px;
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+        }
+
+        .warning-box strong, .info-box strong, .danger-box strong {
+            font-size: 13px;
+        }
+
+        .danger-box strong {
+            color: #991b1b;
+        }
+
+        .warning-box strong {
+            color: #856404;
+        }
+
+        .info-box strong {
+            color: #166534;
+        }
+
+        .info-box a {
+            color: #166534;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 20px 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #166534 0%, #22c55e 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.3);
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(22, 101, 52, 0.4);
+        }
+
+        .nav-button:disabled {
+            background: linear-gradient(to bottom, #cbd5e1 0%, #94a3b8 100%);
+            color: #64748b;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .action-button {
+            padding: 12px 24px;
+            background: white;
+            color: #166534;
+            border: 2px solid #166534;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .action-button:hover {
+            background: #166534;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.3);
+        }
+
+        .progress-indicator {
+            text-align: center;
+            margin: 12px 0 20px 0;
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .table-responsive {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .table-responsive th,
+        .table-responsive td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .table-responsive th {
+            background-color: #f0fdf4;
+            font-weight: bold;
+            color: #166534;
+        }
+
+        .table-responsive input[type="text"],
+        .table-responsive input[type="date"],
+        .table-responsive textarea,
+        .table-responsive select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .riddor-highlight {
+            background-color: #fee2e2;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #991b1b;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .drawing-area {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 6px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .image-upload-box {
+            border: 2px dashed #cbd5e1;
+            border-radius: 6px;
+            padding: 30px;
+            text-align: center;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .image-upload-box:hover {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+
+        .signature-box {
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 20px;
+            background: #f8fafc;
+            margin: 20px 0;
+        }
+
+        .signature-box h4 {
+            color: #166534;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-grid,
+            .checkbox-grid-5 {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-nav {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contact Info Overlay and Popup -->
+    <div class="info-overlay" id="infoOverlay" onclick="toggleContactInfo()"></div>
+    
+    <button class="btn-info-small" onclick="toggleContactInfo()" title="Contact Information">
+      ℹ️
+    </button>
+    
+    <div id="contactInfo" class="info-panel-popup" style="display: none;">
+      <button onclick="toggleContactInfo()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5em; cursor: pointer; color: #6b7280;">×</button>
+      <h4 style="color: #166534; margin: 0 0 10px 0;">SHEQ Consultant Contact Details</h4>
+      <p style="margin: 5px 0;"><strong>Jeremy Bromley</strong></p>
+      <p style="margin: 5px 0;">Handen Farm, Bank Road, Aldington, Kent TN25 7DE</p>
+      <p style="margin: 5px 0;">📧 <a href="/cdn-cgi/l/email-protection#f59f908790988cb5969a98989a9b86909b869086949390818cdb969adb809e" style="color: #166534; text-decoration: none;"><span class="__cf_email__" data-cfemail="62080710070f1b22010d0f0f0d0c11070c110711030407161b4c010d4c1709">[email&#160;protected]</span></a></p>
+      <p style="margin: 5px 0;">📞 <a href="tel:+447775668959" style="color: #166534; text-decoration: none;">+44 7775 668959</a></p>
+      <hr style="margin: 15px 0; border: 1px solid #86efac;">
+      <p style="margin: 5px 0; font-size: 0.9em; color: #6b7280;">
+        <strong>Form Reference:</strong> CSS-HSA-002 (Rev 1 - Digital)<br>
+        © Common Sense Safety 2025
+      </p>
+    </div>
+
+    <div class="info-corner top-left" onclick="toggleInfo('form')">📋 Form Info</div>
+    <div class="info-corner top-right" onclick="toggleInfo('help')">❓ Help & Guidance</div>
+
+    <div class="info-panel left" id="formInfo">
+        <button class="close-btn" onclick="toggleInfo('form')">×</button>
+        <h3>Form Information</h3>
+        <p><strong>Form Reference:</strong> CSS-HSA-002</p>
+        <p><strong>Version:</strong> 1.0</p>
+        <p><strong>Purpose:</strong> UK Environmental Legislation compliant environmental incident and pollution reporting</p>
+        <p><strong>Completion Time:</strong> 30-40 minutes</p>
+        <p><strong>Confidentiality:</strong> All information is strictly confidential</p>
+        <p><strong>Data Storage:</strong> Form auto-saves to browser localStorage</p>
+    </div>
+
+    <div class="info-panel right" id="helpInfo">
+        <button class="close-btn" onclick="toggleInfo('help')">×</button>
+        <h3>Help & Guidance</h3>
+        <p><strong>Navigation:</strong> Use Previous/Next buttons or click tab numbers directly</p>
+        <p><strong>EA Categories:</strong> Cat 1 & 2 must be reported immediately to Environment Agency (0800 807060)</p>
+        <p><strong>RIDDOR Events:</strong> Some environmental incidents may also be RIDDOR reportable to HSE</p>
+        <p><strong>Related Forms:</strong> Links provided for H&S incidents and Service Strikes</p>
+        <p><strong>Support:</strong> Contact SHEQ Consultant for assistance</p>
+    </div>
+
+    <div class="header">
+        <img src="https://page.gensparksite.com/v1/base64_upload/67581ed82cffa2946ecbe3a286301f13" alt="Common Sense Safety" style="max-width: 200px; max-height: 120px; margin-bottom: 15px;">
+        <h1>🌍 ENVIRONMENTAL INCIDENT/ACCIDENT INVESTIGATION REPORT</h1>
+        <div class="subtitle">Form CSS-HSA-002 | UK Environmental Legislation Compliance</div>
+        
+        <div class="header-info">
+            <div class="info-field">
+                <label>Incident Reference Number</label>
+                <input type="text" id="refNumber" placeholder="Auto-generated or manual">
+            </div>
+            <div class="info-field">
+                <label>Date of Report</label>
+                <input type="date" id="reportDate">
+            </div>
+            <div class="info-field">
+                <label>Reported By</label>
+                <input type="text" id="reportedBy" placeholder="Your name">
+            </div>
+            <div class="info-field">
+                <label>Position/Role</label>
+                <input type="text" id="position" placeholder="Your position">
+            </div>
+            <div class="info-field full-width consultant-info">
+                <strong>SHEQ Consultant:</strong> Jeremy Bromley | 
+                <a href="#" onclick="toggleContactInfo(); return false;" style="color: #16a34a; text-decoration: none; font-weight: 600;">View Contact Details</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-indicator" id="progressText">Tab 1 of 12</div>
+
+    <div class="tabs">
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="showTab(1)">1. Related Forms</button>
+            <button class="tab-button" onclick="showTab(2)">2. Location & Time</button>
+            <button class="tab-button" onclick="showTab(3)">3. Incident Type</button>
+            <button class="tab-button" onclick="showTab(4)">4. Description</button>
+            <button class="tab-button" onclick="showTab(5)">5. Impact Assessment</button>
+            <button class="tab-button" onclick="showTab(6)">6. Pollution Details</button>
+            <button class="tab-button" onclick="showTab(7)">7. Notifications</button>
+            <button class="tab-button" onclick="showTab(8)">8. Witnesses</button>
+            <button class="tab-button" onclick="showTab(9)">9. Immediate Actions</button>
+            <button class="tab-button" onclick="showTab(10)">10. Root Cause</button>
+            <button class="tab-button" onclick="showTab(11)">11. Corrective Actions</button>
+            <button class="tab-button" onclick="showTab(12)">12. Sign-off</button>
+        </div>
+
+        <!-- TAB 1: RELATED FORMS -->
+        <div class="tab-content active" id="tab1">
+            <div class="section-title">Related Forms & Initial Information</div>
+
+            <div class="info-box">
+                <strong>📋 Related Forms:</strong><br>
+                <strong>⚠️ Health & Safety Incidents:</strong> Use <a href="CSS-HSA-001.html">Accident/Incident Report CSS-HSA-001</a> for personal injuries<br>
+                <strong>⚙️ Service Strikes:</strong> Use <a href="CSS-SSR-001.html">Service Strike Report CSS-SSR-001</a> for utility damage
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> This form is specifically for environmental incidents including pollution, spills, releases, and environmental damage. If the incident involves personal injury, also complete CSS-HSA-001.
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Contact Phone:</label>
+                    <input type="tel" class="form-control" id="contactPhone">
+                </div>
+                <div class="form-group">
+                    <label>Contact Email:</label>
+                    <input type="email" class="form-control" id="contactEmail">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Company/Site:</label>
+                <input type="text" class="form-control" id="company">
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" disabled>Previous</button>
+                <button class="nav-button" onclick="showTab(2)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: LOCATION & TIME -->
+        <div class="tab-content" id="tab2">
+            <div class="section-title">Incident Location and Timing</div>
+
+            <div class="form-group">
+                <label>Specific Location (Address/Site Location):</label>
+                <input type="text" class="form-control" id="location" placeholder="Full address including postcode">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Grid Reference (if known):</label>
+                    <input type="text" class="form-control" id="gridRef" placeholder="e.g., TQ 384 806">
+                </div>
+                <div class="form-group">
+                    <label>What3Words (optional):</label>
+                    <input type="text" class="form-control" id="what3words" placeholder="e.g., ///filled.count.soap">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Incident: *</label>
+                    <input type="date" class="form-control" id="incidentDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Time of Incident: *</label>
+                    <input type="time" class="form-control" id="incidentTime" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Location Type:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc1">
+                        <label for="loc1">Construction Site</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc2">
+                        <label for="loc2">Depot/Yard</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc3">
+                        <label for="loc3">Public Highway</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc4">
+                        <label for="loc4">Near Waterway</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc5">
+                        <label for="loc5">Residential Area</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc6">
+                        <label for="loc6">Protected Site (SSSI/SAC)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Proximity to Sensitive Receptors:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="prox1">
+                        <label for="prox1">Watercourse (≤10m)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="prox2">
+                        <label for="prox2">Surface Water Drain</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="prox3">
+                        <label for="prox3">Groundwater/Aquifer</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="prox4">
+                        <label for="prox4">Residential Properties</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="prox5">
+                        <label for="prox5">School/Hospital</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="prox6">
+                        <label for="prox6">Ecological Habitat</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(1)">Previous</button>
+                <button class="nav-button" onclick="showTab(3)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 3: INCIDENT TYPE -->
+        <div class="tab-content" id="tab3">
+            <div class="section-title">Classification of Environmental Incident</div>
+
+            <div class="danger-box">
+                <strong>🚨 REGULATORY REPORTING REQUIREMENTS:</strong><br>
+                • Category 1 & 2 incidents MUST be reported to Environment Agency immediately (0800 807060)<br>
+                • Pollution incidents may require notification to Local Authority<br>
+                • Some incidents may also be RIDDOR reportable to HSE
+            </div>
+
+            <div class="form-group">
+                <label><strong>Environment Agency Incident Category: *</strong></label>
+                <div class="radio-stacked">
+                    <div class="radio-item">
+                        <input type="radio" name="eaCategory" id="cat1" value="cat1">
+                        <label for="cat1"><span class="riddor-highlight">Category 1 - Major</span> (Serious impact, extensive remediation)</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="eaCategory" id="cat2" value="cat2">
+                        <label for="cat2"><span class="riddor-highlight">Category 2 - Significant</span> (Significant impact, remediation required)</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="eaCategory" id="cat3" value="cat3">
+                        <label for="cat3">Category 3 - Minor (Minimal impact, no remediation)</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="eaCategory" id="cat4" value="cat4">
+                        <label for="cat4">Category 4 - No Impact (Near miss)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Primary Incident Type:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type1">
+                        <label for="type1">Oil/Fuel Spill</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type2">
+                        <label for="type2">Chemical Release</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type3">
+                        <label for="type3">Water Pollution</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type4">
+                        <label for="type4">Air Pollution/Dust</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type5">
+                        <label for="type5">Noise Pollution</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type6">
+                        <label for="type6">Waste Mismanagement</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type7">
+                        <label for="type7">Unauthorized Discharge</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type8">
+                        <label for="type8">Land Contamination</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type9">
+                        <label for="type9">Ecological Damage</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="type10">
+                        <label for="type10">Permit Breach</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Was this a Near Miss?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="nearMiss" id="nm1" value="yes">
+                        <label for="nm1">Yes - No actual environmental damage</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="nearMiss" id="nm2" value="no">
+                        <label for="nm2">No - Actual environmental impact occurred</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(2)">Previous</button>
+                <button class="nav-button" onclick="showTab(4)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 4: DESCRIPTION -->
+        <div class="tab-content" id="tab4">
+            <div class="section-title">Incident Description</div>
+
+            <div class="form-group">
+                <label><strong>Describe what happened in plain English: *</strong></label>
+                <textarea class="textarea-large" id="description" placeholder="Provide a clear, chronological account of the incident including:&#10;• What activity was being undertaken&#10;• What went wrong&#10;• How the incident occurred&#10;• What was released/damaged&#10;• Where it went"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>What was the cause/trigger of the incident?</strong></label>
+                <textarea class="textarea-large" id="trigger" placeholder="Describe the immediate cause"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Weather Conditions at Time of Incident:</strong></label>
+                <div class="checkbox-grid-5">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="wx1">
+                        <label for="wx1">Dry</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="wx2">
+                        <label for="wx2">Raining</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="wx3">
+                        <label for="wx3">Windy</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="wx4">
+                        <label for="wx4">Hot</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="wx5">
+                        <label for="wx5">Cold/Freezing</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Upload Site Plan/Diagram/Photographs:</strong></label>
+                <div class="image-upload-box">
+                    <p>📷 Click to upload images or drag and drop here</p>
+                    <p style="font-size: 12px; color: #64748b;">Include: spill location, drainage routes, affected areas, equipment involved</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Draw/Sketch Incident Scene:</strong></label>
+                <div class="drawing-area">
+                    Draw or sketch here: location of spill/release, drainage routes, wind direction (if relevant), affected watercourses/receptors
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(3)">Previous</button>
+                <button class="nav-button" onclick="showTab(5)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 5: IMPACT ASSESSMENT -->
+        <div class="tab-content" id="tab5">
+            <div class="section-title">Environmental Impact Assessment</div>
+
+            <div class="form-group">
+                <label><strong>Environmental Media Affected:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="media1">
+                        <label for="media1">Surface Water (river, stream, pond)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="media2">
+                        <label for="media2">Groundwater</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="media3">
+                        <label for="media3">Soil/Land</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="media4">
+                        <label for="media4">Air</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="media5">
+                        <label for="media5">Surface Water Drain</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="media6">
+                        <label for="media6">Foul Sewer</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="media7">
+                        <label for="media7">None (Near Miss)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Estimate of Quantity Released/Affected:</label>
+                    <input type="text" class="form-control" id="quantity" placeholder="e.g., 50 litres, 10 m², unknown">
+                </div>
+                <div class="form-group">
+                    <label>Duration of Release:</label>
+                    <input type="text" class="form-control" id="duration" placeholder="e.g., instantaneous, 30 minutes">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Visible Environmental Damage:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage1">
+                        <label for="damage1">Water discolouration</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage2">
+                        <label for="damage2">Oil sheen on water</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage3">
+                        <label for="damage3">Dead fish/wildlife</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage4">
+                        <label for="damage4">Vegetation damage</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage5">
+                        <label for="damage5">Soil staining</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage6">
+                        <label for="damage6">Odour complaints</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage7">
+                        <label for="damage7">Dust/particulate</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="damage8">
+                        <label for="damage8">No visible damage</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Describe visible environmental impacts:</strong></label>
+                <textarea class="textarea-large" id="impactDesc" placeholder="Detail any visible signs of pollution or damage"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Were any protected species/habitats affected?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="protected" id="prot1" value="yes">
+                        <label for="prot1">Yes - Natural England MUST be notified</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="protected" id="prot2" value="no">
+                        <label for="prot2">No</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="protected" id="prot3" value="unknown">
+                        <label for="prot3">Unknown</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>If yes, provide details:</label>
+                <textarea class="textarea-large" id="protectedDetails" placeholder="Species/habitat type, extent of impact"></textarea>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(4)">Previous</button>
+                <button class="nav-button" onclick="showTab(6)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 6: POLLUTION DETAILS -->
+        <div class="tab-content" id="tab6">
+            <div class="section-title">Pollutant/Substance Details</div>
+
+            <div class="form-group">
+                <label><strong>Substance(s) Involved:</strong></label>
+                <input type="text" class="form-control" id="substance" placeholder="e.g., Diesel fuel, hydraulic oil, concrete washout, chemicals">
+            </div>
+
+            <div class="form-group">
+                <label><strong>Was the substance hazardous?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="hazardous" id="haz1" value="yes">
+                        <label for="haz1">Yes - Hazardous substance</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="hazardous" id="haz2" value="no">
+                        <label for="haz2">No - Non-hazardous</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>If hazardous, provide COSHH/SDS details:</label>
+                <textarea class="textarea-large" id="coshhDetails" placeholder="Attach Safety Data Sheet if applicable"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Source of Release:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source1">
+                        <label for="source1">Vehicle/Plant leak</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source2">
+                        <label for="source2">Storage tank/container</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source3">
+                        <label for="source3">Pipeline/hose failure</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source4">
+                        <label for="source4">Transfer operation</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source5">
+                        <label for="source5">Collision/accident damage</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source6">
+                        <label for="source6">Overfilling</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source7">
+                        <label for="source7">Vandalism/theft</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="source8">
+                        <label for="source8">Other</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Provide details of source:</label>
+                <textarea class="textarea-large" id="sourceDetails" placeholder="Equipment type, make/model, age, maintenance history if relevant"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Were secondary containment/spill kits available?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="containment" id="cont1" value="yes">
+                        <label for="cont1">Yes - Available and adequate</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="containment" id="cont2" value="partial">
+                        <label for="cont2">Partial - Present but inadequate</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="containment" id="cont3" value="no">
+                        <label for="cont3">No - Not available</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Oil Storage Regulations Compliance:</strong></label>
+                <p style="font-size: 11px; color: #64748b; margin: 5px 0;">Control of Pollution (Oil Storage) (England) Regulations 2001</p>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="oilRegs" id="oil1" value="na">
+                        <label for="oil1">Not applicable (not oil storage)</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="oilRegs" id="oil2" value="compliant">
+                        <label for="oil2">Compliant storage</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="oilRegs" id="oil3" value="breach">
+                        <label for="oil3">Non-compliant storage</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(5)">Previous</button>
+                <button class="nav-button" onclick="showTab(7)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 7: NOTIFICATIONS -->
+        <div class="tab-content" id="tab7">
+            <div class="section-title">Regulatory Notifications and Reporting</div>
+
+            <div class="danger-box">
+                <strong>🚨 IMMEDIATE REPORTING REQUIREMENTS:</strong><br>
+                • Environment Agency Hotline: <strong>0800 807 060</strong> (24/7)<br>
+                • HSE (if RIDDOR reportable): <strong>0345 300 9923</strong><br>
+                • Local Authority Environmental Health (if applicable)<br>
+                • Water Company (if discharge to sewer)
+            </div>
+
+            <div class="form-group">
+                <label><strong>Environment Agency Notified?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="eaNotified" id="ean1" value="yes">
+                        <label for="ean1">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="eaNotified" id="ean2" value="no">
+                        <label for="ean2">No - Not required (Cat 3/4 minor/no impact)</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="eaNotified" id="ean3" value="pending">
+                        <label for="ean3">Pending</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>EA Incident Reference Number:</label>
+                    <input type="text" class="form-control" id="eaRef" placeholder="Provided by EA">
+                </div>
+                <div class="form-group">
+                    <label>Date/Time of EA Notification:</label>
+                    <input type="datetime-local" class="form-control" id="eaDateTime">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Name of EA Officer:</label>
+                <input type="text" class="form-control" id="eaOfficer">
+            </div>
+
+            <div class="form-group">
+                <label><strong>HSE Notified (RIDDOR)?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="hseNotified" id="hse1" value="yes">
+                        <label for="hse1">Yes - RIDDOR reportable</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="hseNotified" id="hse2" value="no">
+                        <label for="hse2">No - Not RIDDOR reportable</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>RIDDOR Reference (if applicable):</label>
+                <input type="text" class="form-control" id="riddorRef">
+            </div>
+
+            <div class="form-group">
+                <label><strong>Local Authority Notified?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="laNotified" id="la1" value="yes">
+                        <label for="la1">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="laNotified" id="la2" value="no">
+                        <label for="la2">No</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="laNotified" id="la3" value="na">
+                        <label for="la3">Not applicable</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Local Authority Contact Details:</label>
+                <input type="text" class="form-control" id="laContact">
+            </div>
+
+            <div class="form-group">
+                <label><strong>Water Company Notified?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="waterNotified" id="water1" value="yes">
+                        <label for="water1">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="waterNotified" id="water2" value="no">
+                        <label for="water2">No</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="waterNotified" id="water3" value="na">
+                        <label for="water3">Not applicable</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Other Notifications Made:</strong></label>
+                <div class="checkbox-grid-5">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notif1">
+                        <label for="notif1">Client/Principal Contractor</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notif2">
+                        <label for="notif2">Insurance Company</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notif3">
+                        <label for="notif3">Natural England</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notif4">
+                        <label for="notif4">Landowner</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notif5">
+                        <label for="notif5">Other</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Details of other notifications:</label>
+                <textarea class="textarea-large" id="otherNotif" placeholder="Who was notified, when, and why"></textarea>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(6)">Previous</button>
+                <button class="nav-button" onclick="showTab(8)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 8: WITNESSES -->
+        <div class="tab-content" id="tab8">
+            <div class="section-title">Witnesses and Personnel Involved</div>
+
+            <div class="form-group">
+                <label><strong>Person(s) Discovering/Reporting Incident:</strong></label>
+                <table class="table-responsive" id="reporterTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">Name</th>
+                            <th style="width: 30%">Company/Role</th>
+                            <th style="width: 25%">Contact Details</th>
+                            <th style="width: 15%">Statement?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reporterTableBody">
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="checkbox"> Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="action-button" onclick="addReporterRow()" style="margin-top: 10px;">+ Add Another Person</button>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Person(s) Involved in Activity:</strong></label>
+                <table class="table-responsive" id="involvedTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">Name</th>
+                            <th style="width: 30%">Company/Role</th>
+                            <th style="width: 25%">Contact Details</th>
+                            <th style="width: 15%">Statement?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="involvedTableBody">
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="checkbox"> Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="action-button" onclick="addInvolvedRow()" style="margin-top: 10px;">+ Add Another Person</button>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Other Witnesses:</strong></label>
+                <table class="table-responsive" id="witnessTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">Name</th>
+                            <th style="width: 30%">Company/Role</th>
+                            <th style="width: 25%">Contact Details</th>
+                            <th style="width: 15%">Statement?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="witnessTableBody">
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="checkbox"> Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="action-button" onclick="addWitnessRow()" style="margin-top: 10px;">+ Add Another Witness</button>
+            </div>
+
+            <div class="info-box">
+                <strong>📋 Note:</strong> Signed witness statements must accompany this form. Obtain statements as soon as possible while details are fresh.
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(7)">Previous</button>
+                <button class="nav-button" onclick="showTab(9)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 9: IMMEDIATE ACTIONS -->
+        <div class="tab-content" id="tab9">
+            <div class="section-title">Immediate Actions and Remediation</div>
+
+            <div class="form-group">
+                <label><strong>Immediate Actions Taken to Stop/Contain Release:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action1">
+                        <label for="action1">Source isolated/stopped</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action2">
+                        <label for="action2">Spill kit deployed</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action3">
+                        <label for="action3">Booms/barriers installed</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action4">
+                        <label for="action4">Drains blocked/sealed</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action5">
+                        <label for="action5">Pumping/tankering</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action6">
+                        <label for="action6">Contaminated soil removed</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action7">
+                        <label for="action7">Area ventilated</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="action8">
+                        <label for="action8">Environmental monitoring</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Describe immediate response actions in detail:</label>
+                <textarea class="textarea-large" id="responseActions" placeholder="Timeline of actions taken, resources deployed, effectiveness"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Was specialist environmental contractor called?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="specialist" id="spec1" value="yes">
+                        <label for="spec1">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="specialist" id="spec2" value="no">
+                        <label for="spec2">No - Managed in-house</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Specialist Contractor Details:</label>
+                <input type="text" class="form-control" id="specialistDetails" placeholder="Company name and contact">
+            </div>
+
+            <div class="form-group">
+                <label><strong>Waste Generated from Clean-up:</strong></label>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Type of Waste:</label>
+                    <input type="text" class="form-control" id="wasteType" placeholder="e.g., contaminated soil, absorbent materials">
+                </div>
+                <div class="form-group">
+                    <label>Quantity:</label>
+                    <input type="text" class="form-control" id="wasteQuantity" placeholder="Volume or weight">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Waste Disposal Method:</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="waste1">
+                        <label for="waste1">Licensed waste carrier</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="waste2">
+                        <label for="waste2">Hazardous waste consignment</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="waste3">
+                        <label for="waste3">Waste transfer notes obtained</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Waste Carrier Licence Number:</label>
+                <input type="text" class="form-control" id="wasteCarrier">
+            </div>
+
+            <div class="form-group">
+                <label><strong>Estimated Cost of Clean-up/Remediation:</strong></label>
+                <input type="text" class="form-control" id="cost" placeholder="£">
+            </div>
+
+            <div class="form-group">
+                <label><strong>Is further remediation required?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="furtherRem" id="rem1" value="yes">
+                        <label for="rem1">Yes - Ongoing/planned</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="furtherRem" id="rem2" value="no">
+                        <label for="rem2">No - Complete</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Details of ongoing/planned remediation:</label>
+                <textarea class="textarea-large" id="remDetails" placeholder="What further works are needed and timescales"></textarea>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(8)">Previous</button>
+                <button class="nav-button" onclick="showTab(10)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 10: ROOT CAUSE -->
+        <div class="tab-content" id="tab10">
+            <div class="section-title">Root Cause Analysis</div>
+
+            <div class="form-group">
+                <label><strong>Immediate Causes (select all that apply):</strong></label>
+                
+                <h4 style="color: #166534; margin-top: 20px; font-size: 14px; font-weight: bold;">Human Factors (H)</h4>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="h01">
+                        <label for="h01">H01: Not following procedure</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="h02">
+                        <label for="h02">H02: Lack of awareness</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="h03">
+                        <label for="h03">H03: Poor communication</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="h04">
+                        <label for="h04">H04: Complacency</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="h05">
+                        <label for="h05">H05: Taking shortcuts</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="h06">
+                        <label for="h06">H06: Inexperience</label>
+                    </div>
+                </div>
+
+                <h4 style="color: #166534; margin-top: 20px; font-size: 14px; font-weight: bold;">Technical/Equipment (T)</h4>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="t01">
+                        <label for="t01">T01: Equipment failure</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="t02">
+                        <label for="t02">T02: Poor maintenance</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="t03">
+                        <label for="t03">T03: Inadequate containment</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="t04">
+                        <label for="t04">T04: Poor design</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="t05">
+                        <label for="t05">T05: Unsuitable equipment</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="t06">
+                        <label for="t06">T06: Corrosion/wear</label>
+                    </div>
+                </div>
+
+                <h4 style="color: #166534; margin-top: 20px; font-size: 14px; font-weight: bold;">Management/Control (MC)</h4>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mc01">
+                        <label for="mc01">MC01: Inadequate risk assessment</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mc02">
+                        <label for="mc02">MC02: No/inadequate procedure</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mc03">
+                        <label for="mc03">MC03: Poor supervision</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mc04">
+                        <label for="mc04">MC04: Inadequate training</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mc05">
+                        <label for="mc05">MC05: Unsafe system of work</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mc06">
+                        <label for="mc06">MC06: Inadequate resources</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mc07">
+                        <label for="mc07">MC07: Poor emergency planning</label>
+                    </div>
+                </div>
+
+                <h4 style="color: #166534; margin-top: 20px; font-size: 14px; font-weight: bold;">External/Environmental (E)</h4>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="e01">
+                        <label for="e01">E01: Weather conditions</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="e02">
+                        <label for="e02">E02: Third party action</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="e03">
+                        <label for="e03">E03: Vandalism/theft</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="e04">
+                        <label for="e04">E04: Site conditions</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Percentage Attribution (must total 100%):</strong></label>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Human Error:</label>
+                    <input type="number" class="form-control" min="0" max="100" placeholder="%">
+                </div>
+                <div class="form-group">
+                    <label>Technical/Equipment:</label>
+                    <input type="number" class="form-control" min="0" max="100" placeholder="%">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Management/Control:</label>
+                    <input type="number" class="form-control" min="0" max="100" placeholder="%">
+                </div>
+                <div class="form-group">
+                    <label>External/Environmental:</label>
+                    <input type="number" class="form-control" min="0" max="100" placeholder="%">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Root Cause Summary (in plain English):</strong></label>
+                <textarea class="textarea-large" id="rootCause" placeholder="Explain the underlying root causes that allowed this incident to occur"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Contributing Factors:</strong></label>
+                <textarea class="textarea-large" id="contributing" placeholder="What other factors contributed to the incident?"></textarea>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(9)">Previous</button>
+                <button class="nav-button" onclick="showTab(11)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 11: CORRECTIVE ACTIONS -->
+        <div class="tab-content" id="tab11">
+            <div class="section-title">Corrective and Preventive Actions</div>
+
+            <div class="info-box">
+                Actions must address root causes to prevent recurrence. Consider the hierarchy: <strong>Eliminate → Substitute → Engineering Controls → Administrative Controls → PPE</strong>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Immediate Actions Already Taken:</strong></label>
+                <textarea class="textarea-large" id="immActions" placeholder="What has been done immediately to prevent recurrence"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Corrective Actions Required:</strong></label>
+                <table class="table-responsive" id="actionsTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%">Action</th>
+                            <th style="width: 20%">Responsible Person</th>
+                            <th style="width: 20%">Target Date</th>
+                            <th style="width: 20%">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="actionsTableBody">
+                        <tr>
+                            <td><textarea style="min-height: 60px;"></textarea></td>
+                            <td><input type="text"></td>
+                            <td><input type="date"></td>
+                            <td>
+                                <select>
+                                    <option>Open</option>
+                                    <option>In Progress</option>
+                                    <option>Complete</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="action-button" onclick="addActionRow()" style="margin-top: 10px;">+ Add Another Action</button>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Actions Required to Improve Environmental Management:</strong></label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve1">
+                        <label for="improve1">Review/update Risk Assessment</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve2">
+                        <label for="improve2">Review/update Method Statement</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve3">
+                        <label for="improve3">Additional training required</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve4">
+                        <label for="improve4">New procedure needed</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve5">
+                        <label for="improve5">Equipment upgrade/replacement</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve6">
+                        <label for="improve6">Improve spill kit provision</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve7">
+                        <label for="improve7">Improve containment measures</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve8">
+                        <label for="improve8">Enhanced inspection regime</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="improve9">
+                        <label for="improve9">Update emergency response plan</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Lessons Learned (to be shared):</strong></label>
+                <textarea class="textarea-large" id="lessons" placeholder="Key learning points to share with wider organization"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Communication/Toolbox Talk Required?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="toolbox" id="tb1" value="all">
+                        <label for="tb1">Yes - Issue to all sites</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="toolbox" id="tb2" value="this">
+                        <label for="tb2">Yes - This site only</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="toolbox" id="tb3" value="no">
+                        <label for="tb3">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(10)">Previous</button>
+                <button class="nav-button" onclick="showTab(12)">Next</button>
+            </div>
+        </div>
+
+        <!-- TAB 12: SIGN-OFF -->
+        <div class="tab-content" id="tab12">
+            <div class="section-title">Investigation Sign-off and Approval</div>
+
+            <div class="info-box">
+                I verify that this investigation is sufficient and complete; that the root cause has been identified and that suitable action(s) to prevent recurrence have been identified and will be implemented.
+            </div>
+
+            <div class="signature-box">
+                <h4>Site/Project Manager</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" id="managerName">
+                    </div>
+                    <div class="form-group">
+                        <label>Position:</label>
+                        <input type="text" class="form-control" id="managerPosition">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Signature:</label>
+                        <input type="text" class="form-control" id="managerSig" placeholder="Digital signature or name">
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="date" class="form-control" id="managerDate">
+                    </div>
+                </div>
+            </div>
+
+            <div class="signature-box">
+                <h4>SHEQ Consultant - Common Sense Safety</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" id="consultantName" value="Jeremy Bromley" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Position:</label>
+                        <input type="text" class="form-control" id="consultantPosition" value="SHEQ Consultant / Director" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Signature:</label>
+                        <input type="text" class="form-control" id="consultantSig" placeholder="Digital signature">
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="date" class="form-control" id="consultantDate">
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>📋 Document Retention:</strong><br>
+                This form and all supporting documentation (photos, witness statements, clean-up records, waste transfer notes) must be retained for a minimum of <strong>7 years</strong> in accordance with UK environmental regulations.
+            </div>
+
+            <div class="info-box">
+                <strong>🔍 Regulatory Follow-up:</strong><br>
+                Environment Agency may require follow-up reports. Ensure all corrective actions are completed and evidence retained.
+            </div>
+
+            <div class="tab-navigation">
+                <button class="nav-button" onclick="showTab(11)">Previous</button>
+                <button class="action-button" onclick="submitForm()">✓ Complete Investigation</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Common Sense Safety Ltd</strong> | <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e545b4c5b53477e5d51535351504d5b504d5b4d5f585b4a47105d51104b55">[email&#160;protected]</a> | +44 7775 668959</p>
+        <p>CSS-HSA-002 Environmental Incident/Accident Investigation Report v1.0</p>
+        <p style="margin-top: 10px;">Environmental Protection Act 1990 | Environmental Permitting Regulations 2016 | Environmental Damage Regulations 2015</p>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        let currentTab = 1;
+
+        function showTab(tabNum) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById('tab' + tabNum).classList.add('active');
+            buttons[tabNum - 1].classList.add('active');
+            
+            // Update progress
+            document.getElementById('progressText').textContent = `Tab ${tabNum} of 12`;
+            
+            currentTab = tabNum;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Auto-save (placeholder)
+            saveFormData();
+        }
+
+        function toggleInfo(type) {
+            const formInfo = document.getElementById('formInfo');
+            const helpInfo = document.getElementById('helpInfo');
+            
+            if (type === 'form') {
+                formInfo.classList.toggle('show');
+                helpInfo.classList.remove('show');
+            } else {
+                helpInfo.classList.toggle('show');
+                formInfo.classList.remove('show');
+            }
+        }
+
+        function toggleContactInfo() {
+            const infoPanel = document.getElementById('contactInfo');
+            const overlay = document.getElementById('infoOverlay');
+            
+            if (infoPanel.style.display === 'none' || infoPanel.style.display === '') {
+                infoPanel.style.display = 'block';
+                overlay.classList.add('show');
+            } else {
+                infoPanel.style.display = 'none';
+                overlay.classList.remove('show');
+            }
+        }
+
+        function saveFormData() {
+            // Auto-save to localStorage
+            console.log('Form data saved to localStorage');
+        }
+
+        function submitForm() {
+            if (confirm('Are you ready to complete this environmental incident investigation? Please ensure all required fields are completed.')) {
+                alert('Form completed successfully. This form should now be saved and submitted to your SHEQ system.');
+                // Add actual submission logic here
+            }
+        }
+
+        // Auto-save every 30 seconds
+        setInterval(saveFormData, 30000);
+
+        // Add row functions for Tab 8 (Witnesses)
+        function addReporterRow() {
+            const tbody = document.getElementById('reporterTableBody');
+            const newRow = tbody.rows[0].cloneNode(true);
+            // Clear the inputs
+            newRow.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+            newRow.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
+            tbody.appendChild(newRow);
+        }
+
+        function addInvolvedRow() {
+            const tbody = document.getElementById('involvedTableBody');
+            const newRow = tbody.rows[0].cloneNode(true);
+            newRow.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+            newRow.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
+            tbody.appendChild(newRow);
+        }
+
+        function addWitnessRow() {
+            const tbody = document.getElementById('witnessTableBody');
+            const newRow = tbody.rows[0].cloneNode(true);
+            newRow.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+            newRow.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
+            tbody.appendChild(newRow);
+        }
+
+        // Add row function for Tab 11 (Corrective Actions)
+        function addActionRow() {
+            const tbody = document.getElementById('actionsTableBody');
+            const newRow = tbody.rows[0].cloneNode(true);
+            newRow.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+            newRow.querySelectorAll('input').forEach(input => input.value = '');
+            newRow.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+            tbody.appendChild(newRow);
+        }
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

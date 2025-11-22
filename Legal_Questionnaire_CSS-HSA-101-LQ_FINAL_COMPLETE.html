@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal Questionnaire - Personal Injury Claim | CSS-HSA-101-LQ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        background: #f5f7fa;
+      }
+
+      .info-corner {
+        position: fixed;
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        color: white;
+        padding: 12px 20px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+        z-index: 1000;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .info-corner:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
+      }
+
+      .info-corner.top-left {
+        top: 0;
+        left: 0;
+        border-bottom-right-radius: 8px;
+      }
+
+      .info-corner.top-right {
+        top: 0;
+        right: 0;
+        border-bottom-left-radius: 8px;
+      }
+
+      .info-panel {
+        display: none;
+        position: fixed;
+        top: 60px;
+        background: white;
+        border: 2px solid #1e3a8a;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        z-index: 999;
+        min-width: 300px;
+        max-width: 400px;
+      }
+
+      .info-panel.show {
+        display: block;
+      }
+
+      .info-panel.left {
+        left: 20px;
+      }
+
+      .info-panel.right {
+        right: 20px;
+      }
+
+      .info-panel h3 {
+        margin: 0 0 15px 0;
+        color: #1e3a8a;
+        font-size: 16px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 8px;
+      }
+
+      .info-panel p {
+        margin: 8px 0;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .info-panel .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #64748b;
+        padding: 5px;
+      }
+
+      .info-panel .close-btn:hover {
+        color: #1e3a8a;
+      }
+
+      .header {
+        text-align: center;
+        border: 2px solid #1e3a8a;
+        padding: 20px;
+        margin-bottom: 30px;
+        background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .header-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 2px solid #e2e8f0;
+        text-align: left;
+      }
+
+      .header-info .info-field {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .header-info .info-field label {
+        font-weight: bold;
+        font-size: 11px;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .header-info .info-field input {
+        padding: 8px;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
+      .header-info .info-field.full-width {
+        grid-column: span 2;
+      }
+
+      .consultant-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        background: #f0f9ff;
+        border-radius: 4px;
+        border: 1px solid #0ea5e9;
+      }
+
+      .consultant-info strong {
+        color: #1e3a8a;
+      }
+
+      .consultant-info a {
+        color: #0ea5e9;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 11px;
+      }
+
+      .consultant-info a:hover {
+        text-decoration: underline;
+      }
+
+      .header img {
+        max-width: 280px;
+        max-height: 140px;
+        margin-bottom: 15px;
+      }
+
+      .header h1 {
+        color: #1e3a8a;
+        margin: 15px 0 10px 0;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .header .subtitle {
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 15px;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 24px;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 90%;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .close-button {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .tab-container {
+        margin-bottom: 24px;
+      }
+
+      .tab-navigation {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        margin-bottom: 16px;
+        border-bottom: 2px solid #eee;
+      }
+
+      .tab-button {
+        padding: 12px 16px;
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        cursor: pointer;
+        font-size: 12px;
+        color: #666;
+        border-radius: 4px 4px 0 0;
+        transition: all 0.2s;
+        flex: 1;
+        min-width: calc(20% - 2px);
+        text-align: center;
+      }
+
+      .tab-button.active {
+        background: #2c5aa0;
+        color: white;
+        border-color: #2c5aa0;
+      }
+
+      .tab-indicator {
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 16px;
+      }
+
+      .tab-content {
+        display: none;
+        min-height: 400px;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .form-section {
+        margin-bottom: 24px;
+        padding: 16px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        background: #fafafa;
+      }
+
+      .section-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #2c5aa0;
+        margin: 0 0 16px 0;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+        align-items: flex-end;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+
+      .form-group.half {
+        flex: 0 0 calc(50% - 8px);
+      }
+
+      .form-group.third {
+        flex: 0 0 calc(33.333% - 11px);
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 4px;
+        color: #333;
+        font-size: 13px;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      input[type='tel'],
+      input[type='date'],
+      input[type='time'],
+      input[type='number'],
+      select,
+      textarea {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+
+      .checkbox-group,
+      .radio-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 12px;
+        margin-top: 8px;
+        padding: 12px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .checkbox-item,
+      .radio-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 8px;
+        border-radius: 3px;
+      }
+
+      .checkbox-item:hover,
+      .radio-item:hover {
+        background: #f5f5f5;
+      }
+
+      .checkbox-item label,
+      .radio-item label {
+        margin: 0;
+        font-weight: normal;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      input[type='checkbox'],
+      input[type='radio'] {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .required {
+        color: #d32f2f;
+      }
+
+      .warning-box {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 4px;
+        padding: 12px;
+        margin-bottom: 16px;
+        font-size: 13px;
+      }
+
+      .info-box {
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        border-radius: 4px;
+        padding: 12px;
+        margin-bottom: 16px;
+        font-size: 13px;
+      }
+
+      .navigation-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid #eee;
+      }
+
+      .nav-button {
+        padding: 10px 20px;
+        border: 1px solid #2c5aa0;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .prev-button {
+        background: white;
+        color: #2c5aa0;
+      }
+
+      .next-button {
+        background: #2c5aa0;
+        color: white;
+      }
+
+      .nav-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .footer {
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid #eee;
+        font-size: 11px;
+        color: #666;
+        text-align: center;
+      }
+
+      .declaration-text {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        padding: 16px;
+        border-radius: 4px;
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+
+      .signature-section {
+        display: flex;
+        gap: 32px;
+        margin-top: 24px;
+      }
+
+      .signature-box {
+        flex: 1;
+        border: 1px solid #ccc;
+        padding: 16px;
+        border-radius: 4px;
+        text-align: center;
+        min-height: 80px;
+        background: #fafafa;
+      }
+
+      .table-responsive {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+      }
+
+      th,
+      td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+        font-size: 12px;
+      }
+
+      th {
+        background: #f5f5f5;
+        font-weight: bold;
+      }
+
+      .add-button {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-top: 8px;
+      }
+
+      .company-use-only {
+        background: #fef3c7;
+        border: 2px solid #f59e0b;
+        border-radius: 4px;
+        padding: 16px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body style="">
+    <!-- Information Corner Tabs -->
+    <div class="info-corner top-left" onclick="toggleInfoPanel('left')">📋 Form Info</div>
+    <div class="info-corner top-right" onclick="toggleInfoPanel('right')" style="font-size: 11px">
+      ℹ️ Help & Guidance
+    </div>
+
+    <!-- Information Panels -->
+    <div class="info-panel left" id="info-panel-left">
+      <button class="close-btn" onclick="closeInfoPanel('left')">×</button>
+      <h3>Form Information</h3>
+      <p><strong>Form Reference:</strong> CSS-HSA-101-LQ</p>
+      <p><strong>Version:</strong> 1.0</p>
+      <p>
+        <strong>Purpose:</strong> To gather comprehensive information from claimants pursuing personal injury claims
+      </p>
+      <p><strong>Completion Time:</strong> 45-60 minutes</p>
+      <p><strong>Confidentiality:</strong> All information is strictly confidential</p>
+      <p><strong>Data Storage:</strong> Form auto-saves to browser localStorage</p>
+    </div>
+
+    <div class="info-panel right" id="info-panel-right">
+      <button class="close-btn" onclick="closeInfoPanel('right')">×</button>
+      <h3>Help & Guidance</h3>
+      <p><strong>Navigation:</strong> Use Previous/Next buttons or click tab numbers directly</p>
+      <p><strong>Required Fields:</strong> Items marked with * must be completed</p>
+      <p><strong>Pre-existing Conditions:</strong> Must be declared even if unrelated to current injuries</p>
+      <p><strong>Financial Details:</strong> Provide accurate figures for loss calculation</p>
+      <p><strong>Medical Information:</strong> Include all treatment received and planned</p>
+      <p><strong>Support:</strong> Contact HSQE Consultant for assistance</p>
+    </div>
+
+    <div class="header">
+      <img
+        src="https://page.gensparksite.com/v1/base64_upload/24d623f46688e74aacc76ae1c7bdd283"
+        alt="Common Sense Safety Logo - In Safe Hands"
+        data-height-listener-added="true"
+      />
+      <h1>LEGAL QUESTIONNAIRE - PERSONAL INJURY CLAIM</h1>
+      <div class="subtitle">Common Sense Safety | CSS-HSA-101-LQ</div>
+
+      <div
+        style="
+          background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+          border: 2px solid #1e40af;
+          border-radius: 8px;
+          padding: 12px 20px;
+          margin: 15px auto;
+          max-width: 700px;
+          box-shadow: 0 2px 8px rgba(30, 58, 138, 0.4);
+          text-align: center;
+        "
+      >
+        <p style="margin: 0; font-weight: bold; font-size: 13px; color: #ffffff">
+          ⚠️ This questionnaire must be completed accurately and fully. All information provided will be used for legal
+          purposes and may be disclosed to solicitors, insurers, and medical professionals involved in the claim
+          process.
+        </p>
+      </div>
+
+      <!-- Header Information Fields -->
+      <div class="header-info">
+        <div class="info-field">
+          <label>Report Number:</label>
+          <input type="text" id="reportNumber" class="form-control" placeholder="Auto-generated or manual entry" />
+        </div>
+        <div class="info-field">
+          <label>Date Form Completed:</label>
+          <input type="date" id="dateCompleted" class="form-control" />
+        </div>
+        <div class="info-field">
+          <label>Person completing form:</label>
+          <input type="text" id="personCompleting" class="form-control" placeholder="Full name" />
+        </div>
+        <div class="info-field">
+          <label>Position:</label>
+          <input type="text" id="position" class="form-control" placeholder="Job title" />
+        </div>
+        <div class="info-field full-width">
+          <label>HSQE Consultant:</label>
+          <div class="consultant-info">
+            <strong>Jeremy Bromley</strong>
+            <span>|</span>
+            <a href="/cdn-cgi/l/email-protection#751f100710180c35161a18181a1b06101b061006141310010c5b1a0712" title="Email: jeremy@commonsensesafety.org | Phone: 07775668959">View Contact Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Form Info -->
+    <div id="infoModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 style="margin: 0; color: #2c5aa0">📋 Form Information</h3>
+          <button class="close-button" onclick="closeModal('infoModal')">×</button>
+        </div>
+        <div>
+          <p><strong>Form Title:</strong> Legal Questionnaire - Personal Injury Claim</p>
+          <p><strong>Form Reference:</strong> CSS-HSA-101-LQ</p>
+          <p><strong>Version:</strong> 1.0</p>
+          <p>
+            <strong>Purpose:</strong> To gather comprehensive information from claimants pursuing personal injury
+            claims, ensuring all relevant details are captured for legal proceedings.
+          </p>
+          <p>
+            <strong>Who should complete this:</strong> The injured party (claimant) or their authorized representative
+          </p>
+          <p><strong>Estimated completion time:</strong> 45-60 minutes</p>
+          <p>
+            <strong>Data Protection:</strong> All information provided is processed in accordance with GDPR and UK data
+            protection laws. Your data will only be shared with legal professionals, medical experts, and insurers as
+            necessary for your claim.
+          </p>
+          <p><strong>Need Help?</strong> Contact your HSQE Consultant: Jeremy Bromley</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Help & Guidance -->
+    <div id="helpModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 style="margin: 0; color: #2c5aa0">ℹ️ Help & Guidance</h3>
+          <button class="close-button" onclick="closeModal('helpModal')">×</button>
+        </div>
+        <div>
+          <h4 style="color: #2c5aa0; margin-top: 0">How to Complete This Form</h4>
+          <ol style="line-height: 1.8; margin: 12px 0; padding-left: 24px">
+            <li>
+              <strong>Work through each tab in order</strong> - The form is divided into 10 sections covering different
+              aspects of your claim
+            </li>
+            <li>
+              <strong>Be as detailed as possible</strong> - The more information you provide, the better your legal
+              representative can assist you
+            </li>
+            <li>
+              <strong>Save regularly</strong> - Your progress is automatically saved to your browser, but you can also
+              save manually
+            </li>
+            <li>
+              <strong>Gather supporting documents</strong> - Have medical records, payslips, and receipts ready for
+              reference
+            </li>
+            <li>
+              <strong>Answer honestly</strong> - All information must be accurate. False information can harm your claim
+            </li>
+            <li>
+              <strong>Seek help if needed</strong> - Contact your HSQE Consultant if you're unsure about any questions
+            </li>
+          </ol>
+          <h4 style="color: #2c5aa0">Important Tips</h4>
+          <ul style="line-height: 1.8; margin: 12px 0; padding-left: 24px">
+            <li>Fields marked with <span style="color: #d32f2f">*</span> are required</li>
+            <li>Take your time - accuracy is more important than speed</li>
+            <li>Keep copies of all supporting documents</li>
+            <li>Declare all pre-existing conditions, even if unrelated</li>
+            <li>Update the form if your circumstances change</li>
+          </ul>
+          <p>
+            <strong>Technical Support:</strong> If you experience technical issues, contact Common Sense Safety IT
+            support
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+      <div class="tab-navigation" style="font-size: 12px">
+        <button class="tab-button active" onclick="showTab(1)">1. Claimant Information</button>
+        <button class="tab-button" onclick="showTab(2)">2. Employment & Income</button>
+        <button class="tab-button" onclick="showTab(3)">3. Incident Details</button>
+        <button class="tab-button" onclick="showTab(4)">4. Injuries Sustained</button>
+        <button class="tab-button" onclick="showTab(5)">5. Impact on Daily Life</button>
+        <button class="tab-button" onclick="showTab(6)">6. Financial Losses</button>
+        <button class="tab-button" onclick="showTab(7)">7. Pre-existing Conditions</button>
+        <button class="tab-button" onclick="showTab(8)">8. Legal & Insurance</button>
+        <button class="tab-button" onclick="showTab(9)">9. Rehabilitation & Recovery</button>
+        <button class="tab-button" onclick="showTab(10)">10. Declaration & Sign-off</button>
+      </div>
+      <div class="tab-indicator">Tab <span id="currentTab">1</span> of 10</div>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="tab1" class="tab-content active">
+      <div class="warning-box">
+        ⚠️ This questionnaire must be completed accurately and fully. All information provided will be used for legal
+        purposes and may be disclosed to solicitors, insurers, and medical professionals involved in the claim process.
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title">1. Claimant Information</h3>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="title">Title <span class="required">*</span></label>
+            <select id="title" name="title" required="">
+              <option value="">-- Select --</option>
+              <option value="Mr">Mr</option>
+              <option value="Mrs">Mrs</option>
+              <option value="Miss">Miss</option>
+              <option value="Ms">Ms</option>
+              <option value="Dr">Dr</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label for="surname">Surname <span class="required">*</span></label>
+            <input type="text" id="surname" name="surname" required="" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="forenames">Forename(s) <span class="required">*</span></label>
+            <input type="text" id="forenames" name="forenames" required="" />
+          </div>
+          <div class="form-group half">
+            <label for="maidenName">Maiden/Former Name</label>
+            <input type="text" id="maidenName" name="maidenName" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group third">
+            <label for="dob">Date of Birth <span class="required">*</span></label>
+            <input type="date" id="dob" name="dob" required="" />
+          </div>
+          <div class="form-group third">
+            <label for="niNumber">National Insurance Number <span class="required">*</span></label>
+            <input type="text" id="niNumber" name="niNumber" placeholder="QQ 12 34 56 C" required="" />
+          </div>
+          <div class="form-group third">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+              <option value="">-- Select --</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="address1">Address Line 1 <span class="required">*</span></label>
+            <input type="text" id="address1" name="address1" required="" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="address2">Address Line 2</label>
+            <input type="text" id="address2" name="address2" />
+          </div>
+          <div class="form-group half">
+            <label for="city">City/Town <span class="required">*</span></label>
+            <input type="text" id="city" name="city" required="" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="county">County</label>
+            <input type="text" id="county" name="county" />
+          </div>
+          <div class="form-group half">
+            <label for="postcode">Postcode <span class="required">*</span></label>
+            <input type="text" id="postcode" name="postcode" required="" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group third">
+            <label for="homePhone">Home Phone</label>
+            <input type="tel" id="homePhone" name="homePhone" />
+          </div>
+          <div class="form-group third">
+            <label for="mobilePhone">Mobile Phone <span class="required">*</span></label>
+            <input type="tel" id="mobilePhone" name="mobilePhone" required="" />
+          </div>
+          <div class="form-group third">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required="" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="maritalStatus">Marital Status</label>
+            <select id="maritalStatus" name="maritalStatus">
+              <option value="">-- Select --</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Civil Partnership">Civil Partnership</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Separated">Separated</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label for="dependents">Number of Dependents</label>
+            <input type="number" id="dependents" name="dependents" min="0" />
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()" disabled>◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab2" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">2. Employment & Income</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="employmentStatus">Employment Status at Time of Incident <span class="required">*</span></label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="employed" name="employmentStatus" value="employed" />
+                <label for="employed">Employed</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="selfEmployed" name="employmentStatus" value="selfEmployed" />
+                <label for="selfEmployed">Self-Employed</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="unemployed" name="employmentStatus" value="unemployed" />
+                <label for="unemployed">Unemployed</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="retired" name="employmentStatus" value="retired" />
+                <label for="retired">Retired</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="student" name="employmentStatus" value="student" />
+                <label for="student">Student</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="employerName">Employer Name</label>
+            <input type="text" id="employerName" name="employerName" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="employerAddress">Employer Address</label>
+            <textarea id="employerAddress" name="employerAddress"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="jobTitle">Job Title/Position</label>
+            <input type="text" id="jobTitle" name="jobTitle" />
+          </div>
+          <div class="form-group half">
+            <label for="startDate">Employment Start Date</label>
+            <input type="date" id="startDate" name="startDate" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="jobDuties">Description of Job Duties</label>
+            <textarea id="jobDuties" name="jobDuties"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group third">
+            <label for="weeklyHours">Normal Weekly Hours</label>
+            <input type="number" id="weeklyHours" name="weeklyHours" min="0" max="168" />
+          </div>
+          <div class="form-group third">
+            <label for="hourlyRate">Hourly Rate (£)</label>
+            <input type="number" id="hourlyRate" name="hourlyRate" step="0.01" min="0" />
+          </div>
+          <div class="form-group third">
+            <label for="annualSalary">Annual Salary (£)</label>
+            <input type="number" id="annualSalary" name="annualSalary" min="0" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="overtimeAvailable">Regular Overtime Available?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="overtimeYes" name="overtimeAvailable" value="yes" />
+                <label for="overtimeYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="overtimeNo" name="overtimeAvailable" value="no" />
+                <label for="overtimeNo">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="overtimeHours">Average Weekly Overtime Hours</label>
+            <input type="number" id="overtimeHours" name="overtimeHours" min="0" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="otherIncome">Other Sources of Income (benefits, pensions, etc.)</label>
+            <textarea id="otherIncome" name="otherIncome"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab3" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">3. Incident Details</h3>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="incidentDate">Date of Incident <span class="required">*</span></label>
+            <input type="date" id="incidentDate" name="incidentDate" required="" />
+          </div>
+          <div class="form-group half">
+            <label for="incidentTime">Time of Incident</label>
+            <input type="time" id="incidentTime" name="incidentTime" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="incidentLocation">Location of Incident <span class="required">*</span></label>
+            <textarea id="incidentLocation" name="incidentLocation" required=""></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="incidentDescription"
+              >Detailed Description of How the Incident Occurred <span class="required">*</span></label
+            >
+            <textarea
+              id="incidentDescription"
+              name="incidentDescription"
+              style="min-height: 120px"
+              required=""
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="causesFactors">What do you believe caused the incident?</label>
+            <textarea id="causesFactors" name="causesFactors"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="weatherConditions">Weather/Environmental Conditions</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="weatherDry" name="weatherConditions" value="dry" />
+                <label for="weatherDry">Dry</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="weatherWet" name="weatherConditions" value="wet" />
+                <label for="weatherWet">Wet/Raining</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="weatherIce" name="weatherConditions" value="ice" />
+                <label for="weatherIce">Ice/Snow</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="weatherWindy" name="weatherConditions" value="windy" />
+                <label for="weatherWindy">Windy</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="weatherFog" name="weatherConditions" value="fog" />
+                <label for="weatherFog">Fog/Mist</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="weatherGood" name="weatherConditions" value="good" />
+                <label for="weatherGood">Good Visibility</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="witnessesPresent">Were there any witnesses?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="witnessYes" name="witnessesPresent" value="yes" />
+                <label for="witnessYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="witnessNo" name="witnessesPresent" value="no" />
+                <label for="witnessNo">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="policeInvolved">Was police involved?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="policeYes" name="policeInvolved" value="yes" />
+                <label for="policeYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="policeNo" name="policeInvolved" value="no" />
+                <label for="policeNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="witnessDetails">Witness Details (Names, Addresses, Contact Information)</label>
+            <textarea id="witnessDetails" name="witnessDetails"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="policeRef">Police Reference Number</label>
+            <input type="text" id="policeRef" name="policeRef" />
+          </div>
+          <div class="form-group half">
+            <label for="reportedToEmployer">Incident Reported to Employer?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="reportedYes" name="reportedToEmployer" value="yes" />
+                <label for="reportedYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="reportedNo" name="reportedToEmployer" value="no" />
+                <label for="reportedNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab4" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">4. Injuries Sustained</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bodyPartsAffected">Body Parts Affected (check all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="head" name="bodyPartsAffected" value="head" />
+                <label for="head">Head</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="neck" name="bodyPartsAffected" value="neck" />
+                <label for="neck">Neck</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="shoulders" name="bodyPartsAffected" value="shoulders" />
+                <label for="shoulders">Shoulders</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="arms" name="bodyPartsAffected" value="arms" />
+                <label for="arms">Arms</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="hands" name="bodyPartsAffected" value="hands" />
+                <label for="hands">Hands/Wrists</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="chest" name="bodyPartsAffected" value="chest" />
+                <label for="chest">Chest</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="back" name="bodyPartsAffected" value="back" />
+                <label for="back">Back</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="abdomen" name="bodyPartsAffected" value="abdomen" />
+                <label for="abdomen">Abdomen</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="hips" name="bodyPartsAffected" value="hips" />
+                <label for="hips">Hips</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="legs" name="bodyPartsAffected" value="legs" />
+                <label for="legs">Legs</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="feet" name="bodyPartsAffected" value="feet" />
+                <label for="feet">Feet/Ankles</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="internal" name="bodyPartsAffected" value="internal" />
+                <label for="internal">Internal Injuries</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="natureOfInjury">Nature of Injury (check all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="fracture" name="natureOfInjury" value="fracture" />
+                <label for="fracture">Fracture</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="dislocation" name="natureOfInjury" value="dislocation" />
+                <label for="dislocation">Dislocation</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="strain" name="natureOfInjury" value="strain" />
+                <label for="strain">Strain/Sprain</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="laceration" name="natureOfInjury" value="laceration" />
+                <label for="laceration">Laceration/Cut</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="bruising" name="natureOfInjury" value="bruising" />
+                <label for="bruising">Bruising</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="burn" name="natureOfInjury" value="burn" />
+                <label for="burn">Burn</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="concussion" name="natureOfInjury" value="concussion" />
+                <label for="concussion">Concussion</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="whiplash" name="natureOfInjury" value="whiplash" />
+                <label for="whiplash">Whiplash</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="nerve" name="natureOfInjury" value="nerve" />
+                <label for="nerve">Nerve Damage</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="injuryDetails">Detailed Description of Injuries</label>
+            <textarea id="injuryDetails" name="injuryDetails" style="min-height: 100px"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="immediateSymptoms">Immediate Symptoms After Incident</label>
+            <textarea id="immediateSymptoms" name="immediateSymptoms"></textarea>
+          </div>
+          <div class="form-group half">
+            <label for="currentSymptoms">Current Symptoms</label>
+            <textarea id="currentSymptoms" name="currentSymptoms"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="hospitalTreatment">Did you receive hospital treatment?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="hospitalYes" name="hospitalTreatment" value="yes" />
+                <label for="hospitalYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="hospitalNo" name="hospitalTreatment" value="no" />
+                <label for="hospitalNo">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="hospitalName">Hospital/Medical Facility Name</label>
+            <input type="text" id="hospitalName" name="hospitalName" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="gpTreatment">GP Treatment Received?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="gpYes" name="gpTreatment" value="yes" />
+                <label for="gpYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="gpNo" name="gpTreatment" value="no" />
+                <label for="gpNo">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="gpName">GP Name and Practice</label>
+            <input type="text" id="gpName" name="gpName" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="medicationPrescribed">Medication Prescribed</label>
+            <textarea id="medicationPrescribed" name="medicationPrescribed"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab5" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">5. Impact on Daily Life</h3>
+
+        <div class="info-box">
+          ℹ️ Please describe how your injuries have affected your ability to perform daily activities, both at work and
+          at home.
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="workActivitiesAffected">Work Activities You Can No Longer Perform or Find Difficult</label>
+            <textarea id="workActivitiesAffected" name="workActivitiesAffected" style="min-height: 100px"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="domesticActivitiesAffected">Domestic/Household Activities Affected</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="cooking" name="domesticActivitiesAffected" value="cooking" />
+                <label for="cooking">Cooking</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="cleaning" name="domesticActivitiesAffected" value="cleaning" />
+                <label for="cleaning">Cleaning</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="shopping" name="domesticActivitiesAffected" value="shopping" />
+                <label for="shopping">Shopping</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="laundry" name="domesticActivitiesAffected" value="laundry" />
+                <label for="laundry">Laundry</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="gardening" name="domesticActivitiesAffected" value="gardening" />
+                <label for="gardening">Gardening</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="diy" name="domesticActivitiesAffected" value="diy" />
+                <label for="diy">DIY/Maintenance</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="driving" name="domesticActivitiesAffected" value="driving" />
+                <label for="driving">Driving</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="lifting" name="domesticActivitiesAffected" value="lifting" />
+                <label for="lifting">Lifting/Carrying</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="personalCareAffected">Personal Care Activities Affected</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="washing" name="personalCareAffected" value="washing" />
+                <label for="washing">Washing/Bathing</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="dressing" name="personalCareAffected" value="dressing" />
+                <label for="dressing">Dressing</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="mobility" name="personalCareAffected" value="mobility" />
+                <label for="mobility">Walking/Mobility</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="sleeping" name="personalCareAffected" value="sleeping" />
+                <label for="sleeping">Sleeping</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recreationalActivities">Recreational/Social Activities Affected</label>
+            <textarea id="recreationalActivities" name="recreationalActivities"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="assistanceNeeded">Do you now require assistance with daily activities?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="assistanceYes" name="assistanceNeeded" value="yes" />
+                <label for="assistanceYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="assistanceNo" name="assistanceNeeded" value="no" />
+                <label for="assistanceNo">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="assistanceHours">Hours of assistance per week</label>
+            <input type="number" id="assistanceHours" name="assistanceHours" min="0" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="whoProvides">Who provides this assistance?</label>
+            <textarea id="whoProvides" name="whoProvides"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="equipmentNeeded">Medical Equipment/Aids Required</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="wheelchair" name="equipmentNeeded" value="wheelchair" />
+                <label for="wheelchair">Wheelchair</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="walkingStick" name="equipmentNeeded" value="walkingStick" />
+                <label for="walkingStick">Walking Stick/Frame</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="crutches" name="equipmentNeeded" value="crutches" />
+                <label for="crutches">Crutches</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="brace" name="equipmentNeeded" value="brace" />
+                <label for="brace">Support Brace/Collar</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="adaptations" name="equipmentNeeded" value="adaptations" />
+                <label for="adaptations">Home Adaptations</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="other" name="equipmentNeeded" value="other" />
+                <label for="other">Other</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="psychologicalImpact"
+              >Psychological Impact (anxiety, depression, loss of confidence, etc.)</label
+            >
+            <textarea id="psychologicalImpact" name="psychologicalImpact"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab6" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">6. Financial Losses</h3>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="timeOffWork">Total time off work (days)</label>
+            <input type="number" id="timeOffWork" name="timeOffWork" min="0" />
+          </div>
+          <div class="form-group half">
+            <label for="returnToWorkDate">Date returned to work (if applicable)</label>
+            <input type="date" id="returnToWorkDate" name="returnToWorkDate" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="fullDutiesDate">Date returned to full duties</label>
+            <input type="date" id="fullDutiesDate" name="fullDutiesDate" />
+          </div>
+          <div class="form-group half">
+            <label for="sickPayReceived">Sick pay received (£)</label>
+            <input type="number" id="sickPayReceived" name="sickPayReceived" step="0.01" min="0" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lossOfEarnings">Loss of Earnings Calculation</label>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Period</th>
+                    <th>Days Off</th>
+                    <th>Daily Rate (£)</th>
+                    <th>Loss (£)</th>
+                    <th>Sick Pay (£)</th>
+                    <th>Net Loss (£)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" placeholder="e.g. Month 1" /></td>
+                    <td><input type="number" min="0" /></td>
+                    <td><input type="number" step="0.01" min="0" /></td>
+                    <td><input type="number" step="0.01" min="0" /></td>
+                    <td><input type="number" step="0.01" min="0" /></td>
+                    <td><input type="number" step="0.01" min="0" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="add-button">➕ Add Another Period</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="medicalExpenses">Medical Expenses</label>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Amount (£)</th>
+                    <th>Receipt Available?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" placeholder="e.g. Prescription" /></td>
+                    <td><input type="date" /></td>
+                    <td><input type="number" step="0.01" min="0" /></td>
+                    <td>
+                      <input type="checkbox" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="add-button">➕ Add Another Expense</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="travelExpenses">Travel Expenses (medical appointments)</label>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Purpose</th>
+                    <th>Miles/Cost</th>
+                    <th>Amount (£)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="date" /></td>
+                    <td><input type="text" placeholder="e.g. Hospital appointment" /></td>
+                    <td><input type="text" placeholder="e.g. 20 miles" /></td>
+                    <td><input type="number" step="0.01" min="0" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="add-button">➕ Add Another Journey</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="careExpenses">Care/Assistance Expenses</label>
+            <textarea
+              id="careExpenses"
+              name="careExpenses"
+              placeholder="Detail any costs for care, assistance, or services you now need"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="equipmentCosts">Equipment/Aids Costs</label>
+            <textarea
+              id="equipmentCosts"
+              name="equipmentCosts"
+              placeholder="Detail costs of medical equipment, mobility aids, home adaptations"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="otherExpenses">Other Expenses</label>
+            <textarea
+              id="otherExpenses"
+              name="otherExpenses"
+              placeholder="Any other costs related to your injuries"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="totalLoss">Estimated Total Financial Loss (£)</label>
+            <input type="number" id="totalLoss" name="totalLoss" step="0.01" min="0" />
+          </div>
+          <div class="form-group half">
+            <label for="futureLoss">Future Loss of Earnings Expected?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="futureLossYes" name="futureLoss" value="yes" />
+                <label for="futureLossYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="futureLossNo" name="futureLoss" value="no" />
+                <label for="futureLossNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab7" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">7. Pre-existing Conditions</h3>
+
+        <div class="warning-box">
+          ⚠️ It is important to declare all pre-existing medical conditions, even if you believe they are unrelated to your current injuries. Failure to disclose may affect your claim.
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="preExisting">Do you have any pre-existing medical conditions?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="preExistingYes" name="preExisting" value="yes" />
+                <label for="preExistingYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="preExistingNo" name="preExisting" value="no" />
+                <label for="preExistingNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Medical History Details</label>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Condition/Injury</th>
+                    <th>Date Diagnosed</th>
+                    <th>Body Part Affected</th>
+                    <th>Treatment Received</th>
+                    <th>Related to Current Claim?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" /></td>
+                    <td><input type="date" /></td>
+                    <td><input type="text" /></td>
+                    <td><input type="text" /></td>
+                    <td><input type="checkbox" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="add-button">➕ Add Another Condition</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="previousInjuries">Previous Injuries to Same Body Parts</label>
+            <textarea id="previousInjuries" name="previousInjuries"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Previous Personal Injury Claims</label>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date of Incident</th>
+                    <th>Nature of Claim</th>
+                    <th>Solicitor Used</th>
+                    <th>Outcome</th>
+                    <th>Settlement Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="date" /></td>
+                    <td><input type="text" /></td>
+                    <td><input type="text" /></td>
+                    <td><input type="text" /></td>
+                    <td><input type="number" step="0.01" min="0" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="add-button">➕ Add Another Claim</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="currentMedication">Are you currently taking medication?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="medicationYes" name="currentMedication" value="yes" />
+                <label for="medicationYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="medicationNo" name="currentMedication" value="no" />
+                <label for="medicationNo">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="smokingStatus">Smoking Status</label>
+            <select id="smokingStatus" name="smokingStatus">
+              <option value="">-- Select --</option>
+              <option value="non-smoker">Non-smoker</option>
+              <option value="ex-smoker">Ex-smoker</option>
+              <option value="light">Light smoker (&lt;10/day)</option>
+              <option value="moderate">Moderate smoker (10-20/day)</option>
+              <option value="heavy">Heavy smoker (&gt;20/day)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="medicationDetails">Current Medication Details</label>
+            <textarea id="medicationDetails" name="medicationDetails" placeholder="List all current medications, dosages, and what they're for"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lifestyleFactors">Lifestyle Factors Affecting Recovery</label>
+            <textarea id="lifestyleFactors" name="lifestyleFactors" placeholder="e.g., smoking, alcohol consumption, exercise habits, diet"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab8" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">8. Legal & Insurance</h3>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="claimStatus">Claim Status</label>
+            <select id="claimStatus" name="claimStatus">
+              <option value="">-- Select --</option>
+              <option value="not-started">Not yet started</option>
+              <option value="instructed">Solicitor instructed</option>
+              <option value="in-progress">In progress</option>
+              <option value="settled">Settled</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label for="solicitorInstructed">Have you instructed a solicitor?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="solYes" name="solicitorInstructed" value="yes" />
+                <label for="solYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="solNo" name="solicitorInstructed" value="no" />
+                <label for="solNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="solicitorName">Solicitor/Law Firm Name</label>
+            <input type="text" id="solicitorName" name="solicitorName" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="solicitorAddress">Solicitor Address</label>
+            <textarea id="solicitorAddress" name="solicitorAddress"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group third">
+            <label for="solicitorPhone">Solicitor Phone</label>
+            <input type="tel" id="solicitorPhone" name="solicitorPhone" />
+          </div>
+          <div class="form-group third">
+            <label for="solicitorEmail">Solicitor Email</label>
+            <input type="email" id="solicitorEmail" name="solicitorEmail" />
+          </div>
+          <div class="form-group third">
+            <label for="solicitorRef">Solicitor Reference</label>
+            <input type="text" id="solicitorRef" name="solicitorRef" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="legalAid">Legal Aid Application?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="legalAidYes" name="legalAid" value="yes" />
+                <label for="legalAidYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="legalAidNo" name="legalAid" value="no" />
+                <label for="legalAidNo">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="cfa">Conditional Fee Agreement (No Win No Fee)?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="cfaYes" name="cfa" value="yes" />
+                <label for="cfaYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="cfaNo" name="cfa" value="no" />
+                <label for="cfaNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="defendantName">Defendant/Responsible Party Name</label>
+            <input type="text" id="defendantName" name="defendantName" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="defendantAddress">Defendant Address</label>
+            <textarea id="defendantAddress" name="defendantAddress"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="defendantInsurer">Defendant's Insurer</label>
+            <input type="text" id="defendantInsurer" name="defendantInsurer" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="insurerAddress">Insurer Address</label>
+            <textarea id="insurerAddress" name="insurerAddress"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group third">
+            <label for="insurerRef">Insurer Reference Number</label>
+            <input type="text" id="insurerRef" name="insurerRef" />
+          </div>
+          <div class="form-group third">
+            <label for="insurerPhone">Insurer Phone</label>
+            <input type="tel" id="insurerPhone" name="insurerPhone" />
+          </div>
+          <div class="form-group third">
+            <label for="insurerEmail">Insurer Email</label>
+            <input type="email" id="insurerEmail" name="insurerEmail" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="liabilityAdmitted">Has liability been admitted?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="liabYes" name="liabilityAdmitted" value="yes" />
+                <label for="liabYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="liabNo" name="liabilityAdmitted" value="no" />
+                <label for="liabNo">No</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="liabPartial" name="liabilityAdmitted" value="partial" />
+                <label for="liabPartial">Partial</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group half">
+            <label for="settlementOffer">Settlement offer received?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="settleYes" name="settlementOffer" value="yes" />
+                <label for="settleYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="settleNo" name="settlementOffer" value="no" />
+                <label for="settleNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="offerAmount">Settlement Offer Amount (£)</label>
+            <input type="number" id="offerAmount" name="offerAmount" step="0.01" min="0" />
+          </div>
+          <div class="form-group half">
+            <label for="offerDate">Date of Offer</label>
+            <input type="date" id="offerDate" name="offerDate" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="offerResponse">Response to Settlement Offer</label>
+            <textarea id="offerResponse" name="offerResponse" placeholder="Accepted, rejected, counter-offer details"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="courtProceedings">Have court proceedings been issued?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="courtYes" name="courtProceedings" value="yes" />
+                <label for="courtYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="courtNo" name="courtProceedings" value="no" />
+                <label for="courtNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="courtName">Court Name</label>
+            <input type="text" id="courtName" name="courtName" />
+          </div>
+          <div class="form-group half">
+            <label for="courtRef">Court Claim Number</label>
+            <input type="text" id="courtRef" name="courtRef" />
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab9" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">9. Rehabilitation & Recovery</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="treatmentReceived">Treatment Received (check all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="physiotherapy" name="treatmentReceived" value="physiotherapy" />
+                <label for="physiotherapy">Physiotherapy</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="occupational" name="treatmentReceived" value="occupational" />
+                <label for="occupational">Occupational Therapy</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="chiropractic" name="treatmentReceived" value="chiropractic" />
+                <label for="chiropractic">Chiropractic</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="osteopathy" name="treatmentReceived" value="osteopathy" />
+                <label for="osteopathy">Osteopathy</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="counselling" name="treatmentReceived" value="counselling" />
+                <label for="counselling">Counselling/Therapy</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="surgery" name="treatmentReceived" value="surgery" />
+                <label for="surgery">Surgery</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="painManagement" name="treatmentReceived" value="painManagement" />
+                <label for="painManagement">Pain Management</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Treatment Details</label>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Treatment Type</th>
+                    <th>Provider Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Sessions</th>
+                    <th>Outcome</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" /></td>
+                    <td><input type="text" /></td>
+                    <td><input type="date" /></td>
+                    <td><input type="date" /></td>
+                    <td><input type="number" min="0" /></td>
+                    <td>
+                      <select>
+                        <option value="">-- Select --</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="improved">Improved</option>
+                        <option value="completed">Completed</option>
+                        <option value="no-improvement">No improvement</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="add-button">➕ Add Another Treatment</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ongoingTreatment">Ongoing Treatment Required?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="ongoingYes" name="ongoingTreatment" value="yes" />
+                <label for="ongoingYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="ongoingNo" name="ongoingTreatment" value="no" />
+                <label for="ongoingNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="futureTreatment">Future Treatment Planned</label>
+            <textarea id="futureTreatment" name="futureTreatment" placeholder="Describe any planned treatments, surgeries, or therapies"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="prognosis">Medical Prognosis</label>
+            <select id="prognosis" name="prognosis">
+              <option value="">-- Select --</option>
+              <option value="full-recovery">Full recovery expected</option>
+              <option value="substantial-recovery">Substantial recovery expected</option>
+              <option value="partial-recovery">Partial recovery expected</option>
+              <option value="permanent-disability">Permanent disability</option>
+              <option value="uncertain">Uncertain</option>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label for="recoveryTimeframe">Expected Recovery Timeframe</label>
+            <input type="text" id="recoveryTimeframe" name="recoveryTimeframe" placeholder="e.g., 6-12 months" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="permanentRestrictions">Permanent Restrictions/Limitations</label>
+            <textarea id="permanentRestrictions" name="permanentRestrictions" placeholder="Describe any permanent physical or mental restrictions"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="returnToWorkStatus">Return to Work Status</label>
+            <select id="returnToWorkStatus" name="returnToWorkStatus">
+              <option value="">-- Select --</option>
+              <option value="full-duties">Returned to full duties</option>
+              <option value="light-duties">Returned on light duties</option>
+              <option value="phased-return">Phased return in progress</option>
+              <option value="not-returned">Not yet returned</option>
+              <option value="cannot-return">Cannot return to same role</option>
+              <option value="medically-retired">Medically retired</option>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label for="workModifications">Work Modifications Required</label>
+            <textarea id="workModifications" name="workModifications" placeholder="Reduced hours, altered duties, equipment needed"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="vocationalRehab">Vocational Rehabilitation Required?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="vocationalYes" name="vocationalRehab" value="yes" />
+                <label for="vocationalYes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="vocationalNo" name="vocationalRehab" value="no" />
+                <label for="vocationalNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="retrainingNeeds">Retraining Needs Assessment</label>
+            <textarea id="retrainingNeeds" name="retrainingNeeds" placeholder="Detail any need for retraining or alternative employment support"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="medicalReports">Medical Reports Obtained</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="gpReport" name="medicalReports" value="gpReport" />
+                <label for="gpReport">GP Report</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="consultantReport" name="medicalReports" value="consultantReport" />
+                <label for="consultantReport">Consultant Report</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="medicalExpert" name="medicalReports" value="medicalExpert" />
+                <label for="medicalExpert">Medical Expert Report</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="hospitalRecords" name="medicalReports" value="hospitalRecords" />
+                <label for="hospitalRecords">Hospital Records</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="nextTab()">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="tab10" class="tab-content">
+      <div class="form-section">
+        <h3 class="section-title">10. Declaration & Sign-off</h3>
+
+        <div class="declaration-text">
+          <strong>DECLARATION</strong><br /><br />
+          I declare that the information provided in this questionnaire is true and accurate to the best of my knowledge and belief. I understand that:
+          <ul style="margin: 12px 0; padding-left: 24px">
+            <li>This information will be used in pursuing my personal injury claim</li>
+            <li>False or misleading information may prejudice my claim and could result in legal action against me</li>
+            <li>I have a continuing duty to update this information if circumstances change</li>
+            <li>This information may be disclosed to solicitors, barristers, medical experts, insurers, and the court</li>
+          </ul>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><strong>Consent Declarations (please check all boxes)</strong></label>
+            <div class="checkbox-group" style="grid-template-columns: 1fr">
+              <div class="checkbox-item">
+                <input type="checkbox" id="consentMedical" name="consent" value="medical" required />
+                <label for="consentMedical">I consent to the disclosure of my medical records to my legal representatives and their appointed medical experts</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="consentEmployment" name="consent" value="employment" required />
+                <label for="consentEmployment">I consent to the disclosure of my employment and earnings records as necessary for the claim</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="consentContact" name="consent" value="contact" required />
+                <label for="consentContact">I consent to being contacted by medical experts, rehabilitation providers, and other professionals as required</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="consentData" name="consent" value="data" required />
+                <label for="consentData">I understand how my personal data will be processed in accordance with GDPR and data protection laws</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="signature-section">
+          <div class="signature-box">
+            <label><strong>Claimant Signature</strong></label>
+            <div style="min-height: 60px; border-bottom: 1px solid #999; margin: 16px 0"></div>
+            <div>
+              <label for="claimantSignDate">Date:</label>
+              <input type="date" id="claimantSignDate" name="claimantSignDate" style="margin-top: 8px" />
+            </div>
+          </div>
+
+          <div class="signature-box">
+            <label><strong>Witness Signature</strong></label>
+            <div style="min-height: 60px; border-bottom: 1px solid #999; margin: 16px 0"></div>
+            <div>
+              <label for="witnessName">Witness Name:</label>
+              <input type="text" id="witnessName" name="witnessName" style="margin-top: 8px" />
+              <label for="witnessSignDate" style="margin-top: 8px">Date:</label>
+              <input type="date" id="witnessSignDate" name="witnessSignDate" style="margin-top: 8px" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="company-use-only">
+        <h3 style="margin: 0 0 12px 0; color: #f59e0b">FOR COMPANY USE ONLY</h3>
+        <div class="form-row">
+          <div class="form-group third">
+            <label for="receivedBy">Received By:</label>
+            <input type="text" id="receivedBy" name="receivedBy" />
+          </div>
+          <div class="form-group third">
+            <label for="dateReceived">Date Received:</label>
+            <input type="date" id="dateReceived" name="dateReceived" />
+          </div>
+          <div class="form-group third">
+            <label for="fileReference">File Reference:</label>
+            <input type="text" id="fileReference" name="fileReference" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="internalNotes">Internal Notes:</label>
+            <textarea id="internalNotes" name="internalNotes"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button type="button" class="nav-button prev-button" onclick="prevTab()">◀ Previous</button>
+        <button type="button" class="nav-button next-button" onclick="submitForm()" style="background: #28a745; border-color: #28a745">Submit Form ✓</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p><strong>Common Sense Safety Ltd</strong> | HSQE Consultancy Services</p>
+      <p>Form Reference: CSS-HSA-101-LQ | Version 1.0 | © 2025 Common Sense Safety</p>
+      <p style="font-size: 10px; margin-top: 8px">
+        This document contains confidential and legally privileged information. The information is intended only for the use of the individual or entity named. If you are not the intended recipient, you are hereby notified that any disclosure, copying, distribution, or taking of any action in reliance on the contents of this information is strictly prohibited.
+      </p>
+    </div>
+
+    <!-- JavaScript -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+      // Tab Management
+      let currentTab = 1;
+      const totalTabs = 10;
+
+      function showTab(tabNumber) {
+        for (let i = 1; i <= totalTabs; i++) {
+          document.getElementById('tab' + i).classList.remove('active');
+        }
+        
+        const tabButtons = document.querySelectorAll('.tab-button');
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById('tab' + tabNumber).classList.add('active');
+        tabButtons[tabNumber - 1].classList.add('active');
+        
+        currentTab = tabNumber;
+        document.getElementById('currentTab').textContent = tabNumber;
+        
+        window.scrollTo(0, 0);
+        saveFormData();
+      }
+
+      function nextTab() {
+        if (currentTab < totalTabs) {
+          showTab(currentTab + 1);
+        } else {
+          submitForm();
+        }
+      }
+
+      function prevTab() {
+        if (currentTab > 1) {
+          showTab(currentTab - 1);
+        }
+      }
+
+      // Modal Management
+      function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.style.display = 'block';
+        }
+      }
+
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.style.display = 'none';
+        }
+      }
+
+      window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+          event.target.style.display = 'none';
+        }
+      }
+
+      // Info Panel Controls
+      function toggleInfoPanel(side) {
+        const panel = document.getElementById('info-panel-' + side);
+        const otherPanel = document.getElementById('info-panel-' + (side === 'left' ? 'right' : 'left'));
+        otherPanel.classList.remove('show');
+        panel.classList.toggle('show');
+      }
+
+      function closeInfoPanel(side) {
+        const panel = document.getElementById('info-panel-' + side);
+        panel.classList.remove('show');
+      }
+
+      document.addEventListener('click', function(event) {
+        const leftCorner = document.querySelector('.info-corner.top-left');
+        const rightCorner = document.querySelector('.info-corner.top-right');
+        const leftPanel = document.getElementById('info-panel-left');
+        const rightPanel = document.getElementById('info-panel-right');
+        
+        if (!leftCorner.contains(event.target) && !leftPanel.contains(event.target)) {
+          leftPanel.classList.remove('show');
+        }
+        
+        if (!rightCorner.contains(event.target) && !rightPanel.contains(event.target)) {
+          rightPanel.classList.remove('show');
+        }
+      });
+
+      // Form Data Management
+      function saveFormData() {
+        const formData = {};
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+          if (input.type === 'checkbox') {
+            if (!formData[input.name]) formData[input.name] = [];
+            if (input.checked) formData[input.name].push(input.value);
+          } else if (input.type === 'radio') {
+            if (input.checked) formData[input.name] = input.value;
+          } else {
+            formData[input.name] = input.value;
+          }
+        });
+        localStorage.setItem('css-lq-101-data', JSON.stringify(formData));
+        localStorage.setItem('css-lq-101-tab', currentTab);
+      }
+
+      function loadFormData() {
+        const saved = localStorage.getItem('css-lq-101-data');
+        const savedTab = localStorage.getItem('css-lq-101-tab');
+        
+        if (saved) {
+          const formData = JSON.parse(saved);
+          Object.keys(formData).forEach(name => {
+            const elements = document.getElementsByName(name);
+            elements.forEach(element => {
+              if (element.type === 'checkbox') {
+                element.checked = Array.isArray(formData[name]) && formData[name].includes(element.value);
+              } else if (element.type === 'radio') {
+                element.checked = element.value === formData[name];
+              } else {
+                element.value = formData[name];
+              }
+            });
+          });
+        }
+        
+        if (savedTab) {
+          showTab(parseInt(savedTab));
+        }
+      }
+
+      function submitForm() {
+        const requiredFields = document.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+          if (!field.value) {
+            isValid = false;
+            field.style.borderColor = '#d32f2f';
+          } else {
+            field.style.borderColor = '#ccc';
+          }
+        });
+        
+        if (!isValid) {
+          alert('Please complete all required fields before submitting.');
+          return;
+        }
+        
+        const consentBoxes = document.querySelectorAll('input[name="consent"]');
+        const allChecked = Array.from(consentBoxes).every(box => box.checked);
+        
+        if (!allChecked) {
+          alert('Please check all consent declarations before submitting.');
+          return;
+        }
+        
+        saveFormData();
+        alert('Form submitted successfully! Thank you for completing the Legal Questionnaire.');
+        console.log('Form data saved to localStorage');
+      }
+
+      document.addEventListener('input', function() {
+        saveFormData();
+      });
+
+      window.addEventListener('load', function() {
+        loadFormData();
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        const dateCompleted = document.getElementById('dateCompleted');
+        if (dateCompleted && !dateCompleted.value) {
+          dateCompleted.value = today;
+        }
+      });
+    </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

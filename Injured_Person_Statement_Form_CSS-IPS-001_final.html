@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Injured Person Statement Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        background: #f5f7fa;
+      }
+
+      /* Cover Page Styles */
+      .cover-page {
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .cover-page img {
+        max-width: 180px;
+        max-height: 90px;
+        margin-bottom: 20px;
+      }
+
+      .cover-page h1 {
+        color: #1e3a8a;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 20px 0 10px 0;
+      }
+
+      .cover-page .subtitle {
+        font-size: 16px;
+        color: #64748b;
+        margin-bottom: 30px;
+      }
+
+      .info-box {
+        background: linear-gradient(to right, #f0f9ff 0%, #e0f2fe 100%);
+        border-left: 4px solid #0ea5e9;
+        border-right: 1px solid #0ea5e9;
+        border-top: 1px solid #0ea5e9;
+        border-bottom: 1px solid #0ea5e9;
+        padding: 16px 18px;
+        margin: 15px 0;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+        text-align: left;
+      }
+
+      .info-box h3 {
+        color: #0369a1;
+        margin-top: 0;
+        font-size: 14px;
+      }
+
+      .info-box p {
+        margin: 10px 0;
+        font-size: 12px;
+      }
+
+      .start-button {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+      }
+
+      .start-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
+      }
+
+      /* Main Form Styles */
+      .main-form {
+        display: none;
+      }
+
+      .header {
+        text-align: center;
+        border: 2px solid #1e3a8a;
+        padding: 20px;
+        margin-bottom: 30px;
+        background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      }
+
+      .header img {
+        max-width: 280px;
+        max-height: 140px;
+        margin-bottom: 15px;
+      }
+
+      .header h1 {
+        color: #1e3a8a;
+        margin: 15px 0 10px 0;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .header .subtitle {
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 15px;
+      }
+
+      .header .form-refs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 15px;
+      }
+
+      .header .form-refs input {
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        font-size: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .header .form-refs input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .tabs {
+        margin-bottom: 0;
+      }
+
+      .tab-nav {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2px;
+      }
+
+      .tab-button {
+        padding: 12px 16px;
+        border: none;
+        background: linear-gradient(to bottom, #ffffff 0%, #f1f5f9 100%);
+        color: #475569;
+        font-size: 11px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        border-radius: 6px 6px 0 0;
+        position: relative;
+      }
+
+      .tab-button:hover:not(.active) {
+        background: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+      }
+
+      .tab-button.active {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+        transform: translateY(0);
+      }
+
+      .tab-button.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: white;
+      }
+
+      .tab-content {
+        display: none;
+        padding: 30px;
+        background: white;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        margin-top: -2px;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .section-title {
+        color: #1e3a8a;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #3b82f6;
+        padding-bottom: 10px;
+        background: linear-gradient(to right, #f0f9ff 0%, transparent 100%);
+        padding-left: 12px;
+        margin-left: -12px;
+        padding-right: 12px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 15px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 12px;
+        color: #374151;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+        font-size: 12px;
+        background: white;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .radio-group,
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 8px;
+      }
+
+      /* Tab 4 specific - even distribution of checkboxes */
+      #tab4 .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px 15px;
+        margin-top: 8px;
+      }
+
+      .radio-item,
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .radio-item input,
+      .checkbox-item input {
+        margin: 0;
+      }
+
+      .radio-item label,
+      .checkbox-item label {
+        margin: 0;
+        font-weight: normal;
+        font-size: 12px;
+      }
+
+      .textarea-large {
+        width: 100%;
+        min-height: 100px;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        font-size: 12px;
+        resize: vertical;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        font-family: inherit;
+      }
+
+      .textarea-large:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .subsection {
+        margin: 15px 0;
+        padding: 15px;
+        background: #f8fafc;
+        border-left: 3px solid #1e3a8a;
+        border-radius: 4px;
+      }
+
+      .subsection-title {
+        font-weight: bold;
+        color: #1e3a8a;
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+
+      .signature-section {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .signature-box {
+        border: 2px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 15px;
+        background: white;
+      }
+
+      .signature-box strong {
+        display: block;
+        margin-bottom: 10px;
+        color: #374151;
+        font-size: 12px;
+      }
+
+      .signature-pad-container {
+        border: 2px dashed #cbd5e1;
+        border-radius: 4px;
+        background: #f9fafb;
+        position: relative;
+        height: 120px;
+        cursor: crosshair;
+      }
+
+      .signature-pad-canvas {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+      }
+
+      .signature-controls {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .sig-button {
+        padding: 6px 12px;
+        font-size: 11px;
+        border: 1px solid #cbd5e1;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 600;
+      }
+
+      .sig-button:hover {
+        background: #f1f5f9;
+        border-color: #3b82f6;
+      }
+
+      .sig-button.clear {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #b91c1c;
+      }
+
+      .sig-button.clear:hover {
+        background: #fca5a5;
+      }
+
+      .tab-navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 30px;
+        padding: 20px 0;
+        border-top: 2px solid #e2e8f0;
+      }
+
+      .nav-button {
+        padding: 12px 28px;
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+      }
+
+      .nav-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
+      }
+
+      .nav-button:disabled {
+        background: linear-gradient(to bottom, #cbd5e1 0%, #94a3b8 100%);
+        color: #64748b;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      .action-button {
+        padding: 12px 24px;
+        background: white;
+        color: #1e3a8a;
+        border: 2px solid #1e3a8a;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .action-button:hover {
+        background: #1e3a8a;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+      }
+
+      .progress-indicator {
+        text-align: center;
+        margin: 12px 0 20px 0;
+        font-size: 11px;
+        color: #64748b;
+        font-weight: 600;
+        background: white;
+        padding: 8px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      }
+
+      .instructions {
+        font-style: italic;
+        color: #64748b;
+        font-size: 11px;
+        margin-bottom: 10px;
+        padding: 8px;
+        background: #f8fafc;
+        border-radius: 4px;
+      }
+
+      .warning-box {
+        background: linear-gradient(to right, #fff3cd 0%, #fffbeb 100%);
+        border-left: 4px solid #ffc107;
+        border-right: 1px solid #ffc107;
+        border-top: 1px solid #ffc107;
+        border-bottom: 1px solid #ffc107;
+        padding: 16px 18px;
+        margin: 15px 0;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let currentTab = 1;
+      const totalTabs = 5;
+      let signaturePads = {};
+
+      // Start Statement - Hide cover page and show main form
+      function startStatement() {
+        document.getElementById('coverPage').style.display = 'none';
+        document.getElementById('mainForm').style.display = 'block';
+        showTab(1);
+      }
+
+      function showTab(n) {
+        const tabs = document.getElementsByClassName('tab-content');
+        const tabButtons = document.getElementsByClassName('tab-button');
+
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].classList.remove('active');
+        }
+
+        for (let i = 0; i < tabButtons.length; i++) {
+          tabButtons[i].classList.remove('active');
+        }
+
+        currentTab = n;
+        document.getElementById('tab' + n).classList.add('active');
+        tabButtons[n - 1].classList.add('active');
+
+        document.getElementById('progress-text').textContent = 'Tab ' + currentTab + ' of ' + totalTabs;
+
+        document.getElementById('prevBtn').disabled = currentTab === 1;
+        document.getElementById('nextBtn').disabled = currentTab === totalTabs;
+
+        window.scrollTo(0, 0);
+      }
+
+      function changeTab(direction) {
+        const newTab = currentTab + direction;
+        if (newTab >= 1 && newTab <= totalTabs) {
+          showTab(newTab);
+        }
+      }
+
+      // Initialize signature pads
+      function initSignaturePads() {
+        const canvases = document.querySelectorAll('.signature-pad-canvas');
+        canvases.forEach((canvas) => {
+          const padId = canvas.id;
+          if (!signaturePads[padId]) {
+            signaturePads[padId] = new SignaturePad(canvas, {
+              backgroundColor: 'rgb(249, 250, 251)',
+              penColor: 'rgb(0, 0, 0)'
+            });
+            resizeCanvas(canvas);
+          }
+        });
+      }
+
+      function resizeCanvas(canvas) {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext('2d').scale(ratio, ratio);
+        const padId = canvas.id;
+        if (signaturePads[padId]) {
+          signaturePads[padId].clear();
+        }
+      }
+
+      function clearSignature(padId) {
+        if (signaturePads[padId]) {
+          signaturePads[padId].clear();
+        }
+      }
+
+      // Save form data to browser localStorage
+      function saveForm() {
+        const formData = {};
+
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea, select');
+        inputs.forEach((input) => {
+          if (input.id || input.name) {
+            formData[input.id || input.name] = input.value;
+          }
+        });
+
+        const radios = document.querySelectorAll('input[type="radio"]:checked');
+        radios.forEach((radio) => {
+          formData[radio.name] = radio.id;
+        });
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+          formData[checkbox.id] = checkbox.checked;
+        });
+
+        // Save signatures
+        Object.keys(signaturePads).forEach((padId) => {
+          if (!signaturePads[padId].isEmpty()) {
+            formData[padId] = signaturePads[padId].toDataURL();
+          }
+        });
+
+        localStorage.setItem('injuredPersonForm', JSON.stringify(formData));
+
+        alert('Form saved successfully! Your data will be available when you return.');
+      }
+
+      // Load form data from localStorage
+      function loadFormData() {
+        const savedData = localStorage.getItem('injuredPersonForm');
+        if (!savedData) return;
+
+        const formData = JSON.parse(savedData);
+
+        Object.keys(formData).forEach((key) => {
+          if (key.startsWith('sig-')) {
+            // Load signature
+            if (signaturePads[key]) {
+              signaturePads[key].fromDataURL(formData[key]);
+            }
+          } else {
+            const element = document.getElementById(key) || document.querySelector(`[name="${key}"]`);
+            if (element) {
+              if (element.type === 'checkbox') {
+                element.checked = formData[key];
+              } else if (element.type === 'radio') {
+                const radio = document.getElementById(formData[key]);
+                if (radio) radio.checked = true;
+              } else {
+                element.value = formData[key];
+              }
+            }
+          }
+        });
+      }
+
+      // Print form to PDF
+      function printForm() {
+        const currentTabStore = currentTab;
+
+        const allTabs = document.getElementsByClassName('tab-content');
+        for (let i = 0; i < allTabs.length; i++) {
+          allTabs[i].style.display = 'block';
+        }
+
+        window.print();
+
+        for (let i = 0; i < allTabs.length; i++) {
+          allTabs[i].style.display = 'none';
+        }
+        document.getElementById('tab' + currentTabStore).style.display = 'block';
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function () {
+        loadFormData();
+        setTimeout(initSignaturePads, 100);
+      });
+
+      window.addEventListener('resize', function() {
+        document.querySelectorAll('.signature-pad-canvas').forEach(resizeCanvas);
+      });
+    </script>
+
+    <!-- Cover Page -->
+    <div id="coverPage" class="cover-page">
+      <img
+        src="https://page.gensparksite.com/v1/base64_upload/9aea1891f02d3b0a7298129379d5977e"
+        alt="Common Sense Safety Logo"
+      />
+      <h1>INJURED PERSON STATEMENT FORM</h1>
+      <div class="subtitle">Common Sense Safety</div>
+
+      <div class="info-box">
+        <h3>📋 Purpose of This Form</h3>
+        <p>
+          This form allows the injured person to provide their account of the incident in their own words. Your
+          statement is an important part of the investigation process and helps prevent future incidents.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <h3>📝 When to Complete</h3>
+        <p>
+          Complete this form as soon as reasonably practicable after the incident, while details are fresh in your
+          memory. If you are too injured to complete immediately, you may complete it when you are able.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <h3>🔒 Confidentiality</h3>
+        <p>
+          Your statement will be treated confidentially and used only for incident investigation and prevention purposes
+          in accordance with UK data protection laws.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <h3>🤝 Support Available</h3>
+        <p>
+          If you need assistance completing this form or wish to discuss the incident, please contact SHEQ Consultant:
+          Jeremy Bromley - Common Sense Safety
+        </p>
+      </div>
+
+      <div class="warning-box" style="text-align: center">
+        <strong style="color: #856404; font-size: 14px">⚠️ CONFIDENTIAL DOCUMENT</strong><br />
+        <span style="font-size: 11px; color: #856404"
+          >Form Ref: CSS-IPS-001 | Common Sense Safety<br />
+          For Official Use Only - Not for Public Distribution</span
+        >
+      </div>
+
+      <button class="start-button" onclick="startStatement()">START STATEMENT</button>
+    </div>
+
+    <!-- Main Form -->
+    <div id="mainForm" class="main-form">
+      <div class="header">
+        <img
+          src="https://page.gensparksite.com/v1/base64_upload/9aea1891f02d3b0a7298129379d5977e"
+          alt="Common Sense Safety Logo"
+        />
+        <h1>INJURED PERSON STATEMENT FORM</h1>
+        <div class="subtitle">Common Sense Safety</div>
+        <div class="form-refs">
+          <div>
+            <label><strong>Statement Reference Number:</strong></label>
+            <input type="text" class="form-control" id="ref_number" />
+          </div>
+          <div>
+            <label><strong>Statement Date & Time:</strong></label>
+            <input type="text" class="form-control" id="statement_datetime" />
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab-nav">
+          <div class="tab-button active" onclick="showTab(1)">1. Personal Details</div>
+          <div class="tab-button" onclick="showTab(2)">2. Incident Details</div>
+          <div class="tab-button" onclick="showTab(3)">3. Your Statement</div>
+          <div class="tab-button" onclick="showTab(4)">4. Injury Details</div>
+          <div class="tab-button" onclick="showTab(5)">5. Declaration & Signature</div>
+        </div>
+        <div class="progress-indicator">
+          <span id="progress-text">Tab 1 of 5</span>
+        </div>
+      </div>
+
+      <!-- Tab 1: Personal Details -->
+      <div class="tab-content active" id="tab1">
+        <div class="section-title">1. Personal Details</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name:</label>
+            <input type="text" class="form-control" id="full_name" />
+          </div>
+          <div class="form-group">
+            <label>Date of Birth:</label>
+            <input type="text" class="form-control" id="dob" placeholder="DD/MM/YYYY" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Home Address:</label>
+          <textarea class="form-control" id="home_address" rows="3"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Contact Phone:</label>
+            <input type="text" class="form-control" id="contact_phone" />
+          </div>
+          <div class="form-group">
+            <label>Email Address:</label>
+            <input type="email" class="form-control" id="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Employment Status:</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_employee" />
+              <label for="emp_employee">Employee</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_contractor" />
+              <label for="emp_contractor">Contractor</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_visitor" />
+              <label for="emp_visitor">Visitor</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_other" />
+              <label for="emp_other">Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Job Title/Position:</label>
+            <input type="text" class="form-control" id="job_title" />
+          </div>
+          <div class="form-group">
+            <label>Department/Location:</label>
+            <input type="text" class="form-control" id="department" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Length of Service:</label>
+            <input type="text" class="form-control" id="service_length" />
+          </div>
+          <div class="form-group">
+            <label>Normal Working Hours:</label>
+            <input type="text" class="form-control" id="working_hours" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Incident Details -->
+      <div class="tab-content" id="tab2">
+        <div class="section-title">2. Incident Details</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date of Incident (DD/MM/YYYY):</label>
+            <input type="text" class="form-control" id="incident_date" />
+          </div>
+          <div class="form-group">
+            <label>Time of Incident:</label>
+            <input type="text" class="form-control" id="incident_time" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Exact Location of Incident:</label>
+          <textarea class="form-control" id="incident_location" rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>What were you doing at the time?</label>
+          <textarea class="form-control" id="doing_at_time" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Were you doing your normal duties?</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="normal_duties" id="nd_yes" />
+              <label for="nd_yes">Yes</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="normal_duties" id="nd_no" />
+              <label for="nd_no">No</label>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 10px">
+            <label>If No, explain:</label>
+            <textarea class="form-control" id="normal_duties_explain" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Was your supervisor notified?</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="supervisor_notified" id="sn_yes" />
+              <label for="sn_yes">Yes</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="supervisor_notified" id="sn_no" />
+              <label for="sn_no">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Supervisor Name:</label>
+            <input type="text" class="form-control" id="supervisor_name" />
+          </div>
+          <div class="form-group">
+            <label>Time Supervisor Notified:</label>
+            <input type="text" class="form-control" id="supervisor_notified_time" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Your Statement -->
+      <div class="tab-content" id="tab3">
+        <div class="section-title">3. Your Statement</div>
+
+        <div class="instructions">
+          In your own words, describe exactly what happened. Include: What you were doing immediately before the
+          incident, What happened during the incident, What happened immediately after, Who else was present
+        </div>
+
+        <div class="form-group">
+          <textarea
+            class="textarea-large"
+            id="statement_description"
+            rows="8"
+            style="min-height: 150px"
+            placeholder="Describe the incident in detail..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>What do you think caused the incident?</label>
+          <textarea class="textarea-large" id="statement_cause" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Could this incident have been prevented? If yes, how?</label>
+          <textarea class="textarea-large" id="statement_prevention" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Is there anything else you would like to add?</label>
+          <textarea class="textarea-large" id="statement_additional" rows="4"></textarea>
+        </div>
+      </div>
+
+      <!-- Tab 4: Injury Details -->
+      <div class="tab-content" id="tab4">
+        <div class="section-title">4. Injury Details</div>
+
+        <div class="form-group">
+          <label>Body part(s) injured:</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_head" />
+              <label for="body_head">Head</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_eyes" />
+              <label for="body_eyes">Eyes</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_face" />
+              <label for="body_face">Face</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_neck" />
+              <label for="body_neck">Neck</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_back" />
+              <label for="body_back">Back</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_chest" />
+              <label for="body_chest">Chest</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_abdomen" />
+              <label for="body_abdomen">Abdomen</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_arms" />
+              <label for="body_arms">Arms</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_hands" />
+              <label for="body_hands">Hands</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_fingers" />
+              <label for="body_fingers">Fingers</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_legs" />
+              <label for="body_legs">Legs</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_feet" />
+              <label for="body_feet">Feet</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_toes" />
+              <label for="body_toes">Toes</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="body_other" />
+              <label for="body_other">Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Nature of injury:</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="nature_cut" />
+              <label for="nature_cut">Cut/Laceration</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="nature_bruise" />
+              <label for="nature_bruise">Bruise/Contusion</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="nature_strain" />
+              <label for="nature_strain">Strain/Sprain</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="nature_fracture" />
+              <label for="nature_fracture">Fracture</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="nature_burn" />
+              <label for="nature_burn">Burn</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="nature_shock" />
+              <label for="nature_shock">Electric Shock</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="nature_other" />
+              <label for="nature_other">Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Describe your injury in detail:</label>
+          <textarea class="textarea-large" id="injury_description" rows="4"></textarea>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Medical Treatment:</div>
+
+          <div class="form-group">
+            <label>Did you require first aid?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="first_aid" id="fa_yes" />
+                <label for="fa_yes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="first_aid" id="fa_no" />
+                <label for="fa_no">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Who provided first aid?</label>
+            <input type="text" class="form-control" id="first_aid_provider" />
+          </div>
+
+          <div class="form-group">
+            <label>First aid treatment given:</label>
+            <textarea class="form-control" id="first_aid_treatment" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Did you attend hospital/medical facility?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="hospital" id="hosp_yes" />
+                <label for="hosp_yes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="hospital" id="hosp_no" />
+                <label for="hosp_no">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Hospital/Facility name and location:</label>
+            <input type="text" class="form-control" id="hospital_name" />
+          </div>
+
+          <div class="form-group">
+            <label>Medical treatment received:</label>
+            <textarea class="form-control" id="medical_treatment" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Return to Work:</div>
+
+          <div class="form-group">
+            <label>Did you lose time from work?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="lost_time" id="lt_yes" />
+                <label for="lt_yes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="lost_time" id="lt_no" />
+                <label for="lt_no">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Number of days lost (if applicable):</label>
+            <input type="text" class="form-control" id="days_lost" />
+          </div>
+
+          <div class="form-group">
+            <label>Have you returned to work?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="returned_work" id="rw_yes" />
+                <label for="rw_yes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="returned_work" id="rw_no" />
+                <label for="rw_no">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Return to work date:</label>
+            <input type="text" class="form-control" id="return_date" />
+          </div>
+
+          <div class="form-group">
+            <label>Are you on restricted/light duties?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="restricted" id="rest_yes" />
+                <label for="rest_yes">Yes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="restricted" id="rest_no" />
+                <label for="rest_no">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Details of restrictions:</label>
+            <textarea class="form-control" id="restrictions_details" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Declaration & Signature -->
+      <div class="tab-content" id="tab5">
+        <div class="section-title">5. Declaration & Signature</div>
+
+        <div class="subsection">
+          <div class="subsection-title">Declaration:</div>
+          <p style="font-style: italic; margin: 15px 0; line-height: 1.6">
+            I declare that the information provided in this statement is true and accurate to the best of my knowledge.
+            I understand this statement may be used for incident investigation, prevention measures, and may be shared
+            with relevant authorities as required by law.
+          </p>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Injured Person:</div>
+
+          <div class="form-group">
+            <label>Name (please print):</label>
+            <input type="text" class="form-control" id="injured_person_name" />
+          </div>
+
+          <div class="signature-section">
+            <div class="signature-box">
+              <strong>Digital Signature</strong>
+              <div class="signature-pad-container">
+                <canvas id="sig-injured" class="signature-pad-canvas"></canvas>
+              </div>
+              <div class="signature-controls">
+                <button type="button" class="sig-button clear" onclick="clearSignature('sig-injured')">Clear</button>
+                <span style="font-size: 10px; color: #64748b;">Sign using mouse or touch</span>
+              </div>
+            </div>
+            <div class="signature-box">
+              <strong>Date</strong>
+              <input type="text" class="form-control" id="injured_date" placeholder="DD/MM/YYYY" style="margin-top: 10px" />
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Witness (if applicable):</div>
+
+          <div class="form-group">
+            <label>Witness Name:</label>
+            <input type="text" class="form-control" id="witness_name" />
+          </div>
+
+          <div class="signature-section">
+            <div class="signature-box">
+              <strong>Digital Signature</strong>
+              <div class="signature-pad-container">
+                <canvas id="sig-witness" class="signature-pad-canvas"></canvas>
+              </div>
+              <div class="signature-controls">
+                <button type="button" class="sig-button clear" onclick="clearSignature('sig-witness')">Clear</button>
+                <span style="font-size: 10px; color: #64748b;">Sign using mouse or touch</span>
+              </div>
+            </div>
+            <div class="signature-box">
+              <strong>Date</strong>
+              <input type="text" class="form-control" id="witness_date" placeholder="DD/MM/YYYY" style="margin-top: 10px" />
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">If statement completed by someone other than injured person:</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Name:</label>
+              <input type="text" class="form-control" id="other_person_name" />
+            </div>
+            <div class="form-group">
+              <label>Relationship to injured person:</label>
+              <input type="text" class="form-control" id="relationship" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation Buttons -->
+      <div class="tab-navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeTab(-1)">← Previous</button>
+        <button class="action-button" onclick="saveForm()">💾 Save & Exit</button>
+        <button class="action-button" onclick="printForm()">🖨️ Print to PDF</button>
+        <button class="nav-button" id="nextBtn" onclick="changeTab(1)">Next →</button>
+      </div>
+    </div>
+  </body>
+</html>

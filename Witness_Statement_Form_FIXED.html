@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Witness Statement Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      /* Cover Page Styles */
+      .cover-page {
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .cover-page img {
+        max-width: 180px;
+        max-height: 90px;
+        margin-bottom: 20px;
+      }
+
+      .cover-page h1 {
+        color: #1e3a8a;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 20px 0 10px 0;
+      }
+
+      .cover-page .subtitle {
+        font-size: 16px;
+        color: #64748b;
+        margin-bottom: 30px;
+      }
+
+      .info-box {
+        background: #f0f9ff;
+        border: 2px solid #0ea5e9;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        text-align: left;
+      }
+
+      .info-box h3 {
+        color: #0369a1;
+        margin-top: 0;
+        font-size: 14px;
+      }
+
+      .info-box p {
+        margin: 10px 0;
+        font-size: 12px;
+      }
+
+      .start-button {
+        background: #1e3a8a;
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: background 0.3s;
+      }
+
+      .start-button:hover {
+        background: #2c5aa0;
+      }
+
+      /* Main Form Styles */
+      .main-form {
+        display: none;
+      }
+
+      .header {
+        text-align: center;
+        border: 2px solid #1e3a8a;
+        padding: 20px;
+        margin-bottom: 30px;
+        background-color: #f8fafc;
+      }
+
+      .header img {
+        max-width: 180px;
+        max-height: 90px;
+        margin-bottom: 15px;
+      }
+
+      .header h1 {
+        color: #1e3a8a;
+        margin: 15px 0 10px 0;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .header .subtitle {
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 15px;
+      }
+
+      .header .form-refs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 15px;
+      }
+
+      .header .form-refs input {
+        padding: 6px 8px;
+        border: 1px solid #64748b;
+        font-size: 12px;
+      }
+
+      .tabs {
+        border-bottom: 2px solid #e2e8f0;
+        margin-bottom: 20px;
+      }
+
+      .tab-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+      }
+
+      .tab-button {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+        background: #f1f5f9;
+        color: #475569;
+        font-size: 11px;
+        cursor: pointer;
+        border-bottom: none;
+      }
+
+      .tab-button.active {
+        background: #1e3a8a;
+        color: white;
+        font-weight: bold;
+      }
+
+      .tab-content {
+        display: none;
+        padding: 20px 0;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .section-title {
+        color: #1e3a8a;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 8px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 15px;
+      }
+
+      .form-row-three {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 12px;
+        color: #374151;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 6px 8px;
+        border: 1px solid #64748b;
+        font-size: 12px;
+        background: white;
+      }
+
+      select.form-control {
+        height: 32px;
+      }
+
+      .radio-group,
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 8px;
+      }
+
+      .radio-item,
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .radio-item input,
+      .checkbox-item input {
+        margin: 0;
+      }
+
+      .radio-item label,
+      .checkbox-item label {
+        margin: 0;
+        font-weight: normal;
+        font-size: 12px;
+      }
+
+      .textarea-large {
+        width: 100%;
+        min-height: 100px;
+        padding: 8px;
+        border: 1px solid #64748b;
+        font-size: 12px;
+        resize: vertical;
+      }
+
+      .subsection {
+        margin: 15px 0;
+        padding: 10px;
+        background: #f8fafc;
+        border-left: 3px solid #1e3a8a;
+      }
+
+      .subsection-title {
+        font-weight: bold;
+        color: #1e3a8a;
+        margin-bottom: 8px;
+        font-size: 12px;
+      }
+
+      .signature-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .signature-box {
+        border: 1px solid #64748b;
+        padding: 15px;
+        text-align: center;
+        min-height: 80px;
+      }
+
+      .signature-line {
+        border-bottom: 1px solid #374151;
+        margin: 30px 0 5px 0;
+        height: 1px;
+      }
+
+      .tab-navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 30px;
+        padding: 20px 0;
+        border-top: 2px solid #e2e8f0;
+      }
+
+      .nav-button {
+        padding: 10px 24px;
+        background: #1e3a8a;
+        color: white;
+        border: 2px solid #1e3a8a;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+
+      .nav-button:hover:not(:disabled) {
+        background: #2c5aa0;
+        border-color: #2c5aa0;
+      }
+
+      .nav-button:disabled {
+        background: #cbd5e1;
+        border-color: #cbd5e1;
+        color: #94a3b8;
+        cursor: not-allowed;
+      }
+
+      .action-button {
+        padding: 10px 20px;
+        background: white;
+        color: #1e3a8a;
+        border: 2px solid #1e3a8a;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+
+      .action-button:hover {
+        background: #1e3a8a;
+        color: white;
+      }
+
+      .progress-indicator {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 11px;
+        color: #64748b;
+      }
+
+      .instructions {
+        font-style: italic;
+        color: #64748b;
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+
+      .add-witness-btn {
+        padding: 8px 16px;
+        background: #1e3a8a;
+        color: white;
+        border: 2px solid #1e3a8a;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 4px;
+        margin-top: 10px;
+        transition: all 0.3s;
+      }
+
+      .add-witness-btn:hover {
+        background: #2c5aa0;
+        border-color: #2c5aa0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let currentTab = 1;
+      const totalTabs = 5;
+      let witnessCount = 1;
+
+      // Start Statement - Hide cover page and show main form
+      function startStatement() {
+        document.getElementById('coverPage').style.display = 'none';
+        document.getElementById('mainForm').style.display = 'block';
+        showTab(1);
+      }
+
+      function showTab(n) {
+        // Hide all tabs
+        const tabs = document.getElementsByClassName('tab-content');
+        const tabButtons = document.getElementsByClassName('tab-button');
+
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].classList.remove('active');
+        }
+
+        for (let i = 0; i < tabButtons.length; i++) {
+          tabButtons[i].classList.remove('active');
+        }
+
+        // Show the current tab
+        currentTab = n;
+        document.getElementById('tab' + n).classList.add('active');
+        tabButtons[n - 1].classList.add('active');
+
+        // Update progress indicator
+        document.getElementById('progress-text').textContent = 'Tab ' + currentTab + ' of ' + totalTabs;
+
+        // Update navigation buttons
+        document.getElementById('prevBtn').disabled = currentTab === 1;
+        document.getElementById('nextBtn').disabled = currentTab === totalTabs;
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
+
+      function changeTab(direction) {
+        const newTab = currentTab + direction;
+        if (newTab >= 1 && newTab <= totalTabs) {
+          showTab(newTab);
+        }
+      }
+
+      // Add witness function
+      function addWitness() {
+        witnessCount++;
+        const container = document.getElementById('witnessContainer');
+        const newWitnessDiv = document.createElement('div');
+        newWitnessDiv.className = 'form-group';
+        newWitnessDiv.innerHTML = '<label>Witness ' + witnessCount + ':</label><input type="text" class="form-control" />';
+        container.appendChild(newWitnessDiv);
+      }
+
+      // Save form data to browser localStorage
+      function saveForm() {
+        const formData = {};
+
+        // Get all input fields
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea, select');
+        inputs.forEach((input) => {
+          if (input.id || input.name) {
+            formData[input.id || input.name] = input.value;
+          }
+        });
+
+        // Get all radio buttons
+        const radios = document.querySelectorAll('input[type="radio"]:checked');
+        radios.forEach((radio) => {
+          formData[radio.name] = radio.id;
+        });
+
+        // Get all checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+          formData[checkbox.id] = checkbox.checked;
+        });
+
+        // Save to localStorage
+        localStorage.setItem('witnessStatementForm', JSON.stringify(formData));
+
+        alert('Form saved successfully! Your data will be available when you return.');
+      }
+
+      // Load form data from localStorage
+      function loadFormData() {
+        const savedData = localStorage.getItem('witnessStatementForm');
+        if (!savedData) return;
+
+        const formData = JSON.parse(savedData);
+
+        // Restore text inputs, textareas, and selects
+        Object.keys(formData).forEach((key) => {
+          const element = document.getElementById(key) || document.querySelector(`[name="${key}"]`);
+          if (element) {
+            if (element.type === 'checkbox') {
+              element.checked = formData[key];
+            } else if (element.type === 'radio') {
+              const radio = document.getElementById(formData[key]);
+              if (radio) radio.checked = true;
+            } else {
+              element.value = formData[key];
+            }
+          }
+        });
+      }
+
+      // Print form to PDF
+      function printForm() {
+        // Store current tab
+        const currentTabStore = currentTab;
+
+        // Temporarily show all tabs for printing
+        const allTabs = document.getElementsByClassName('tab-content');
+        for (let i = 0; i < allTabs.length; i++) {
+          allTabs[i].style.display = 'block';
+        }
+
+        // Print
+        window.print();
+
+        // Restore tab display
+        for (let i = 0; i < allTabs.length; i++) {
+          allTabs[i].style.display = 'none';
+        }
+        document.getElementById('tab' + currentTabStore).style.display = 'block';
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function () {
+        loadFormData();
+      });
+    </script>
+
+    <!-- Cover Page -->
+    <div id="coverPage" class="cover-page">
+      <img
+        src="https://page.gensparksite.com/v1/base64_upload/9aea1891f02d3b0a7298129379d5977e"
+        alt="Common Sense Safety Logo"
+      />
+      <h1>WITNESS STATEMENT FORM</h1>
+      <div class="subtitle">Common Sense Safety</div>
+
+      <div class="info-box">
+        <h3>📋 Purpose of This Form</h3>
+        <p>
+          This form allows witnesses to provide their account of an incident. Witness statements are crucial for
+          thorough incident investigation and help prevent future occurrences.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <h3>📝 When to Complete</h3>
+        <p>
+          Complete this form as soon as possible after witnessing the incident, while details are fresh in your memory.
+          Your statement should be factual and objective.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <h3>🔒 Confidentiality</h3>
+        <p>
+          Your statement will be treated confidentially and used only for incident investigation purposes in accordance
+          with UK data protection laws.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <h3>🤝 Support Available</h3>
+        <p>
+          If you need assistance completing this form or wish to discuss what you witnessed, please contact SHEQ
+          Consultant: Jeremy Bromley - Common Sense Safety
+        </p>
+      </div>
+
+      <div
+        style="
+          background: #fff3cd;
+          border: 2px solid #ffc107;
+          padding: 15px;
+          margin: 15px 0;
+          border-radius: 4px;
+          text-align: center;
+        "
+      >
+        <strong style="color: #856404; font-size: 14px">⚠️ CONFIDENTIAL DOCUMENT</strong><br />
+        <span style="font-size: 11px; color: #856404"
+          >Form Ref: CSS-WSF-001 | Common Sense Safety<br />
+          For Official Use Only - Not for Public Distribution</span
+        >
+      </div>
+
+      <button class="start-button" onclick="startStatement()">START STATEMENT</button>
+    </div>
+
+    <!-- Main Form -->
+    <div id="mainForm" class="main-form">
+      <div class="header">
+        <img
+          src="https://page.gensparksite.com/v1/base64_upload/9aea1891f02d3b0a7298129379d5977e"
+          alt="Common Sense Safety Logo"
+        />
+        <h1>WITNESS STATEMENT FORM</h1>
+        <div class="subtitle">Common Sense Safety</div>
+        <div class="form-refs">
+          <div>
+            <label><strong>Statement Reference Number:</strong></label>
+            <input type="text" class="form-control" />
+          </div>
+          <div>
+            <label><strong>Statement Date & Time:</strong></label>
+            <input type="text" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab-nav">
+          <div class="tab-button active" onclick="showTab(1)">1. Witness Details</div>
+          <div class="tab-button" onclick="showTab(2)">2. Incident Details</div>
+          <div class="tab-button" onclick="showTab(3)">3. Your Statement</div>
+          <div class="tab-button" onclick="showTab(4)">4. Injured Person & Others</div>
+          <div class="tab-button" onclick="showTab(5)">5. Declaration & Signature</div>
+        </div>
+        <div class="progress-indicator">
+          <span id="progress-text">Tab 1 of 5</span>
+        </div>
+      </div>
+
+      <!-- Tab 1: Witness Details -->
+      <div class="tab-content active" id="tab1">
+        <div class="section-title">1. Witness Details</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name:</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Date of Birth:</label>
+            <input type="text" class="form-control" placeholder="DD/MM/YYYY" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Home Address:</label>
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Contact Phone:</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Email Address:</label>
+            <input type="email" class="form-control" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Employment Status:</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_employee" />
+              <label for="emp_employee">Employee</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_contractor" />
+              <label for="emp_contractor">Contractor</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_visitor" />
+              <label for="emp_visitor">Visitor</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="employment_status" id="emp_other" />
+              <label for="emp_other">Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Job Title/Position:</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Department/Location:</label>
+            <input type="text" class="form-control" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Length of Service (if employee):</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Relationship to injured person (if any):</label>
+            <input type="text" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Incident Details -->
+      <div class="tab-content" id="tab2">
+        <div class="section-title">2. Incident Details</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date of Incident (DD/MM/YYYY):</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Time of Incident:</label>
+            <input type="text" class="form-control" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Exact Location of Incident:</label>
+          <textarea class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Where were you when the incident occurred?</label>
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>How far were you from the incident?</label>
+          <select class="form-control">
+            <option value="">Please select...</option>
+            <option value="less-than-1m">Less than 1m</option>
+            <option value="1-5m">1-5m</option>
+            <option value="5-10m">5-10m</option>
+            <option value="10-20m">10-20m</option>
+            <option value="more-than-20m">More than 20m</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Did you have a clear view?</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="clear_view" id="cv_yes" />
+              <label for="cv_yes">Yes</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="clear_view" id="cv_no" />
+              <label for="cv_no">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>What were you doing at the time?</label>
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Did you witness the entire incident?</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="entire_incident" id="ei_yes" />
+              <label for="ei_yes">Yes</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="entire_incident" id="ei_no" />
+              <label for="ei_no">No</label>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 10px">
+            <label>If No, what parts did you witness?</label>
+            <textarea class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Your Statement -->
+      <div class="tab-content" id="tab3">
+        <div class="section-title">3. Your Statement</div>
+
+        <div class="instructions">
+          In your own words, describe exactly what you witnessed. Be specific about: What you saw immediately before the
+          incident, What happened during the incident, What happened immediately after, Who else was present
+        </div>
+
+        <div class="form-group">
+          <textarea
+            class="textarea-large"
+            rows="8"
+            style="min-height: 150px"
+            placeholder="Describe what you witnessed in detail..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>What do you think caused the incident?</label>
+          <textarea class="textarea-large" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Could this incident have been prevented? If yes, how?</label>
+          <textarea class="textarea-large" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Were there any unsafe conditions you observed?</label>
+          <textarea class="textarea-large" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Were there any unsafe actions you observed?</label>
+          <textarea class="textarea-large" rows="4"></textarea>
+        </div>
+      </div>
+
+      <!-- Tab 4: Injured Person & Others -->
+      <div class="tab-content" id="tab4">
+        <div class="section-title">4. Injured Person & Others</div>
+
+        <div class="form-group">
+          <label>Name of injured person:</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label>What injuries did you observe?</label>
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Describe the injured person's condition:</label>
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Did you provide any assistance?</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="provided_assistance" id="pa_yes" />
+              <label for="pa_yes">Yes</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="provided_assistance" id="pa_no" />
+              <label for="pa_no">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>If Yes, what assistance did you provide?</label>
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Were emergency services called?</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="emergency_called" id="ec_yes" />
+              <label for="ec_yes">Yes</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="emergency_called" id="ec_no" />
+              <label for="ec_no">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Who called them?</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Names of other witnesses present (if any):</div>
+
+          <div id="witnessContainer">
+            <div class="form-group">
+              <label>Witness 1:</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+
+          <button class="add-witness-btn" onclick="addWitness()">▼ Add Another Witness</button>
+        </div>
+      </div>
+
+      <!-- Tab 5: Declaration & Signature -->
+      <div class="tab-content" id="tab5">
+        <div class="section-title">5. Declaration & Signature</div>
+
+        <div class="subsection">
+          <div class="subsection-title">Declaration:</div>
+          <p style="font-style: italic; margin: 15px 0; line-height: 1.6">
+            I declare that this statement is true and accurate to the best of my knowledge and belief. I understand this
+            statement may be used for incident investigation, prevention measures, and may be shared with relevant
+            authorities as required by law. I am willing to be contacted for further clarification if needed.
+          </p>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Witness:</div>
+
+          <div class="form-group">
+            <label>Name (please print):</label>
+            <input type="text" class="form-control" />
+          </div>
+
+          <div class="signature-section">
+            <div class="signature-box">
+              <div><strong>Signature</strong></div>
+              <div class="signature-line"></div>
+            </div>
+            <div class="signature-box">
+              <div><strong>Date</strong></div>
+              <input type="text" class="form-control" style="margin-top: 20px" />
+            </div>
+            <div style="border: none"></div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Statement taken by (if applicable):</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Name:</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Position/Role:</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+
+          <div class="signature-section">
+            <div class="signature-box">
+              <div><strong>Signature</strong></div>
+              <div class="signature-line"></div>
+            </div>
+            <div class="signature-box">
+              <div><strong>Date</strong></div>
+              <input type="text" class="form-control" style="margin-top: 20px" />
+            </div>
+            <div style="border: none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation Buttons -->
+      <div class="tab-navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeTab(-1)">← Previous</button>
+        <button class="action-button" onclick="saveForm()">💾 Save & Exit</button>
+        <button class="action-button" onclick="printForm()">🖨️ Print to PDF</button>
+        <button class="nav-button" id="nextBtn" onclick="changeTab(1)">Next →</button>
+      </div>
+    </div>
+  </body>
+</html>
