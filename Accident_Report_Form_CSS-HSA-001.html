@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accident Report Form CSS-HSA-001</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
             max-width: 880px;
@@ -594,6 +595,48 @@
         .injury-dot.selected[data-location*="Pinky"],
         .injury-dot.selected[data-location*="Palm"] {
             background-color: #ef4444;
+        }
+
+        /* Print/PDF specific styles */
+        @media print {
+            .info-corner, .info-panel, .tab-navigation, .tab-nav, .progress-indicator {
+                display: none !important;
+            }
+
+            .tab-content {
+                display: block !important;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+
+            body {
+                background: white !important;
+            }
+
+            .section-title {
+                page-break-after: avoid;
+            }
+
+            .form-group {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Loading indicator for PDF generation */
+        .pdf-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Open%20Sans:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Noto%20Sans%20JP:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&amp;display=swap" rel="stylesheet"></head>
@@ -2854,7 +2897,8 @@
     <div class="tab-navigation" style="font-size: 16px;">
         <button class="nav-button" id="prevBtn" onclick="changeTab(-1)">← Previous</button>
         <button class="action-button" onclick="saveForm()">💾 Save &amp; Exit</button>
-        <button class="action-button" onclick="printForm()">🖨️ Print to PDF</button>
+        <button class="action-button" onclick="generatePDF()">📄 Download PDF</button>
+        <button class="action-button" onclick="emailForm()">📧 Email Form</button>
         <button class="nav-button" id="nextBtn" onclick="changeTab(1)">Next →</button>
     </div>
 
@@ -3061,7 +3105,134 @@
             }
         }
 
-        // Print form to PDF
+        // Generate PDF with proper formatting
+        async function generatePDF() {
+            try {
+                // Show loading message
+                const originalText = event.target.textContent;
+                event.target.textContent = '⏳ Generating PDF...';
+                event.target.disabled = true;
+
+                // Get form identifiers for filename
+                const reportNumber = document.getElementById('report_number')?.value || 'DRAFT';
+                const dateCompleted = document.getElementById('date_completed')?.value || '未dated';
+                const filename = `Accident_Report_${reportNumber}_${dateCompleted.replace(/\//g, '-')}.pdf`;
+
+                // Clone the document for PDF generation
+                const element = document.body.cloneNode(true);
+
+                // Remove buttons and interactive elements from PDF
+                const buttonsToRemove = element.querySelectorAll('.tab-navigation, .info-corner, .info-panel, button');
+                buttonsToRemove.forEach(btn => btn.remove());
+
+                // Show all tabs in PDF
+                const allTabs = element.querySelectorAll('.tab-content');
+                allTabs.forEach(tab => {
+                    tab.style.display = 'block';
+                    tab.classList.add('active');
+                });
+
+                // Remove tab navigation
+                const tabNav = element.querySelector('.tab-nav');
+                if (tabNav) tabNav.remove();
+
+                const progressIndicator = element.querySelector('.progress-indicator');
+                if (progressIndicator) progressIndicator.remove();
+
+                // PDF options
+                const opt = {
+                    margin: [10, 10, 10, 10],
+                    filename: filename,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        letterRendering: true
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait',
+                        compress: true
+                    },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                // Generate PDF
+                await html2pdf().set(opt).from(element).save();
+
+                // Reset button
+                event.target.textContent = originalText;
+                event.target.disabled = false;
+
+                alert('✅ PDF generated successfully!');
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('❌ Error generating PDF. Please try again or use your browser\'s print function.');
+                event.target.textContent = '📄 Download PDF';
+                event.target.disabled = false;
+            }
+        }
+
+        // Email form functionality
+        function emailForm() {
+            // Get form data
+            const reportNumber = document.getElementById('report_number')?.value || 'DRAFT';
+            const dateCompleted = document.getElementById('date_completed')?.value || 'Not specified';
+            const formCompleter = document.getElementById('form_completer')?.value || 'Not specified';
+
+            // Email subject and body
+            const subject = encodeURIComponent(`Accident Report Form ${reportNumber} - ${dateCompleted}`);
+            const body = encodeURIComponent(
+                `Please find the Accident Report Form details below:\n\n` +
+                `Report Number: ${reportNumber}\n` +
+                `Date Completed: ${dateCompleted}\n` +
+                `Completed by: ${formCompleter}\n\n` +
+                `IMPORTANT: Please generate and attach the PDF version of this form.\n\n` +
+                `To attach the PDF:\n` +
+                `1. Click "📄 Download PDF" button on the form\n` +
+                `2. Attach the generated PDF to this email\n` +
+                `3. Send to the HSQE Consultant (Jeremy Bromley)\n\n` +
+                `Form Reference: CSS-HSA-001\n` +
+                `Common Sense Safety - Accident/Incident Report\n\n` +
+                `This is a confidential document for official use only.`
+            );
+
+            // HSQE Consultant email (you may want to customize this)
+            const toEmail = 'jeremy@commonsensesafety.co.uk'; // Default recipient
+
+            // Create mailto link
+            const mailtoLink = `mailto:${toEmail}?subject=${subject}&body=${body}`;
+
+            // Show instructions dialog
+            const sendEmail = confirm(
+                '📧 Email Form Instructions:\n\n' +
+                '1. This will open your default email client\n' +
+                '2. Please generate a PDF first using "📄 Download PDF" button\n' +
+                '3. Attach the PDF file to the email\n' +
+                '4. Review and send the email\n\n' +
+                'Click OK to continue to your email client.'
+            );
+
+            if (sendEmail) {
+                // Open mailto link
+                window.location.href = mailtoLink;
+
+                // Also offer to generate PDF if not done yet
+                setTimeout(() => {
+                    const generatePDFNow = confirm(
+                        '📄 Would you like to generate the PDF now?\n\n' +
+                        'Click OK to generate the PDF that you can attach to your email.'
+                    );
+                    if (generatePDFNow) {
+                        generatePDF();
+                    }
+                }, 1000);
+            }
+        }
+
+        // Legacy print function (keeping for compatibility)
         function printForm() {
             window.print();
         }
