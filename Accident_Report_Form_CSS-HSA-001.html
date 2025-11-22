@@ -1,0 +1,3187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Report Form CSS-HSA-001</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 32px 80px;
+            position: relative;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #f5f7fa;
+        }
+
+        .info-corner {
+            position: fixed;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .info-corner:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
+        }
+
+        .info-corner.top-left {
+            top: 0;
+            left: 0;
+            border-bottom-right-radius: 8px;
+        }
+
+        .info-corner.top-right {
+            top: 0;
+            right: 0;
+            border-bottom-left-radius: 8px;
+        }
+
+        .info-panel {
+            display: none;
+            position: fixed;
+            top: 60px;
+            background: white;
+            border: 2px solid #1e3a8a;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            z-index: 999;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .info-panel.show {
+            display: block;
+        }
+
+        .info-panel.left {
+            left: 20px;
+        }
+
+        .info-panel.right {
+            right: 20px;
+        }
+
+        .info-panel h3 {
+            margin: 0 0 15px 0;
+            color: #1e3a8a;
+            font-size: 16px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .info-panel p {
+            margin: 8px 0;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .info-panel .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #64748b;
+            padding: 5px;
+        }
+
+        .info-panel .close-btn:hover {
+            color: #1e3a8a;
+        }
+
+        .header {
+            text-align: center;
+            border: 2px solid #1e3a8a;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .header-info .info-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .header-info .info-field label {
+            font-weight: bold;
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-info .info-field input {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .header-info .info-field.full-width {
+            grid-column: span 2;
+        }
+
+        .consultant-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #f0f9ff;
+            border-radius: 4px;
+            border: 1px solid #0ea5e9;
+        }
+
+        .consultant-info strong {
+            color: #1e3a8a;
+        }
+
+        .consultant-info a {
+            color: #0ea5e9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .consultant-info a:hover {
+            text-decoration: underline;
+        }
+
+        .header img {
+            max-width: 280px;
+            max-height: 140px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            color: #1e3a8a;
+            margin: 15px 0 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header .subtitle {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .tabs {
+            margin-bottom: 0;
+        }
+
+        .tab-nav {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2px;
+        }
+
+        .tab-button {
+            padding: 12px 16px;
+            border: none;
+            background: linear-gradient(to bottom, #ffffff 0%, #f1f5f9 100%);
+            color: #475569;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+            transform: translateY(0);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-top: -2px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            color: #1e3a8a;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 10px;
+            background: linear-gradient(to right, #f0f9ff 0%, transparent 100%);
+            padding-left: 12px;
+            margin-left: -12px;
+            padding-right: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #374151;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+            background: white;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .radio-item input, .checkbox-item input {
+            margin: 0;
+        }
+
+        .radio-item label, .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        .textarea-large {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+            resize: vertical;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .textarea-large:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .warning-box {
+            background: linear-gradient(to right, #fff3cd 0%, #fffbeb 100%);
+            border-left: 4px solid #ffc107;
+            border-right: 1px solid #ffc107;
+            border-top: 1px solid #ffc107;
+            border-bottom: 1px solid #ffc107;
+            padding: 16px 18px;
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+        }
+
+        .info-box {
+            background: linear-gradient(to right, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid #0ea5e9;
+            border-right: 1px solid #0ea5e9;
+            border-top: 1px solid #0ea5e9;
+            border-bottom: 1px solid #0ea5e9;
+            padding: 16px 18px;
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+        }
+
+        .warning-box strong, .info-box strong {
+            color: #856404;
+            font-size: 13px;
+        }
+
+        .warning-box a, .info-box a {
+            color: #1e3a8a;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 20px 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
+        }
+
+        .nav-button:disabled {
+            background: linear-gradient(to bottom, #cbd5e1 0%, #94a3b8 100%);
+            color: #64748b;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .action-button {
+            padding: 12px 24px;
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #1e3a8a;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .action-button:hover {
+            background: #1e3a8a;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+        }
+
+        .progress-indicator {
+            text-align: center;
+            margin: 12px 0 20px 0;
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .table-responsive {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .table-responsive th,
+        .table-responsive td {
+            border: 1px solid #666;
+            padding: 6px;
+            text-align: left;
+            font-size: 10px;
+        }
+
+        .table-responsive th {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .injury-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        /* Head/Neck - Blue */
+        .injury-dot[data-location*="Head"],
+        .injury-dot[data-location*="Face"],
+        .injury-dot[data-location*="Neck"] {
+            background-color: rgba(59, 130, 246, 0.4);
+            border: 2px solid #3b82f6;
+        }
+
+        /* Torso/Back - Green */
+        .injury-dot[data-location*="Chest"],
+        .injury-dot[data-location*="Abdomen"],
+        .injury-dot[data-location*="Groin"],
+        .injury-dot[data-location*="Back"]:not([data-location*="Head"]):not([data-location*="Neck"]),
+        .injury-dot[data-location*="Shoulder Blade"],
+        .injury-dot[data-location*="Buttocks"] {
+            background-color: rgba(16, 185, 129, 0.4);
+            border: 2px solid #10b981;
+        }
+
+        /* Arms - Orange */
+        .injury-dot[data-location*="Shoulder"]:not([data-location*="Blade"]),
+        .injury-dot[data-location*="Upper Arm"],
+        .injury-dot[data-location*="Elbow"],
+        .injury-dot[data-location*="Forearm"],
+        .injury-dot[data-location*="Wrist"] {
+            background-color: rgba(249, 115, 22, 0.4);
+            border: 2px solid #f97316;
+        }
+
+        /* Legs/Feet - Purple */
+        .injury-dot[data-location*="Thigh"],
+        .injury-dot[data-location*="Knee"],
+        .injury-dot[data-location*="Lower Leg"],
+        .injury-dot[data-location*="Calf"],
+        .injury-dot[data-location*="Ankle"],
+        .injury-dot[data-location*="Foot"],
+        .injury-dot[data-location*="Heel"] {
+            background-color: rgba(139, 92, 246, 0.4);
+            border: 2px solid #8b5cf6;
+        }
+
+        /* Hands - Red */
+        .injury-dot[data-location*="Hand"],
+        .injury-dot[data-location*="Thumb"],
+        .injury-dot[data-location*="Index"],
+        .injury-dot[data-location*="Middle"],
+        .injury-dot[data-location*="Ring"],
+        .injury-dot[data-location*="Pinky"],
+        .injury-dot[data-location*="Palm"],
+        .injury-dot[data-hand-location] {
+            background-color: rgba(239, 68, 68, 0.4);
+            border: 2px solid #ef4444;
+        }
+
+        .injury-dot:hover {
+            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(1.3);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .injury-dot.selected {
+            opacity: 1;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        /* Selected state maintains the original color but more opaque */
+        .injury-dot.selected[data-location*="Head"],
+        .injury-dot.selected[data-location*="Face"],
+        .injury-dot.selected[data-location*="Neck"] {
+            background-color: #3b82f6;
+        }
+
+        .injury-dot.selected[data-location*="Chest"],
+        .injury-dot.selected[data-location*="Abdomen"],
+        .injury-dot.selected[data-location*="Groin"],
+        .injury-dot.selected[data-location*="Back"]:not([data-location*="Head"]):not([data-location*="Neck"]),
+        .injury-dot.selected[data-location*="Shoulder Blade"],
+        .injury-dot.selected[data-location*="Buttocks"] {
+            background-color: #10b981;
+        }
+
+        .injury-dot.selected[data-location*="Shoulder"]:not([data-location*="Blade"]),
+        .injury-dot.selected[data-location*="Upper Arm"],
+        .injury-dot.selected[data-location*="Elbow"],
+        .injury-dot.selected[data-location*="Forearm"],
+        .injury-dot.selected[data-location*="Wrist"] {
+            background-color: #f97316;
+        }
+
+        .injury-dot.selected[data-location*="Thigh"],
+        .injury-dot.selected[data-location*="Knee"],
+        .injury-dot.selected[data-location*="Lower Leg"],
+        .injury-dot.selected[data-location*="Calf"],
+        .injury-dot.selected[data-location*="Ankle"],
+        .injury-dot.selected[data-location*="Foot"],
+        .injury-dot.selected[data-location*="Heel"] {
+            background-color: #8b5cf6;
+        }
+
+        .injury-dot.selected[data-location*="Hand"],
+        .injury-dot.selected[data-location*="Thumb"],
+        .injury-dot.selected[data-location*="Index"],
+        .injury-dot.selected[data-location*="Middle"],
+        .injury-dot.selected[data-location*="Ring"],
+        .injury-dot.selected[data-location*="Pinky"],
+        .injury-dot.selected[data-location*="Palm"] {
+            background-color: #ef4444;
+        }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Open%20Sans:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Noto%20Sans%20JP:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&amp;display=swap" rel="stylesheet"></head>
+<body style="">
+    <!-- Information Corner Tabs -->
+    <div class="info-corner top-left" onclick="toggleInfoPanel('left')">
+        📋 Form Info
+    </div>
+    <div class="info-corner top-right" onclick="toggleInfoPanel('right')" style="font-size: 11px;">
+        ℹ️ Help &amp; Guidance
+    </div>
+
+    <!-- Information Panels -->
+    <div class="info-panel left" id="info-panel-left">
+        <button class="close-btn" onclick="closeInfoPanel('left')">×</button>
+        <h3>Form Information</h3>
+        <p><strong>Form Reference:</strong> CSS-HSA-001</p>
+        <p><strong>Version:</strong> 1.0</p>
+        <p><strong>Purpose:</strong> HSE RIDDOR compliant accident and incident reporting</p>
+        <p><strong>Completion Time:</strong> 20-30 minutes</p>
+        <p><strong>Confidentiality:</strong> All information is strictly confidential</p>
+        <p><strong>Data Storage:</strong> Form auto-saves to browser localStorage</p>
+    </div>
+
+    <div class="info-panel right" id="info-panel-right">
+        <button class="close-btn" onclick="closeInfoPanel('right')">×</button>
+        <h3>Help &amp; Guidance</h3>
+        <p><strong>Navigation:</strong> Use Previous/Next buttons or click tab numbers directly</p>
+        <p><strong>Minor Accidents:</strong> Complete Tab 5 Option A then skip to Tab 14</p>
+        <p><strong>RIDDOR Events:</strong> Items marked in RED must be reported to HSE</p>
+        <p><strong>Body Diagrams:</strong> Click dots on diagrams to mark injury locations</p>
+        <p><strong>Related Forms:</strong> Links provided for Service Strikes, Third Party Claims, Witness Statements</p>
+        <p><strong>Support:</strong> Contact HSQE Consultant for assistance</p>
+    </div>
+
+    <div class="header">
+        <img src="https://page.gensparksite.com/v1/base64_upload/65982c0f83dc8cbbe9020c7b0cf61502" alt="Common Sense Safety Logo - In Safe Hands" data-height-listener-added="true">
+        <h1>ACCIDENT/INCIDENT REPORT & INVESTIGATION FORM</h1>
+        <div class="subtitle">Common Sense Safety | CSS-HSA-001</div>
+        
+        <div style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); border: 2px solid #1e40af; border-radius: 8px; padding: 12px 20px; margin: 15px auto; max-width: 700px; box-shadow: 0 2px 8px rgba(30, 58, 138, 0.4); text-align: center;">
+            <p style="margin: 0; font-weight: bold; font-size: 13px; color: #ffffff;">
+                ⚠️ To be completed in conjunction with the HSQE Consultant. Tick boxes where appropriate. Use block letters & Print Clearly.
+            </p>
+        </div>
+        
+        <!-- Header Information Fields -->
+        <div class="header-info">
+            <div class="info-field">
+                <label>Report Number:</label>
+                <input type="text" id="report_number" class="form-control" placeholder="Auto-generated or manual entry">
+            </div>
+            <div class="info-field">
+                <label>Date Form Completed:</label>
+                <input type="text" id="date_completed" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="info-field">
+                <label>Person completing form:</label>
+                <input type="text" id="form_completer" class="form-control" placeholder="Full name">
+            </div>
+            <div class="info-field">
+                <label>Position:</label>
+                <input type="text" id="completer_position" class="form-control" placeholder="Job title">
+            </div>
+            <div class="info-field full-width">
+                <label>HSQE Consultant:</label>
+                <div class="consultant-info">
+                    <strong>Jeremy Bromley</strong>
+                    <span>|</span>
+                    <a href="/cdn-cgi/l/email-protection#5a303f283f37231a393537373534293f34293f293b3c3f2e23743935742f31" title="Click to email Jeremy Bromley">View Contact Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-nav">
+            <div class="tab-button" onclick="showTab(1)">1. Person Affected/Injured</div>
+            <div class="tab-button" onclick="showTab(2)">2. Accident/Incident Details</div>
+            <div class="tab-button" onclick="showTab(3)">3. Description</div>
+            <div class="tab-button" onclick="showTab(4)">4. Statements</div>
+            <div class="tab-button" onclick="showTab(5)">5. Minor Accidents</div>
+            <div class="tab-button active" onclick="showTab(6)">6. Further Accident/Incident Details</div>
+            <div class="tab-button" onclick="showTab(7)">7. Person Details</div>
+            <div class="tab-button" onclick="showTab(8)">8. Absence &amp; Duty</div>
+            <div class="tab-button" onclick="showTab(9)">9. Task Details</div>
+            <div class="tab-button" onclick="showTab(10)">10. Vehicle</div>
+            <div class="tab-button" onclick="showTab(11)">11. Machine/Tool</div>
+            <div class="tab-button" onclick="showTab(12)">12. Occupational Health</div>
+            <div class="tab-button" onclick="showTab(13)">13. Root Cause Analysis</div>
+            <div class="tab-button" onclick="showTab(14)">14. Sign-off and Approval</div>
+            <div class="tab-button" onclick="openLegalQuestionnaire()" style="cursor: pointer;">15. Legal Questionnaire ↗</div>
+        </div>
+        <div class="progress-indicator">
+            <span id="progress-text">Tab 6 of 15</span>
+        </div>
+    </div>
+
+    <!-- Tab 1: Person Affected/Injured -->
+    <div class="tab-content" id="tab1">
+        <div class="warning-box">
+            <strong>⚠️ Service Strikes:</strong> If this incident involves damage to underground or overhead utilities (gas, electric, water, sewer, telecommunications), you must complete the separate 
+            <a href="https://page.gensparksite.com/9a7e36bd-2b0f-441b-8bd0-fb7e8c10bcf9/e94cdf05-2669-4dff-a1ef-0122f562dac8/docs_agent/saved/Service_Strike_Report_Form_UK_Final_SHEQ.html" target="_blank">Service Strike Incident Report Form (CSS-SSR-001)</a>
+        </div>
+
+        <div class="info-box" style="margin-bottom: 20px; background: linear-gradient(to right, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #10b981; border-right: 1px solid #10b981; border-top: 1px solid #10b981; border-bottom: 1px solid #10b981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);">
+            <strong>🌍 Environmental Incidents:</strong> If this incident involves environmental damage (pollution, spills, contamination, waste incidents, wildlife harm), you must also complete the 
+            <a href="file:///mnt/user-data/outputs/CSS-HSA-002-Environmental-Incident-Report.html" target="_blank" style="color: #1e3a8a; text-decoration: underline; font-weight: bold;">Environmental Incident Report Form (CSS-HSA-002) ↗</a>
+        </div>
+
+        <div class="section-title">1. Person Affected/Injured</div>
+        
+        <div class="form-group">
+            <label>Person type:</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="person_type" id="staff">
+                    <label for="staff">Staff</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="person_type" id="public">
+                    <label for="public">Public</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="person_type" id="contractor">
+                    <label for="contractor">Contractor</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="person_type" id="other">
+                    <label for="other">Other</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="person_type" id="occ_ill_health">
+                    <label for="occ_ill_health">Occ. Ill Health</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Surname:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Forename:</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Date of birth:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Contact phone:</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Contact email:</label>
+            <input type="email" class="form-control">
+        </div>
+    </div>
+
+    <!-- Tab 2: Accident/Incident Details -->
+    <div class="tab-content" id="tab2">
+        <div class="section-title">2. Accident/Incident Details</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Date:</strong></label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="form-group">
+                <label><strong>Time:</strong></label>
+                <input type="text" class="form-control" placeholder="HH:MM">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Location Name:</strong></label>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class="form-group" style="margin-top: 25px;">
+            <label><strong>Was First Aid Given?</strong></label>
+            <div style="display: flex; gap: 20px; margin-top: 8px;">
+                <label style="display: flex; align-items: center; gap: 8px;">
+                    <input type="radio" name="first_aid_given" value="yes" onchange="document.getElementById('first_aid_details').style.display = this.checked ? 'block' : 'none'; document.getElementById('first_aid_brief').style.display = this.checked ? 'block' : 'none';">
+                    <span>Yes - Give details below</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px;">
+                    <input type="radio" name="first_aid_given" value="no" onchange="document.getElementById('first_aid_details').style.display = 'none'; document.getElementById('first_aid_brief').style.display = 'none';">
+                    <span>No - Proceed to Section 3</span>
+                </label>
+            </div>
+        </div>
+
+        <div id="first_aid_brief" style="display: block; margin-top: 15px;">
+            <div class="form-group">
+                <label><strong>Brief description of first aid given:</strong></label>
+                <textarea class="textarea-large" rows="3" placeholder="Describe the first aid treatment provided..."></textarea>
+            </div>
+        </div>
+
+        <div id="first_aid_details" style="display: block; margin-top: 20px; padding: 20px; background: rgb(240, 249, 255); border-left: 4px solid rgb(14, 165, 233); border-radius: 6px;">
+            <div class="form-group">
+                <label><strong>Name of person who gave first aid (State if Doctor):</strong></label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label><strong>If Hospital or Medical Aid given, state name of Institution or Doctor:</strong></label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label><strong>Was the injured person taken to hospital?</strong></label>
+                <div style="display: flex; gap: 20px; margin-top: 8px;">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="radio" name="taken_hospital" value="yes">
+                        <span>Yes</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="radio" name="taken_hospital" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Was injured person detained in Hospital more than 24 hrs?</strong></label>
+                <div style="display: flex; gap: 20px; margin-top: 8px;">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="radio" name="detained_hospital" value="yes">
+                        <span>Yes</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="radio" name="detained_hospital" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Were all persons authorised to be in the place where the accident/incident occurred?</strong></label>
+            <div class="form-row" style="margin-top: 10px;">
+                <div class="form-group">
+                    <label style="font-size: 12px; color: #64748b;">Injured Person:</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="authorised_injured" id="auth_injured_yes">
+                            <label for="auth_injured_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="authorised_injured" id="auth_injured_no">
+                            <label for="auth_injured_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 12px; color: #64748b;">Others Involved:</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="authorised_others" id="auth_others_yes">
+                            <label for="auth_others_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="authorised_others" id="auth_others_no">
+                            <label for="auth_others_no">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 25px;">
+            <label><strong>Have you reported it to SHEQ Consultant?</strong></label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="reported_sheq" id="reported_sheq_yes">
+                    <label for="reported_sheq_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="reported_sheq" id="reported_sheq_no">
+                    <label for="reported_sheq_no" style="color: red; font-weight: bold;">No - Please do so Now!</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Date Reported:</strong></label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="form-group">
+                <label><strong>When was it reported to you?</strong></label>
+                <input type="text" class="form-control" placeholder="Date and time">
+            </div>
+        </div>
+        <h3 style="color: #1e3a8a; font-size: 15px; margin: 30px 0 20px 0;">Costs of Accident/Incident</h3>
+        <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">This information is required to calculate an approximate cost of this accident.</p>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Investigation hours (approximately):</strong></label>
+                <input type="text" class="form-control" placeholder="Hours spent investigating">
+                <div style="font-size: 11px; color: #64748b; margin-top: 5px;">How many man hours were spent investigating, including you?</div>
+            </div>
+            <div class="form-group">
+                <label><strong>Treatment/lost hours (approximately):</strong></label>
+                <input type="text" class="form-control" placeholder="Hours lost">
+                <div style="font-size: 11px; color: #64748b; margin-top: 5px;">Hours lost treating injured/hospital/waiting to restart work?</div>
+            </div>
+        </div>
+
+
+        <div class="info-box" style="margin-top: 25px;">
+            <strong>ℹ️ For Occupational/ill health <a href="javascript:void(0);" onclick="showTab(12)" style="color: #1e3a8a; text-decoration: underline; font-weight: bold;">proceed to section 12</a>.</strong>
+        </div>
+    </div>
+
+    <!-- Tab 3: Description -->
+    <div class="tab-content" id="tab3">
+        <div class="section-title">3. Description</div>
+        
+        <div class="form-group">
+            <label>Describe what happened in plain English:</label>
+            <textarea class="textarea-large" rows="6"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Draw accident scene, upload diagram or photo:</strong></label>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="scene_photo_upload" style="display: inline-block; padding: 10px 20px; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); transition: all 0.3s ease;">
+                    📷 Upload Photo/Diagram
+                </label>
+                <input type="file" id="scene_photo_upload" accept="image/*,.pdf" style="display: none;" onchange="handleScenePhotoUpload(event)">
+                <div id="scene_upload_status" style="margin-top: 8px; font-size: 12px; color: #0ea5e9;"></div>
+            </div>
+
+            <div id="scene_image_preview" style="display: none; margin-bottom: 15px; border: 2px solid #0ea5e9; border-radius: 6px; padding: 10px; background: #f0f9ff;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong style="color: #1e3a8a;">Uploaded Image:</strong>
+                    <button onclick="clearScenePhoto()" style="background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 11px;">Remove</button>
+                </div>
+                <img id="scene_preview_img" src="" alt="Scene preview" style="max-width: 100%; height: auto; border-radius: 4px;" data-height-listener-added="true">
+            </div>
+
+            <div style="border: 1px solid #cbd5e1; border-radius: 6px; min-height: 150px; padding: 10px; font-style: italic; color: #64748b; text-align: center; display: flex; align-items: center; justify-content: center; background: #f8fafc;">
+                <div>
+                    <strong>Drawing Area (Optional)</strong><br>
+                    Draw or sketch the accident scene here<br>
+                    <span style="font-size: 11px;">Include: position of injured person, equipment, hazards, distances</span>
+                </div>
+            </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 2px solid #e2e8f0;">
+
+        <h3 style="color: #1e3a8a; font-size: 15px; margin-bottom: 20px;">Immediate Actions Taken</h3>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Was the area made safe? <span style="color: red;">*</span></strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="area_made_safe" id="area_safe_yes">
+                        <label for="area_safe_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="area_made_safe" id="area_safe_no">
+                        <label for="area_safe_no">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><strong>Was equipment isolated/tagged out?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="equipment_isolated" id="equip_iso_yes">
+                        <label for="equip_iso_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="equipment_isolated" id="equip_iso_no">
+                        <label for="equip_iso_no">No</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="equipment_isolated" id="equip_iso_na">
+                        <label for="equip_iso_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Were emergency services called?</strong></label>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <thead>
+                    <tr style="background: #f1f5f9;">
+                        <th style="padding: 8px; text-align: left; width: 15%; border: 1px solid #e2e8f0;">Called?</th>
+                        <th style="padding: 8px; text-align: left; width: 30%; border: 1px solid #e2e8f0;">Service</th>
+                        <th style="padding: 8px; text-align: left; width: 55%; border: 1px solid #e2e8f0;">Reference Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 8px; text-align: center; border: 1px solid #e2e8f0;">
+                            <input type="checkbox" id="emergency_police">
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0;">
+                            <label for="emergency_police" style="margin: 0; font-weight: normal;">Police</label>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0;">
+                            <input type="text" class="form-control" placeholder="Police reference number" style="margin: 0;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; text-align: center; border: 1px solid #e2e8f0;">
+                            <input type="checkbox" id="emergency_fire">
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0;">
+                            <label for="emergency_fire" style="margin: 0; font-weight: normal;">Fire Service</label>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0;">
+                            <input type="text" class="form-control" placeholder="Fire service reference number" style="margin: 0;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; text-align: center; border: 1px solid #e2e8f0;">
+                            <input type="checkbox" id="emergency_ambulance">
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0;">
+                            <label for="emergency_ambulance" style="margin: 0; font-weight: normal;">Ambulance</label>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0;">
+                            <input type="text" class="form-control" placeholder="Ambulance reference number" style="margin: 0;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; text-align: center; border: 1px solid #e2e8f0;">
+                            <input type="checkbox" id="emergency_none">
+                        </td>
+                        <td colspan="2" style="padding: 8px; border: 1px solid #e2e8f0;">
+                            <label for="emergency_none" style="margin: 0; font-weight: normal;">None required</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Additional immediate actions taken:</strong></label>
+            <textarea class="textarea-large" rows="3" placeholder="Describe any other immediate actions taken to prevent further injury or damage..."></textarea>
+        </div>
+
+    </div>
+
+    <!-- Tab 4: Statements -->
+    <div class="tab-content" id="tab4">
+        <div class="section-title">4. Statements</div>
+        
+        <div class="info-box">
+            <strong>📄 Injured Person Statement:</strong> The injured person must complete an 
+            <a href="https://page.gensparksite.com/9a7e36bd-2b0f-441b-8bd0-fb7e8c10bcf9/4216423b-7ec5-40a1-9761-7ca43337b3b0/docs_agent/saved/Injured_Person_Statement_Form_CSS-IPS-001.html" target="_blank">Injured Person Statement Form (CSS-IPS-001)</a>
+        </div>
+
+        <div class="info-box">
+            <strong>📝 Witness Statements:</strong> Each witness should complete a separate 
+            <a href="https://page.gensparksite.com/9a7e36bd-2b0f-441b-8bd0-fb7e8c10bcf9/0d7f38f3-76b3-4281-995a-bb51623e858a/docs_agent/saved/Witness_Statement_Form_CSS-WSF-001.html" target="_blank">Witness Statement Form (CSS-WSF-001)</a>
+        </div>
+
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Statement Taken?</th>
+                </tr>
+            </thead>
+            <tbody id="witness_table_body">
+                <tr>
+                    <td><input type="text" class="form-control" placeholder="Witness name"></td>
+                    <td><input type="text" class="form-control" placeholder="Position/Role"></td>
+                    <td>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" name="statement1" id="stmt1_yes">
+                                <label for="stmt1_yes">Yes</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="statement1" id="stmt1_no">
+                                <label for="stmt1_no">No</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button" onclick="addWitnessRow()" style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); transition: all 0.3s ease;">
+            ➕ Add Another Witness
+        </button>
+
+        <p style="font-weight: bold; margin-top: 15px; font-size: 12px;">Note: All signed statements (injured person and witnesses) must accompany this form</p>
+    </div>
+
+    <!-- Tab 5: Minor Accidents -->
+    <div class="tab-content" id="tab5">
+        <div class="section-title">5. Minor Accidents</div>
+        
+        <div class="info-box">
+            <strong>📋 Near Miss:</strong> If this was a near miss event, you may also want to complete the 
+            <a href="https://page.gensparksite.com/9a7e36bd-2b0f-441b-8bd0-fb7e8c10bcf9/b30e4987-1599-479b-a949-2570867ba70b/docs_agent/saved/Near_Miss_Report_Form_CSS-NMR-001.html" target="_blank">Near Miss Report Form (CSS-NMR-001)</a>
+        </div>
+
+        <div class="form-group">
+            <label>Choose investigation path: Minor accident (quick route) or full investigation</label>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px;">Option A: Minor Accident (Quick Classification)</h4>
+        <p style="font-size: 12px;">If NO time off work AND injury is minor, complete this section and <a href="#" onclick="showTab(14); return false;" style="color: #1e3a8a; font-weight: bold; text-decoration: underline;">skip to Tab 14</a></p>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Body part affected:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label><strong>Nature of injury:</strong></label>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-top: 10px;">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="strain_sprain">
+                        <label for="strain_sprain">Strain/Sprain</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bruise_abrasion">
+                        <label for="bruise_abrasion">Bruise/Abrasion</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cut_laceration">
+                        <label for="cut_laceration">Cut/Laceration</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="traumatic_shock">
+                        <label for="traumatic_shock">Traumatic Shock</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item_eye">
+                        <label for="item_eye">Item in Eye</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bite_sting">
+                        <label for="bite_sting">Bite/Sting</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Investigation hours:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Treatment hours:</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0; font-weight: bold;">OR</div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px;">Option B: Full Investigation</h4>
+
+        <div class="form-group">
+            <label><strong>Degree/Type:</strong></label>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-top: 10px;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="riddor_fatal">
+                    <label for="riddor_fatal" style="color: red;">Fatal</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="riddor_specified">
+                    <label for="riddor_specified" style="color: red;">Specified Injury</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="riddor_over7">
+                    <label for="riddor_over7" style="color: red;">Over 7-day Injury</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="under7">
+                    <label for="under7">Under 7-day Injury</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="environmental">
+                    <label for="environmental">Environmental</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="near_miss">
+                    <label for="near_miss">Near Miss</label>
+                </div>
+            </div>
+        </div>
+
+        <p style="color: red; font-size: 11px; font-weight: bold;">Items in red are RIDDOR reportable and must be reported to HSE</p>
+    </div>
+
+    <!-- Tab 6: Further Accident/Incident Details -->
+    <div class="tab-content active" id="tab6">
+        <div class="section-title">6. Further Accident/Incident Details</div>
+        
+        <div class="warning-box" style="background: #fee2e2; border-color: #dc2626;">
+            <strong style="color: #991b1b;">⚠️ HSE RIDDOR COMPLIANCE:</strong> Select the appropriate injury classification below. Items marked in RED must be reported to HSE under RIDDOR regulations.
+        </div>
+
+        <div class="form-group">
+            <label style="font-size: 14px; color: #1e3a8a; font-weight: bold;">HSE RIDDOR Injury Classification:</label>
+            <div class="radio-group" style="display: flex; flex-direction: column; gap: 10px;">
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="fatal">
+                    <label for="fatal" style="color: red; font-weight: bold;">FATAL - Death of any person from work-related accident</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="specified_injury">
+                    <label for="specified_injury" style="color: red; font-weight: bold;">SPECIFIED INJURY - See list below (RIDDOR Reg 4)</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="over7_injury">
+                    <label for="over7_injury" style="color: red; font-weight: bold;">OVER 7-DAY INCAPACITATION - Unable to work for more than 7 consecutive days</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="over3_injury">
+                    <label for="over3_injury">Over 3-day Incapacitation (Record only - not reportable to HSE)</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="non_worker">
+                    <label for="non_worker" style="color: red; font-weight: bold;">NON-WORKER taken to hospital from scene (public/customer/volunteer)</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="occupational_disease">
+                    <label for="occupational_disease" style="color: red; font-weight: bold;">OCCUPATIONAL DISEASE (diagnosed) - <a href="https://www.hse.gov.uk/riddor/occupational-diseases.htm" target="_blank" style="color: #1e3a8a; text-decoration: underline;">See HSE list</a></label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="dangerous_occurrence">
+                    <label for="dangerous_occurrence" style="color: red; font-weight: bold;">DANGEROUS OCCURRENCE (Schedule 2) - <a href="https://www.hse.gov.uk/riddor/dangerous-occurences.htm" target="_blank" style="color: #1e3a8a; text-decoration: underline;">See HSE list</a></label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="minor_injury">
+                    <label for="minor_injury">Minor Injury (not reportable)</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_classification" id="near_miss">
+                    <label for="near_miss">Near Miss (not reportable)</label>
+                </div>
+            </div>
+        </div>
+
+        <div style="border: 2px solid #dc2626; padding: 15px; margin: 15px 0; background: #fef2f2; border-radius: 4px;">
+            <h4 style="color: #991b1b; font-size: 13px; margin: 0 0 10px 0;">SPECIFIED INJURIES (RIDDOR Regulation 4) - Select if applicable:</h4>
+            <div class="checkbox-group" style="display: flex; flex-direction: column; gap: 8px;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_fracture">
+                    <label for="spec_fracture" style="font-size: 11px;">Fracture (other than to fingers, thumbs, and toes)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_amputation">
+                    <label for="spec_amputation" style="font-size: 11px;">Amputation of arm, hand, finger, thumb, leg, foot or toe</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_sight">
+                    <label for="spec_sight" style="font-size: 11px;">Injury likely to cause permanent blinding or reduction in sight</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_crush">
+                    <label for="spec_crush" style="font-size: 11px;">Crush injury to head/torso causing damage to brain or internal organs</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_burns">
+                    <label for="spec_burns" style="font-size: 11px;">Serious burns (&gt;10% of body OR damage to eyes/respiratory system/vital organs)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_scalping">
+                    <label for="spec_scalping" style="font-size: 11px;">Scalping requiring hospital treatment</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_unconscious">
+                    <label for="spec_unconscious" style="font-size: 11px;">Loss of consciousness caused by head injury or asphyxia</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="spec_enclosed">
+                    <label for="spec_enclosed" style="font-size: 11px;">Injury from working in enclosed space (hypothermia/heat-induced illness requiring resuscitation or hospital &gt;24hrs)</label>
+                </div>
+            </div>
+        </div>
+
+        <p style="color: red; font-size: 11px; font-weight: bold; margin-bottom: 15px;">⚠️ All items in RED must be reported to HSE within 10 days (or immediately for fatalities/specified injuries). Report online at: www.hse.gov.uk/riddor</p>
+
+        <div style="border: 1px solid #64748b; padding: 20px; margin-bottom: 15px; background: white;">
+            <p style="font-weight: bold; margin: 0 0 20px 0; font-size: 13px; text-align: center;">Click on body diagram to mark injury locations (interactive)</p>
+            
+            <!-- Body Diagrams Section -->
+            <h4 style="color: #1e3a8a; font-size: 13px; margin: 0 0 15px 0;">Body Diagrams</h4>
+            <div style="display: flex; gap: 50px; justify-content: center; align-items: flex-start; margin-bottom: 40px;">
+                <!-- Front Body -->
+                <div style="text-align: center;">
+                    <p style="font-weight: bold; margin-bottom: 10px; font-size: 12px; color: #374151;">Front</p>
+                    <div style="position: relative; display: inline-block;">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/2b56c17c2294d5b13779dd5e9112acb3" style="width: 200px; height: 650px; display: block;" data-height-listener-added="true">
+                        <!-- Front Body Dots -->
+                        <div class="injury-dot" data-location="Head - Front" style="top: 5.5%; left: 46.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Face" style="top: 11%; left: 46.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Neck - Front" style="top: 16.3%; left: 46.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Shoulder" style="top: 19%; left: 31.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Shoulder" style="top: 19.5%; left: 63.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Chest" style="top: 26.8%; left: 46.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Upper Arm" style="top: 26.8%; left: 26.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Upper Arm" style="top: 27.8%; left: 67.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Abdomen" style="top: 38.5%; left: 47.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Elbow" style="top: 33.3%; left: 26.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Elbow" style="top: 34.3%; left: 68.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Forearm" style="top: 39.3%; left: 25.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Forearm" style="top: 40.3%; left: 68.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Groin" style="top: 47.8%; left: 45.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot selected" data-location="Left Wrist" style="top: 45.3%; left: 24.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot selected" data-location="Right Wrist" style="top: 46.3%; left: 68.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot selected" data-location="Left Hand" style="top: 50.7%; left: 26.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot selected" data-location="Right Hand" style="top: 51.2%; left: 68.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Thigh" style="top: 55.3%; left: 37.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot selected" data-location="Right Thigh" style="top: 56.3%; left: 57.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Knee" style="top: 64.8%; left: 37.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Knee" style="top: 64.8%; left: 57.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Lower Leg" style="top: 75.5%; left: 36.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Lower Leg" style="top: 74.8%; left: 59.1%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Ankle" style="top: 88%; left: 38%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Ankle" style="top: 87.3%; left: 57.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Foot" style="top: 93.5%; left: 31.6%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Foot" style="top: 93.5%; left: 63.6%;" onclick="toggleInjury(this)"></div>
+                    </div>
+                </div>
+
+                <!-- Back Body -->
+                <div style="text-align: center;">
+                    <p style="font-weight: bold; margin-bottom: 10px; font-size: 12px; color: #374151;">Back</p>
+                    <div style="position: relative; display: inline-block;">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/0f93a76f5d4e7158cfe2f24b707405a2" style="width: 200px; height: 650px; display: block;" data-height-listener-added="true">
+                        <!-- Back Body Dots -->
+                        <div class="injury-dot selected" data-location="Head - Back" style="top: 4.8%; left: 48.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot selected" data-location="Neck - Back" style="top: 11.3%; left: 48.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Upper Back" style="top: 17.8%; left: 47.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Shoulder Blade" style="top: 38.3%; left: 47.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Shoulder Blade" style="top: 29.3%; left: 47.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Lower Back" style="top: 43.8%; left: 55.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Buttocks" style="top: 44%; left: 38.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Shoulder" style="top: 18.5%; left: 27.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Shoulder" style="top: 17.3%; left: 68.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Upper Arm" style="top: 25.3%; left: 26.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Upper Arm" style="top: 26%; left: 67.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Elbow" style="top: 32.3%; left: 26.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Elbow" style="top: 32%; left: 68.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Forearm" style="top: 39.3%; left: 24.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Forearm" style="top: 39.3%; left: 69.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Wrist" style="top: 44%; left: 25.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Wrist" style="top: 44.8%; left: 70.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Hand" style="top: 48.8%; left: 25.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Hand" style="top: 49.5%; left: 69.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Thigh" style="top: 53%; left: 37.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Thigh" style="top: 52.3%; left: 58.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Knee" style="top: 63.2%; left: 36.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Knee" style="top: 63.2%; left: 56.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Calf" style="top: 72.8%; left: 35.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Calf" style="top: 73.5%; left: 57.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Lower Leg" style="top: 87.3%; left: 37.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Lower Leg" style="top: 86.8%; left: 57.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Back Ankle" style="top: 93%; left: 40.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Back Ankle" style="top: 92.8%; left: 55.3%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Left Heel" style="top: 91.3%; left: 28.8%;" onclick="toggleInjury(this)"></div>
+                        <div class="injury-dot" data-location="Right Heel" style="top: 90.5%; left: 69.3%;" onclick="toggleInjury(this)"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Dot Color Legend -->
+            <div style="margin-top: 20px; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px;">
+                <p style="font-weight: bold; margin: 0 0 8px 0; font-size: 11px;">Dot Colours:</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; font-size: 10px;">
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #3b82f6;"></div>
+                        <span>Head/Neck (Blue)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></div>
+                        <span>Torso/Back (Green)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #f97316;"></div>
+                        <span>Arms (Orange)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #8b5cf6;"></div>
+                        <span>Legs/Feet (Purple)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></div>
+                        <span>Hands (Red)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="injury-list" style="margin-top: 15px; padding: 10px; background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 4px;">
+                <p style="font-weight: bold; margin: 0 0 5px 0; font-size: 11px;">Selected Injury Locations:</p>
+                <p id="selected-injuries" style="margin: 0px; font-size: 11px; color: rgb(220, 38, 38); font-weight: bold;">Left Wrist, Right Wrist, Left Hand, Right Hand, Neck - Back</p>
+            </div>
+
+            <p style="font-style: italic; font-size: 10px; color: #64748b; margin-top: 10px; text-align: center;">Click on any body part to mark injury location. Selected areas will be highlighted and listed below.</p>
+        </div>
+
+        <div class="form-group" style="margin-top: 30px;">
+            <label><strong>Hand Injury Location:</strong></label>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">Click on the hand diagrams to mark injury locations</p>
+            
+            <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
+                <!-- Left Hand -->
+                <div style="text-align: center;">
+                    <h4 style="color: #1e3a8a; font-size: 13px; margin-bottom: 10px;">LEFT HAND (Palm View)</h4>
+                    <div style="position: relative; display: inline-block;">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/131852432f279dd9287a7ce9fa82255e" alt="Left Hand" style="width: 200px; height: auto;" data-height-listener-added="true">
+                        
+                        <!-- Left Thumb -->
+                        <div class="injury-dot" data-hand-location="Left Thumb" onclick="toggleHandInjury(this)" style="position: absolute; top: 50%; left: 15%;"></div>
+                        
+                        <!-- Left Index Finger -->
+                        <div class="injury-dot" data-hand-location="Left Index Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 15%; left: 30%;"></div>
+                        
+                        <!-- Left Middle Finger -->
+                        <div class="injury-dot" data-hand-location="Left Middle Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 8%; left: 50%;"></div>
+                        
+                        <!-- Left Ring Finger -->
+                        <div class="injury-dot" data-hand-location="Left Ring Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 15%; left: 70%;"></div>
+                        
+                        <!-- Left Little Finger -->
+                        <div class="injury-dot" data-hand-location="Left Little Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 25%; left: 85%;"></div>
+                        
+                        <!-- Left Palm -->
+                        <div class="injury-dot" data-hand-location="Left Palm" onclick="toggleHandInjury(this)" style="position: absolute; top: 60%; left: 50%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Right Hand -->
+                <div style="text-align: center;">
+                    <h4 style="color: #1e3a8a; font-size: 13px; margin-bottom: 10px;">RIGHT HAND (Palm View)</h4>
+                    <div style="position: relative; display: inline-block;">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/75a928d6f072a97e814231d48923d87c" alt="Right Hand" style="width: 200px; height: auto;" data-height-listener-added="true">
+                        
+                        <!-- Right Thumb -->
+                        <div class="injury-dot" data-hand-location="Right Thumb" onclick="toggleHandInjury(this)" style="position: absolute; top: 50%; left: 85%;"></div>
+                        
+                        <!-- Right Little Finger -->
+                        <div class="injury-dot" data-hand-location="Right Little Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 25%; left: 15%;"></div>
+                        
+                        <!-- Right Ring Finger -->
+                        <div class="injury-dot" data-hand-location="Right Ring Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 15%; left: 30%;"></div>
+                        
+                        <!-- Right Middle Finger -->
+                        <div class="injury-dot" data-hand-location="Right Middle Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 8%; left: 50%;"></div>
+                        
+                        <!-- Right Index Finger -->
+                        <div class="injury-dot" data-hand-location="Right Index Finger" onclick="toggleHandInjury(this)" style="position: absolute; top: 15%; left: 70%;"></div>
+                        
+                        <!-- Right Palm -->
+                        <div class="injury-dot" data-hand-location="Right Palm" onclick="toggleHandInjury(this)" style="position: absolute; top: 60%; left: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-left: 4px solid #0ea5e9; border-radius: 6px;">
+                <p style="font-weight: bold; margin: 0 0 5px 0; font-size: 11px;">Selected Hand Injury Locations:</p>
+                <p id="selected-hand-injuries" style="margin: 0px; font-size: 11px; color: rgb(220, 38, 38); font-weight: bold;">None selected - click on hand diagrams above</p>
+            </div>
+            
+            <p style="font-style: italic; font-size: 10px; color: #64748b; margin-top: 10px; text-align: center;">Click on thumb, fingers or palm to mark hand injury locations.</p>
+        </div>
+
+
+        <div class="form-group">
+            <label><strong>Nature of Injury:</strong></label>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-top: 10px;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="amputation">
+                    <label for="amputation">Amputation</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="fracture">
+                    <label for="fracture">Fracture</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="strain_sprain2">
+                    <label for="strain_sprain2">Strain/Sprain</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="burn_scald">
+                    <label for="burn_scald">Burn/Scald</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="electric_shock">
+                    <label for="electric_shock">Electric Shock/Burn</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="inhalation">
+                    <label for="inhalation">Inhalation/Ingestion</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="whiplash">
+                    <label for="whiplash">Whiplash Injury</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="crush">
+                    <label for="crush">Crush Injury</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dislocation">
+                    <label for="dislocation">Dislocation</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="bruise_abrasion2">
+                    <label for="bruise_abrasion2">Bruise/Abrasion</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="cut_laceration2">
+                    <label for="cut_laceration2">Cut/Laceration</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="traumatic_shock2">
+                    <label for="traumatic_shock2">Traumatic Shock</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="something_eye">
+                    <label for="something_eye">Something in Eye</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="bite_sting2">
+                    <label for="bite_sting2">Bite/Sting</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="concussion">
+                    <label for="concussion">Concussion</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="none_near_miss">
+                    <label for="none_near_miss">None (Near Miss)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="other_injury">
+                    <label for="other_injury">Other</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Please note any other injury details that may be pertinent i.e., internal injuries, concussion etc:</label>
+            <textarea class="textarea-large" rows="4" placeholder="Describe injury locations from body diagram above and any other relevant injury details such as internal injuries, concussion, severity, medical treatment received, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Has site/location been inspected?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="site_inspected" id="site_inspected_yes">
+                    <label for="site_inspected_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="site_inspected" id="site_inspected_no">
+                    <label for="site_inspected_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #fffbeb; padding: 10px; border-left: 4px solid #f59e0b; margin: 20px 0 10px 0;">Lighting</h4>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="daylight">
+                <label for="daylight">Daylight</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="darkness">
+                <label for="darkness">Darkness</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="fluorescent">
+                <label for="fluorescent">Fluorescent</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="electric_bulb">
+                <label for="electric_bulb">Electric Bulb</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="floodlight">
+                <label for="floodlight">Floodlight</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="hand_lamp">
+                <label for="hand_lamp">Hand Lamp</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="other_lighting">
+                <label for="other_lighting">Other</label>
+            </div>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #eff6ff; padding: 10px; border-left: 4px solid #3b82f6; margin: 20px 0 10px 0;">Weather</h4>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="fair">
+                <label for="fair">Fair</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="raining">
+                <label for="raining">Raining</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="snowing">
+                <label for="snowing">Snowing</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="fog_mist">
+                <label for="fog_mist">Fog/Mist</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sun">
+                <label for="sun">Sun</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="indoor">
+                <label for="indoor">Indoor/Undercover</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="high_wind">
+                <label for="high_wind">High Wind</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="freezing">
+                <label for="freezing">Freezing</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="other_weather">
+                <label for="other_weather">Other</label>
+            </div>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #f0fdf4; padding: 10px; border-left: 4px solid #10b981; margin: 20px 0 10px 0;">Ground/Floor Condition</h4>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="even">
+                <label for="even">Even</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="uneven">
+                <label for="uneven">Uneven</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="dry">
+                <label for="dry">Dry</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="wet">
+                <label for="wet">Wet</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="grease_oil">
+                <label for="grease_oil">Grease/Oil/Polished</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="frost_snow">
+                <label for="frost_snow">Frost/Snow/Ice</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="gritted">
+                <label for="gritted">Gritted/Sanded</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="other_ground">
+                <label for="other_ground">Other</label>
+            </div>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #fae8ff; padding: 10px; border-left: 4px solid #a855f7; margin: 20px 0 10px 0;">Location Description</h4>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="depot">
+                <label for="depot">Depot</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="operational_site">
+                <label for="operational_site">Operational Site</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="public_transport">
+                <label for="public_transport">On Public Transport</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="yard_storage">
+                <label for="yard_storage">Yard/Storage Facility</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="private_land">
+                <label for="private_land">Private Land</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="maintenance_shed">
+                <label for="maintenance_shed">Maintenance Shed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="workshop">
+                <label for="workshop">Workshop</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="office">
+                <label for="office">Office</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="public_highway">
+                <label for="public_highway">Public Highway/Footpath</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="private_highway">
+                <label for="private_highway">Private Highway/Footpath</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="within_vehicle">
+                <label for="within_vehicle">Within/Upon Vehicle</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="other_location">
+                <label for="other_location">Other</label>
+            </div>
+        </div>
+        <hr style="margin: 30px 0; border: none; border-top: 2px solid #e2e8f0;">
+
+        <h3 style="color: #1e3a8a; font-size: 15px; margin-bottom: 20px;">RIDDOR Reporting Status</h3>
+
+        <div class="form-group">
+            <label><strong>Is this incident RIDDOR reportable? <span style="color: red;">*</span></strong></label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="riddor_reportable" id="riddor_rep_yes" onchange="document.getElementById('riddor_reporting_details').style.display = this.checked ? 'block' : 'none';">
+                    <label for="riddor_rep_yes">Yes - Must report to HSE</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="riddor_reportable" id="riddor_rep_no" onchange="document.getElementById('riddor_reporting_details').style.display = 'none';">
+                    <label for="riddor_rep_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="riddor_reporting_details" style="display: none; padding: 20px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 6px; margin-top: 15px;">
+            <div class="form-row">
+                <div class="form-group">
+                    <label><strong>Has RIDDOR report been submitted to HSE? <span style="color: red;">*</span></strong></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="riddor_submitted" id="riddor_sub_yes">
+                            <label for="riddor_sub_yes">Yes - Submitted</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="riddor_submitted" id="riddor_sub_pending">
+                            <label for="riddor_sub_pending">Pending - Will submit</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="riddor_submitted" id="riddor_sub_no">
+                            <label for="riddor_sub_no">No - Not yet submitted</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>RIDDOR Reference Number:</strong></label>
+                    <input type="text" class="form-control" placeholder="HSE reference number (if submitted)">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label><strong>Date reported to HSE:</strong></label>
+                    <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+                </div>
+                <div class="form-group">
+                    <label><strong>Reported by:</strong></label>
+                    <input type="text" class="form-control" placeholder="Name of person who submitted RIDDOR">
+                </div>
+            </div>
+            <div class="warning-box" style="margin-top: 15px; background: #fef2f2;">
+                <strong>⚠️ RIDDOR Deadline:</strong> Fatal/specified injuries must be reported immediately. Over-7-day injuries within 15 days. Occupational diseases within 10 days of diagnosis.
+            </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 2px solid #e2e8f0;">
+
+        <h3 style="color: #1e3a8a; font-size: 15px; margin-bottom: 20px;">Notification Log</h3>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Client notified?</strong></label>
+                <input type="text" class="form-control" placeholder="Date/Time">
+            </div>
+            <div class="form-group">
+                <label><strong>Insurance notified?</strong></label>
+                <input type="text" class="form-control" placeholder="Date/Time + Claim Ref">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Next of kin notified? (if serious)</strong></label>
+                <input type="text" class="form-control" placeholder="Date/Time">
+            </div>
+            <div class="form-group">
+                <label><strong>Other notifications:</strong></label>
+                <input type="text" class="form-control" placeholder="Who else was notified and when">
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 7: Further details of the Person affected -->
+    <div class="tab-content" id="tab7">
+        <div class="section-title">7. Further details of the Person affected</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Sex:</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="sex" id="sex_male">
+                        <label for="sex_male">Male</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="sex" id="sex_female">
+                        <label for="sex_female">Female</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="sex" id="sex_other">
+                        <label for="sex_other">Other</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Date of Birth:</label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Job description or title:</label>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>National Insurance Number:</label>
+                <input type="text" class="form-control" placeholder="AB 12 34 56 C">
+            </div>
+            <div class="form-group">
+                <label>Date Started with Company:</label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Date Started present Position:</label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="form-group">
+                <label>Operational Site:</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Title of Employing Manager:</label>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Are there any medical limitations on the work the person can undertake?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="medical_limitations" id="medical_yes">
+                    <label for="medical_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="medical_limitations" id="medical_no">
+                    <label for="medical_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>If YES, give details:</label>
+            <textarea class="textarea-large" rows="3"></textarea>
+        </div>
+    </div>
+
+    <!-- Tab 8: Period of absence and details of duty -->
+    <div class="tab-content" id="tab8">
+        <div class="section-title">8. Period of absence and details of duty</div>
+        
+        <div class="form-group">
+            <label><strong>Number of days absence from work (select one):</strong></label>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px 20px; margin-top: 10px;">
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_0">
+                    <label for="absent_0">0 days</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_1">
+                    <label for="absent_1">1 day</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_2">
+                    <label for="absent_2">2 days</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_3">
+                    <label for="absent_3">3 days</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_4">
+                    <label for="absent_4">4 days</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_5">
+                    <label for="absent_5">5 days</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_6">
+                    <label for="absent_6">6 days</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="days_absent" id="absent_7plus">
+                    <label for="absent_7plus" style="color: red; font-weight: bold;">7+ days (RIDDOR)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Date of return to work:</label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="form-group">
+                <label>Date of return to normal duties:</label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Type of duty:</strong></label>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-top: 10px;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="duty_ordinary">
+                    <label for="duty_ordinary">Ordinary</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="duty_overtime">
+                    <label for="duty_overtime">Overtime</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="duty_sunday">
+                    <label for="duty_sunday">Sunday</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="duty_evening">
+                    <label for="duty_evening">Evening</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="duty_night">
+                    <label for="duty_night">Night</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="duty_rest_day">
+                    <label for="duty_rest_day">Rest Day</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Contracted hours per week:</label>
+                <input type="text" class="form-control" placeholder="e.g., 40">
+            </div>
+            <div class="form-group">
+                <label>Hours worked on day of incident:</label>
+                <input type="text" class="form-control" placeholder="e.g., 8.5">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Had required meal and rest intervals been observed?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="rest_intervals" id="rest_yes">
+                    <label for="rest_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="rest_intervals" id="rest_no">
+                    <label for="rest_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>If NO, give details:</label>
+            <textarea class="textarea-large" rows="3"></textarea>
+        </div>
+    </div>
+
+    <!-- Tab 9: Task Details -->
+    <div class="tab-content" id="tab9">
+        <div class="section-title">9. Task Details</div>
+        
+
+        <div class="form-group">
+            <label>Should relevant PPE have been used?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="ppe_should_used" id="ppe_yes">
+                    <label for="ppe_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="ppe_should_used" id="ppe_no">
+                    <label for="ppe_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Which PPE would have prevented/reduced injury?</strong></label>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 20px; margin-top: 10px;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="head_protection">
+                    <label for="head_protection">Head protection</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="ear_defenders">
+                    <label for="ear_defenders">Ear defenders</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="eye_protection">
+                    <label for="eye_protection">Eye protection</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="high_vis">
+                    <label for="high_vis">High visibility clothing</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="gloves">
+                    <label for="gloves">Gloves</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="safety_footwear">
+                    <label for="safety_footwear">Safety footwear</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="respiratory">
+                    <label for="respiratory">Respiratory protection</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="other_ppe">
+                    <label for="other_ppe">Other (specify)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Was person concerned using this PPE?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_using" id="ppe_using_yes">
+                        <label for="ppe_using_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_using" id="ppe_using_no">
+                        <label for="ppe_using_no">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Was PPE being used correctly?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_correct" id="ppe_correct_yes">
+                        <label for="ppe_correct_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_correct" id="ppe_correct_no">
+                        <label for="ppe_correct_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Was PPE defective or unsuitable?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_defective" id="ppe_defective_yes">
+                        <label for="ppe_defective_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_defective" id="ppe_defective_no">
+                        <label for="ppe_defective_no">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Had person been instructed in its use?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_instructed" id="ppe_instructed_yes">
+                        <label for="ppe_instructed_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="ppe_instructed" id="ppe_instructed_no">
+                        <label for="ppe_instructed_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Details of defective/inadequate PPE:</label>
+            <textarea class="textarea-large" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Were hazardous substances involved?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="hazardous_substances" id="hazardous_yes" onchange="document.getElementById('hazardous_details').style.display = this.checked ? 'block' : 'none';">
+                    <label for="hazardous_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="hazardous_substances" id="hazardous_no" onchange="document.getElementById('hazardous_details').style.display = 'none';">
+                    <label for="hazardous_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="hazardous_details" style="display: none; margin-top: 15px;">
+            <div class="form-group">
+                <label><strong>List hazardous substances involved:</strong></label>
+                <textarea class="textarea-large" rows="4" placeholder="Specify the hazardous substances involved (include chemical names, COSHH reference numbers, etc.)"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Was task covered by written procedure (Risk Assessment/Method Statement)?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="written_procedure" id="written_proc_yes" onchange="document.getElementById('written_proc_yes_details').style.display = this.checked ? 'block' : 'none'; document.getElementById('written_proc_no_details').style.display = 'none';">
+                    <label for="written_proc_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="written_procedure" id="written_proc_no" onchange="document.getElementById('written_proc_no_details').style.display = this.checked ? 'block' : 'none'; document.getElementById('written_proc_yes_details').style.display = 'none';">
+                    <label for="written_proc_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="written_proc_yes_details" style="display: none; margin-top: 15px;">
+            <div class="form-group">
+                <label><strong>Provide relevant document references:</strong></label>
+                <textarea class="textarea-large" rows="3" placeholder="List Risk Assessment references, Method Statement numbers, procedure documents, etc."></textarea>
+            </div>
+        </div>
+
+        <div id="written_proc_no_details" style="display: none; margin-top: 15px;">
+            <div class="form-group">
+                <label><strong>Should a written procedure (Risk Assessment/Method Statement) have been provided?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="should_written_proc" id="should_proc_yes">
+                        <label for="should_proc_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="should_written_proc" id="should_proc_no">
+                        <label for="should_proc_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Was formal training required for the task?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="formal_training" id="training_yes">
+                        <label for="training_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="formal_training" id="training_no">
+                        <label for="training_no">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Was person authorized to carry out the task?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="authorized" id="auth_yes">
+                        <label for="auth_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="authorized" id="auth_no">
+                        <label for="auth_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Was injured person undertaking work he was used to (done similar in last 6 months)?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="work_used_to" id="work_used_yes">
+                    <label for="work_used_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="work_used_to" id="work_used_no">
+                    <label for="work_used_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Degree of supervision at time of accident:</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="supervision" id="working_alone">
+                    <label for="working_alone">Working alone</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="supervision" id="with_others">
+                    <label for="with_others">Working with others unsupervised</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="supervision" id="direct_supervision">
+                    <label for="direct_supervision">Working under direct supervision</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="supervision" id="supervising_others">
+                    <label for="supervising_others">Supervising others</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Was damage to third party involved?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="third_party_damage" id="third_party_yes">
+                    <label for="third_party_yes">YES</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="third_party_damage" id="third_party_no">
+                    <label for="third_party_no">NO - Proceed to Tab 10</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 15px;">
+            <strong>📋 If YES:</strong> Please complete <a href="https://page.gensparksite.com/9a7e36bd-2b0f-441b-8bd0-fb7e8c10bcf9/4b649b85-6bd1-4242-913e-59a7c5584090/docs_agent/saved/Third_Party_Claim_Form_CSS-TPC-001.html" target="_blank" style="color: #1e3a8a; text-decoration: underline; font-weight: bold;">Form CSS-TPC-001 - Third Party Claim Form ↗</a>
+        </div>
+
+
+        <hr style="margin: 30px 0; border: none; border-top: 2px solid #e2e8f0;">
+
+        <h3 style="color: #1e3a8a; font-size: 15px; margin-bottom: 20px;">Environmental Conditions</h3>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Weather conditions:</strong></label>
+                <select class="form-control">
+                    <option value="">-- Select --</option>
+                    <option value="Clear/Dry">Clear/Dry</option>
+                    <option value="Rain">Rain</option>
+                    <option value="Snow/Ice">Snow/Ice</option>
+                    <option value="Windy">Windy</option>
+                    <option value="Fog/Mist">Fog/Mist</option>
+                    <option value="Hot">Hot (over 25°C)</option>
+                    <option value="Cold">Cold (below 5°C)</option>
+                    <option value="N/A">N/A - Indoor work</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><strong>Lighting conditions:</strong></label>
+                <select class="form-control">
+                    <option value="">-- Select --</option>
+                    <option value="Good natural daylight">Good natural daylight</option>
+                    <option value="Artificial lighting - adequate">Artificial lighting - adequate</option>
+                    <option value="Artificial lighting - poor">Artificial lighting - poor</option>
+                    <option value="Dawn/Dusk">Dawn/Dusk</option>
+                    <option value="Dark">Dark</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Ground/floor conditions:</strong></label>
+                <select class="form-control">
+                    <option value="">-- Select --</option>
+                    <option value="Dry">Dry</option>
+                    <option value="Wet">Wet</option>
+                    <option value="Icy/Slippery">Icy/Slippery</option>
+                    <option value="Muddy">Muddy</option>
+                    <option value="Uneven">Uneven surface</option>
+                    <option value="Debris/Obstructions">Debris/Obstructions present</option>
+                    <option value="Good">Good condition</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><strong>Did environmental conditions contribute to the incident?</strong></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="env_contributed" id="env_yes">
+                        <label for="env_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="env_contributed" id="env_no">
+                        <label for="env_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Tab 10: Vehicle -->
+    <div class="tab-content" id="tab10">
+        <div class="section-title">10. Vehicle</div>
+        
+        <div class="form-group">
+            <label>Was road vehicle involved?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="vehicle_involved" id="vehicle_yes" onchange="document.getElementById('vehicle_details_section').style.display = this.checked ? 'block' : 'none';">
+                    <label for="vehicle_yes">YES - Give details below</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="vehicle_involved" id="vehicle_no" onchange="document.getElementById('vehicle_details_section').style.display = 'none';">
+                    <label for="vehicle_no">NO</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="vehicle_details_section" style="display: block; margin-top: 20px;">
+            <div class="form-group">
+                <label><strong>Vehicle Type:</strong></label>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-top: 10px;">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="vehicle_lorry">
+                        <label for="vehicle_lorry">Road vehicle (Lorry, Van, Car etc.)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="vehicle_crane">
+                        <label for="vehicle_crane">Road Crane</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="vehicle_forklift">
+                        <label for="vehicle_forklift">Forklift Truck</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="vehicle_plant">
+                        <label for="vehicle_plant">Plant</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="vehicle_other">
+                        <label for="vehicle_other">Other (specify below)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label><strong>Vehicle Number or Registration:</strong></label>
+                    <input type="text" class="form-control" placeholder="Registration or fleet number">
+                </div>
+                <div class="form-group">
+                    <label><strong>Vehicle Status:</strong></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="vehicle_status" id="vehicle_moving">
+                            <label for="vehicle_moving">Moving</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="vehicle_status" id="vehicle_stationary">
+                            <label for="vehicle_stationary">Stationary</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Vehicle details and circumstances:</strong></label>
+                <textarea class="textarea-large" rows="4" placeholder="Describe the vehicle involvement in the incident..."></textarea>
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 15px;">
+            <strong>📋 If third party involved:</strong> Please also complete <a href="https://page.gensparksite.com/9a7e36bd-2b0f-441b-8bd0-fb7e8c10bcf9/4b649b85-6bd1-4242-913e-59a7c5584090/docs_agent/saved/Third_Party_Claim_Form_CSS-TPC-001.html" target="_blank" style="color: #1e3a8a; text-decoration: underline; font-weight: bold;">Form CSS-TPC-001 - Third Party Claim Form ↗</a>
+        </div>
+    </div>
+
+    <!-- Tab 11: Machine/Tool -->
+    <div class="tab-content" id="tab11">
+        <div class="section-title">11. Machine/Tool</div>
+        
+        <div class="form-group">
+            <label>Was machine/tool involved?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="machine_involved" id="machine_yes" onchange="document.getElementById('machine_details_section').style.display = this.checked ? 'block' : 'none';">
+                    <label for="machine_yes">YES - Give details below</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="machine_involved" id="machine_no" onchange="document.getElementById('machine_details_section').style.display = 'none';">
+                    <label for="machine_no">NO - <a href="javascript:void(0);" onclick="showTab(12)" style="color: #1e3a8a; text-decoration: underline; font-weight: bold;">Proceed to Tab 12</a></label>
+                </div>
+            </div>
+        </div>
+
+        <div id="machine_details_section" style="display: block; margin-top: 20px;">
+            <div class="form-row">
+                <div class="form-group">
+                    <label><strong>Machine/Tool Category:</strong></label>
+                    <select class="form-control" id="machine_category">
+                        <option value="">-- Select category --</option>
+                        <option value="Hand Tools">Hand Tools (Manual)</option>
+                        <option value="Power Tools">Power Tools (Electric/Battery)</option>
+                        <option value="Pneumatic Tools">Pneumatic Tools (Air-powered)</option>
+                        <option value="Hydraulic Equipment">Hydraulic Equipment</option>
+                        <option value="Construction Machinery">Construction Machinery</option>
+                        <option value="Lifting Equipment">Lifting Equipment (Hoists, Cranes)</option>
+                        <option value="Access Equipment">Access Equipment (Ladders, Scaffolds, MEWPs)</option>
+                        <option value="Cutting/Grinding">Cutting/Grinding Equipment</option>
+                        <option value="Welding Equipment">Welding/Hot Work Equipment</option>
+                        <option value="Compaction Equipment">Compaction Equipment (Rollers, Plates)</option>
+                        <option value="Other">Other (specify below)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><strong>Ownership:</strong></label>
+                    <select class="form-control" id="machine_ownership">
+                        <option value="">-- Select --</option>
+                        <option value="Own Property">Own Property</option>
+                        <option value="Hired">Hired</option>
+                        <option value="Subcontractor">Subcontractor's Equipment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label><strong>Make/Manufacturer:</strong></label>
+                    <input type="text" class="form-control" placeholder="e.g., Hilti, Makita, JCB">
+                </div>
+                <div class="form-group">
+                    <label><strong>Model/Serial/ID:</strong></label>
+                    <input type="text" class="form-control" placeholder="Model number or serial/ID">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label><strong>Was it in use at time of incident?</strong></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="machine_in_use" id="machine_use_yes">
+                            <label for="machine_use_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="machine_in_use" id="machine_use_no">
+                            <label for="machine_use_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>Was it correct for the task?</strong></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="machine_correct" id="machine_correct_yes">
+                            <label for="machine_correct_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="machine_correct" id="machine_correct_no">
+                            <label for="machine_correct_no">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Machine/tool details and circumstances:</strong></label>
+                <textarea class="textarea-large" rows="4" placeholder="Describe the machine/tool involvement, condition, defects, misuse, etc."></textarea>
+            </div>
+
+            <div class="warning-box" style="margin-top: 15px;">
+                <strong>⚠️ Service Strikes:</strong> Was a utility/service involved? Service strikes should use <a href="https://page.gensparksite.com/9a7e36bd-2b0f-441b-8bd0-fb7e8c10bcf9/e94cdf05-2669-4dff-a1ef-0122f562dac8/docs_agent/saved/Service_Strike_Report_Form_UK_Final_SHEQ.html" target="_blank" style="color: #1e3a8a; text-decoration: underline; font-weight: bold;">Form CSS-SSR-001 - Service Strike Incident Report Form ↗</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 12: Occupational Ill Health -->
+    <div class="tab-content" id="tab12">
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>ℹ️ Do NOT complete for Accident/Incident - This section is for Occupational Ill Health only</strong>
+        </div>
+
+        <div class="section-title">12. Occupational Ill Health</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Date identified:</strong></label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="form-group">
+                <label><strong>Who by:</strong></label>
+                <input type="text" class="form-control" placeholder="Usually by Doctor or Person Concerned">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><strong>Nature of illness:</strong> <a href="https://www.hse.gov.uk/riddor/occupational-diseases.htm" target="_blank" style="font-size: 11px; color: #0ea5e9;">(HSE RIDDOR Guidance)</a></label>
+                <select class="form-control" id="nature_illness" onchange="document.getElementById('illness_other_field').style.display = this.value === 'Other' ? 'block' : 'none';">
+                    <option value="">-- Select reportable disease --</option>
+                    <option value="Carpal Tunnel Syndrome">Carpal Tunnel Syndrome (due to hand-held power tools)</option>
+                    <option value="Cramp of Hand or Forearm">Cramp of Hand or Forearm (chronic, due to repetitive movement)</option>
+                    <option value="Occupational Dermatitis">Occupational Dermatitis (chemical/biological skin irritant exposure)</option>
+                    <option value="Hand-Arm Vibration Syndrome">Hand-Arm Vibration Syndrome (HAVS - due to vibrating tools)</option>
+                    <option value="Occupational Asthma">Occupational Asthma (respiratory sensitiser exposure)</option>
+                    <option value="Tendonitis">Tendonitis (hand/forearm - frequent repetitive movements)</option>
+                    <option value="Tenosynovitis">Tenosynovitis (hand/forearm - frequent repetitive movements)</option>
+                    <option value="Occupational Cancer">Occupational Cancer (carcinogen exposure)</option>
+                    <option value="Disease from Biological Agent">Disease caused by Biological Agent</option>
+                    <option value="Disease from Mutagen">Disease caused by Mutagen</option>
+                    <option value="Other">Other (specify below)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><strong>Date reported:</strong></label>
+                <input type="text" class="form-control" placeholder="To Manager or Supervisor - DD/MM/YYYY">
+            </div>
+        </div>
+
+        <div id="illness_other_field" style="display: none; margin-top: 15px;">
+            <div class="form-group">
+                <label><strong>Specify other illness:</strong></label>
+                <input type="text" class="form-control" placeholder="Please specify the nature of illness (see Doctor's Certificate)">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>State circumstances and location:</strong></label>
+            <textarea class="textarea-large" rows="4" placeholder="Describe the circumstances and location where the occupational ill health occurred..."></textarea>
+        </div>
+    </div>
+
+    <!-- Tab 13: Root Cause Analysis -->
+    <div class="tab-content" id="tab13">
+        <div class="section-title">13. Root Cause Analysis</div>
+        
+        <p style="font-weight: bold; margin-bottom: 15px;">Select ALL causes that contributed (direct and underlying)</p>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #f0f9ff; padding: 10px; border-left: 4px solid #3b82f6; margin-bottom: 10px;">Human Error</h4>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="h01">
+                <label for="h01">H01: Not allowing for conditions</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h02">
+                <label for="h02">H02: Not paying attention</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h03">
+                <label for="h03">H03: Not using correct equipment</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h04">
+                <label for="h04">H04: Misusing equipment</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h05">
+                <label for="h05">H05: Not following procedure</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h06">
+                <label for="h06">H06: Inexperience/lack of skill</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h07">
+                <label for="h07">H07: Taking shortcuts</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h08">
+                <label for="h08">H08: Fatigue</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h09">
+                <label for="h09">H09: Misjudgement</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h10">
+                <label for="h10">H10: Complacency</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h11">
+                <label for="h11">H11: Horseplay</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="h12">
+                <label for="h12">H12: Other</label>
+            </div>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #f0fdf4; padding: 10px; border-left: 4px solid #10b981; margin-bottom: 10px;">Technical</h4>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="t01">
+                <label for="t01">T01: Equipment/machinery failure</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="t02">
+                <label for="t02">T02: Structural/building defect</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="t03">
+                <label for="t03">T03: Poor design</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="t04">
+                <label for="t04">T04: Inadequate maintenance</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="t05">
+                <label for="t05">T05: Inadequate lighting</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="t06">
+                <label for="t06">T06: Poor access/egress</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="t07">
+                <label for="t07">T07: Workplace layout issues</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="t08">
+                <label for="t08">T08: Other</label>
+            </div>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #fef3c7; padding: 10px; border-left: 4px solid #f59e0b; margin-bottom: 10px;">Management</h4>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc01">
+                <label for="mc01">MC01: Inadequate rules/procedures</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc02">
+                <label for="mc02">MC02: Poor supervision</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc03">
+                <label for="mc03">MC03: Inadequate training</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc04">
+                <label for="mc04">MC04: Unsafe system of work</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc05">
+                <label for="mc05">MC05: Inadequate PPE provision</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc06">
+                <label for="mc06">MC06: Poor communication</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc07">
+                <label for="mc07">MC07: Inadequate risk assessment</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc08">
+                <label for="mc08">MC08: Time pressure</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="mc09">
+                <label for="mc09">MC09: Other</label>
+            </div>
+        </div>
+
+        <h4 style="color: #1e3a8a; font-size: 14px; background: #fce7f3; padding: 10px; border-left: 4px solid #ec4899; margin-bottom: 10px;">Miscellaneous</h4>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-bottom: 20px;">
+            <div class="checkbox-item">
+                <input type="checkbox" id="ms01">
+                <label for="ms01">MS01: Pre-existing medical condition</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="ms02">
+                <label for="ms02">MS02: Vandalism/sabotage</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="ms03">
+                <label for="ms03">MS03: Inadequate clothing</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="ms04">
+                <label for="ms04">MS04: Act of nature</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="ms05">
+                <label for="ms05">MS05: Third party action</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="ms06">
+                <label for="ms06">MS06: Other</label>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: linear-gradient(to right, #f8fafc, #ffffff); border: 2px solid #3b82f6; border-radius: 8px; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);">
+            <h4 style="color: #1e3a8a; font-size: 14px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #3b82f6;">⚖️ Percentage Attribution (must total 100%):</h4>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Human Error: %</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Technical: %</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Management: %</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Miscellaneous: %</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Main Causes (in words):</strong></label>
+            <textarea class="textarea-large" rows="4" placeholder="Summarize the main root causes identified above..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label><strong>Actions to Prevent Recurrence: <span style="color: red;">*</span></strong></label>
+            
+            <table class="table-responsive" style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Action Required</th>
+                        <th style="width: 20%;">Responsible Person</th>
+                        <th style="width: 15%;">Target Date</th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 10%;"></th>
+                    </tr>
+                </thead>
+                <tbody id="actions_table_body">
+                    <tr>
+                        <td><textarea class="form-control" rows="2" placeholder="Describe the corrective action"></textarea></td>
+                        <td><input type="text" class="form-control" placeholder="Name"></td>
+                        <td><input type="text" class="form-control" placeholder="DD/MM/YYYY"></td>
+                        <td>
+                            <select class="form-control">
+                                <option value="">-- Select --</option>
+                                <option value="Pending">Pending</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Complete">Complete</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button type="button" onclick="addActionRow()" style="margin-top: 10px; padding: 10px 20px; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); transition: all 0.3s ease;">
+                ➕ Add Another Action
+            </button>
+        </div>
+
+        <div class="form-group" style="margin-top: 30px; padding: 15px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 6px;">
+            <label style="color: #991b1b; font-weight: bold; font-size: 13px;">⚠️ Could this incident have been more serious? (Near miss potential)</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" name="near_miss_potential" id="nmp_yes" onchange="document.getElementById('nmp_details').style.display = this.checked ? 'block' : 'none';">
+                    <label for="nmp_yes">Yes - Explain below</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" name="near_miss_potential" id="nmp_no" onchange="document.getElementById('nmp_details').style.display = 'none';">
+                    <label for="nmp_no">No</label>
+                </div>
+            </div>
+            <div id="nmp_details" style="display: none; margin-top: 10px;">
+                <textarea class="textarea-large" rows="2" placeholder="Explain how this incident could have been more serious..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 14: Sign-off and Approval -->
+    <div class="tab-content" id="tab14">
+        <div class="section-title">14. Sign-off and Approval</div>
+        
+        <p style="font-style: italic; margin-bottom: 20px;">I verify that this investigation is sufficient and complete; that the cause has been identified and that suitable action(s) to prevent recurrence have been found and will be implemented.</p>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Person in Charge (Name):</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Position:</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #64748b; margin: 30px 0; padding-top: 20px;">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>SHEQ Consultant - Signed:</label>
+                    <input type="text" class="form-control" value="Jeremy Bromley" placeholder="SHEQ Consultant signature">
+                </div>
+                <div class="form-group">
+                    <label>Date:</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 30px; border-left: 4px solid #1e3a8a;">
+            <strong>⚖️ Legal Questionnaire:</strong> If the injured Party or Parties are likely to make a claim, please complete <a href="javascript:void(0);" onclick="openLegalQuestionnaire()" style="color: #1e3a8a; text-decoration: underline; font-weight: bold; cursor: pointer;">The Legal Questionnaire on Tab 15 ↗</a>
+        </div>
+    </div>
+
+    <!-- Tab Navigation Buttons -->
+    <div class="tab-navigation" style="font-size: 16px;">
+        <button class="nav-button" id="prevBtn" onclick="changeTab(-1)">← Previous</button>
+        <button class="action-button" onclick="saveForm()">💾 Save &amp; Exit</button>
+        <button class="action-button" onclick="printForm()">🖨️ Print to PDF</button>
+        <button class="nav-button" id="nextBtn" onclick="changeTab(1)">Next →</button>
+    </div>
+
+    <div class="footer">
+        <strong>Form Ref: CSS-HSA-001 | Version 2.0 | January 2025 | Common Sense Safety</strong><br>
+        CONFIDENTIAL - For Official Use Only<br>
+        © 2025 Common Sense Safety<br>
+        <div style="font-size: 10px; margin-top: 8px; color: #94a3b8;">
+            <strong>Data Protection Notice:</strong> This form contains personal data processed under GDPR. Data will be retained for 6 years (or longer if required by HSE/legal proceedings) for compliance with health &amp; safety legislation.
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        let currentTab = 1;
+        const totalTabs = 14; // Tab 15 (Legal Questionnaire) opens externally
+
+        function showTab(n) {
+            // Hide all tabs
+            const tabs = document.getElementsByClassName('tab-content');
+            const tabButtons = document.getElementsByClassName('tab-button');
+
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+
+            // Show the current tab
+            currentTab = n;
+            document.getElementById('tab' + n).classList.add('active');
+            tabButtons[n - 1].classList.add('active');
+
+            // Update progress indicator
+            document.getElementById('progress-text').textContent = 'Tab ' + currentTab + ' of ' + totalTabs;
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = (currentTab === 1);
+            document.getElementById('nextBtn').disabled = (currentTab === totalTabs);
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function changeTab(direction) {
+            const newTab = currentTab + direction;
+            if (newTab >= 1 && newTab <= totalTabs) {
+                showTab(newTab);
+            }
+        }
+
+        function openLegalQuestionnaire() {
+            // Open Legal Questionnaire in new tab
+            const legalQuestUrl = 'https://page.gensparksite.com/66c5ef3b-3123-4f0e-b103-16b111adeb74/d4eae17f-abf3-446a-b07e-556615bb417b/docs_agent/saved/CSS-HSA-101-LQ-Legal-Questionnaire.html';
+            window.open(legalQuestUrl, '_blank');
+        }
+
+        // Handle scene photo upload
+        function handleScenePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('scene_preview_img');
+                    const previewContainer = document.getElementById('scene_image_preview');
+                    const statusDiv = document.getElementById('scene_upload_status');
+                    
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    statusDiv.innerHTML = '✅ Photo uploaded: ' + file.name;
+                    
+                    // Store image data in localStorage
+                    localStorage.setItem('scene_photo', e.target.result);
+                    localStorage.setItem('scene_photo_name', file.name);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Clear scene photo
+        function clearScenePhoto() {
+            document.getElementById('scene_photo_upload').value = '';
+            document.getElementById('scene_preview_img').src = '';
+            document.getElementById('scene_image_preview').style.display = 'none';
+            document.getElementById('scene_upload_status').innerHTML = '';
+            localStorage.removeItem('scene_photo');
+            localStorage.removeItem('scene_photo_name');
+        }
+
+        // Add witness row dynamically
+        let witnessCounter = 1;
+        function addWitnessRow() {
+            witnessCounter++;
+            const tbody = document.getElementById('witness_table_body');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="text" class="form-control" placeholder="Witness name"></td>
+                <td><input type="text" class="form-control" placeholder="Position/Role"></td>
+                <td>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="statement${witnessCounter}" id="stmt${witnessCounter}_yes">
+                            <label for="stmt${witnessCounter}_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="statement${witnessCounter}" id="stmt${witnessCounter}_no">
+                            <label for="stmt${witnessCounter}_no">No</label>
+                        </div>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        // Add corrective action row dynamically
+        function addActionRow() {
+            const tbody = document.getElementById('actions_table_body');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><textarea class="form-control" rows="2" placeholder="Describe the corrective action"></textarea></td>
+                <td><input type="text" class="form-control" placeholder="Name"></td>
+                <td><input type="text" class="form-control" placeholder="DD/MM/YYYY"></td>
+                <td>
+                    <select class="form-control">
+                        <option value="">-- Select --</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Complete">Complete</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="button" onclick="this.closest('tr').remove()" style="background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 11px;">Remove</button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+
+
+        // Save form data to browser localStorage
+        function saveForm() {
+            const formData = {};
+
+            // Get all input fields
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea, select');
+            inputs.forEach(input => {
+                if (input.id || input.name) {
+                    formData[input.id || input.name] = input.value;
+                }
+            });
+
+            // Get all radio buttons
+            const radios = document.querySelectorAll('input[type="radio"]:checked');
+            radios.forEach(radio => {
+                formData[radio.name] = radio.id;
+            });
+
+            // Get all checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                formData[checkbox.id] = checkbox.checked;
+            });
+
+            // Save to localStorage
+            localStorage.setItem('accidentReportForm', JSON.stringify(formData));
+
+            alert('Form saved successfully! Your data will be available when you return.');
+        }
+
+        // Load form data from localStorage
+        function loadFormData() {
+            const savedData = localStorage.getItem('accidentReportForm');
+            if (!savedData) return;
+
+            const formData = JSON.parse(savedData);
+
+            // Restore text inputs, textareas, and selects
+            Object.keys(formData).forEach(key => {
+                const element = document.getElementById(key) || document.querySelector(`[name="${key}"]`);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = formData[key];
+                    } else if (element.type === 'radio') {
+                        const radio = document.getElementById(formData[key]);
+                        if (radio) radio.checked = true;
+                    } else {
+                        element.value = formData[key];
+                    }
+                }
+            });
+
+            // Restore scene photo if it exists
+            const scenePhoto = localStorage.getItem('scene_photo');
+            const scenePhotoName = localStorage.getItem('scene_photo_name');
+            if (scenePhoto) {
+                const preview = document.getElementById('scene_preview_img');
+                const previewContainer = document.getElementById('scene_image_preview');
+                const statusDiv = document.getElementById('scene_upload_status');
+                
+                preview.src = scenePhoto;
+                previewContainer.style.display = 'block';
+                statusDiv.innerHTML = '✅ Photo uploaded: ' + scenePhotoName;
+            }
+        }
+
+        // Print form to PDF
+        function printForm() {
+            window.print();
+        }
+
+        // Handle injury dot selection
+        let selectedInjuries = [];
+
+        function toggleInjury(dot) {
+            const location = dot.getAttribute('data-location');
+            
+            if (dot.classList.contains('selected')) {
+                // Deselect
+                dot.classList.remove('selected');
+                selectedInjuries = selectedInjuries.filter(injury => injury !== location);
+            } else {
+                // Select
+                dot.classList.add('selected');
+                selectedInjuries.push(location);
+            }
+
+            // Update the display
+            updateInjuryList();
+        }
+
+        function updateInjuryList() {
+            const injuryListElement = document.getElementById('selected-injuries');
+            
+            if (selectedInjuries.length === 0) {
+                injuryListElement.textContent = 'None selected - click on body diagram above';
+                injuryListElement.style.color = '#1e3a8a';
+            } else {
+                injuryListElement.textContent = selectedInjuries.join(', ');
+                injuryListElement.style.color = '#dc2626';
+                injuryListElement.style.fontWeight = 'bold';
+            }
+        }
+
+        // Handle hand injury dot selection
+        let selectedHandInjuries = [];
+
+        function toggleHandInjury(dot) {
+            const location = dot.getAttribute('data-hand-location');
+            
+            if (dot.classList.contains('selected')) {
+                // Deselect
+                dot.classList.remove('selected');
+                selectedHandInjuries = selectedHandInjuries.filter(injury => injury !== location);
+            } else {
+                // Select
+                dot.classList.add('selected');
+                selectedHandInjuries.push(location);
+            }
+
+            // Update the display
+            updateHandInjuryList();
+        }
+
+        function updateHandInjuryList() {
+            const handInjuryListElement = document.getElementById('selected-hand-injuries');
+            
+            if (selectedHandInjuries.length === 0) {
+                handInjuryListElement.textContent = 'None selected - click on hand diagrams above';
+                handInjuryListElement.style.color = '#1e3a8a';
+            } else {
+                handInjuryListElement.textContent = selectedHandInjuries.join(', ');
+                handInjuryListElement.style.color = '#dc2626';
+                handInjuryListElement.style.fontWeight = 'bold';
+            }
+        }
+
+
+
+        // Information panel controls
+        function toggleInfoPanel(side) {
+            const panel = document.getElementById('info-panel-' + side);
+            const otherPanel = document.getElementById('info-panel-' + (side === 'left' ? 'right' : 'left'));
+            
+            // Close the other panel
+            otherPanel.classList.remove('show');
+            
+            // Toggle this panel
+            panel.classList.toggle('show');
+        }
+
+        function closeInfoPanel(side) {
+            const panel = document.getElementById('info-panel-' + side);
+            panel.classList.remove('show');
+        }
+
+        // Close info panels when clicking outside
+        document.addEventListener('click', function(event) {
+            const leftCorner = document.querySelector('.info-corner.top-left');
+            const rightCorner = document.querySelector('.info-corner.top-right');
+            const leftPanel = document.getElementById('info-panel-left');
+            const rightPanel = document.getElementById('info-panel-right');
+            
+            if (!leftCorner.contains(event.target) && !leftPanel.contains(event.target)) {
+                leftPanel.classList.remove('show');
+            }
+            
+            if (!rightCorner.contains(event.target) && !rightPanel.contains(event.target)) {
+                rightPanel.classList.remove('show');
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            showTab(1);
+            loadFormData();
+            
+            // Auto-populate date completed if empty
+            const dateField = document.getElementById('date_completed');
+            if (dateField && !dateField.value) {
+                const today = new Date();
+                const day = String(today.getDate()).padStart(2, '0');
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const year = today.getFullYear();
+                dateField.value = day + '/' + month + '/' + year;
+            }
+        });
+    </script>
+
+</body></html>
