@@ -2899,6 +2899,7 @@
         <button class="action-button" onclick="saveForm()">💾 Save &amp; Exit</button>
         <button class="action-button" onclick="generatePDF()">📄 Download PDF</button>
         <button class="action-button" onclick="emailForm()">📧 Email Form</button>
+        <button class="action-button" onclick="openKPIDashboard()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; font-weight: bold;">📊 View KPI Dashboard</button>
         <button class="nav-button" id="nextBtn" onclick="changeTab(1)">Next →</button>
     </div>
 
@@ -3066,7 +3067,10 @@
             // Save to localStorage
             localStorage.setItem('accidentReportForm', JSON.stringify(formData));
 
-            alert('Form saved successfully! Your data will be available when you return.');
+            // Also save to KPI database
+            saveAccidentDataToKPI(formData);
+
+            alert('Form saved successfully! Your data will be available when you return and has been added to the KPI database.');
         }
 
         // Load form data from localStorage
@@ -3103,6 +3107,95 @@
                 previewContainer.style.display = 'block';
                 statusDiv.innerHTML = '✅ Photo uploaded: ' + scenePhotoName;
             }
+        }
+
+        // Save accident data to KPI database (localStorage-based aggregation)
+        function saveAccidentDataToKPI(formData) {
+            try {
+                // Get existing KPI data or create new array
+                let kpiDatabase = localStorage.getItem('accidentKPIDatabase');
+                let accidentRecords = kpiDatabase ? JSON.parse(kpiDatabase) : [];
+
+                // Create a KPI record from the form data
+                const kpiRecord = {
+                    id: formData.report_number || `ACC-${Date.now()}`,
+                    timestamp: new Date().toISOString(),
+                    dateOfIncident: formData.incident_date || '',
+                    timeOfIncident: formData.incident_time || '',
+                    reportNumber: formData.report_number || '',
+
+                    // Person details
+                    personName: formData.injured_name || '',
+                    personAge: formData.injured_age || '',
+                    personGender: formData.injured_gender || '',
+
+                    // Incident classification
+                    incidentType: formData.accident_type || '',
+                    riddorReportable: formData.riddor_reportable === 'yes',
+                    riddorType: formData.riddor_type || '',
+
+                    // Injury details
+                    injuryType: formData.injury_type || '',
+                    bodyPartAffected: formData.injury_location || selectedInjuries.join(', ') || '',
+                    injurySeverity: formData.injury_severity || '',
+
+                    // Time loss
+                    daysLost: parseInt(formData.days_lost) || 0,
+                    lostTimeInjury: (parseInt(formData.days_lost) || 0) > 0,
+
+                    // Investigation status
+                    investigationStatus: formData.investigation_status || 'Pending',
+                    investigationComplete: formData.investigation_complete === 'true',
+
+                    // Root cause
+                    rootCauseCategory: formData.root_cause_category || '',
+                    rootCauseCode: formData.root_cause_code || '',
+                    contributingFactors: formData.contributing_factors || '',
+
+                    // Location and environment
+                    location: formData.incident_location || '',
+                    department: formData.department || '',
+
+                    // Actions
+                    correctiveActions: formData.corrective_action || '',
+
+                    // Metadata
+                    completedBy: formData.completed_by || '',
+                    dateCompleted: formData.date_completed || ''
+                };
+
+                // Check if record already exists (update) or add new
+                const existingIndex = accidentRecords.findIndex(record => record.id === kpiRecord.id);
+                if (existingIndex >= 0) {
+                    accidentRecords[existingIndex] = kpiRecord;
+                } else {
+                    accidentRecords.push(kpiRecord);
+                }
+
+                // Save back to localStorage
+                localStorage.setItem('accidentKPIDatabase', JSON.stringify(accidentRecords));
+
+                console.log('Accident data saved to KPI database:', kpiRecord);
+            } catch (error) {
+                console.error('Error saving to KPI database:', error);
+            }
+        }
+
+        // Open KPI Dashboard
+        function openKPIDashboard() {
+            // Save current form state before navigating
+            const confirmNav = confirm(
+                '📊 Opening KPI Dashboard\n\n' +
+                'This will navigate to the KPI Dashboard which shows aggregated data from all accident reports.\n\n' +
+                'Would you like to save your current form before navigating?'
+            );
+
+            if (confirmNav) {
+                saveForm();
+            }
+
+            // Navigate to KPI dashboard
+            window.location.href = 'CSS-HSA-001-KPI.html';
         }
 
         // Generate PDF with proper formatting

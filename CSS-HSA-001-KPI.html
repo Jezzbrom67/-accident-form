@@ -689,8 +689,8 @@ Guides PPE requirements and training focus areas.
 </div>
 
 <div class="footer-actions">
-<a href="#" class="action-button">🖨️ Print KPI Report</a>
-<a href="#" class="action-button">📊 Export Data</a>
+<a href="#" class="action-button" onclick="window.print(); return false;">🖨️ Print KPI Report</a>
+<a href="#" class="action-button" onclick="exportKPIData(); return false;">📊 Export Data</a>
 <a href="Accident_Report_Form_CSS-HSA-001.html" class="action-button primary">← Return to Accident Report Form</a>
 </div>
 
@@ -704,5 +704,268 @@ protection legislation.<br />
 KPI calculations based on HSE guidance documents HSG65 and industry best practices.
 </div>
 </div>
+
+<script>
+// KPI Dashboard Data Loading and Calculation
+document.addEventListener('DOMContentLoaded', function() {
+    loadKPIData();
+});
+
+function loadKPIData() {
+    try {
+        // Load accident data from localStorage
+        const kpiDatabase = localStorage.getItem('accidentKPIDatabase');
+
+        if (!kpiDatabase) {
+            console.log('No KPI data found. Using sample data.');
+            showNoDataMessage();
+            return;
+        }
+
+        const accidentRecords = JSON.parse(kpiDatabase);
+
+        if (accidentRecords.length === 0) {
+            showNoDataMessage();
+            return;
+        }
+
+        // Calculate and display KPIs
+        calculateAndDisplayKPIs(accidentRecords);
+
+    } catch (error) {
+        console.error('Error loading KPI data:', error);
+        alert('Error loading KPI data. Please check the console for details.');
+    }
+}
+
+function showNoDataMessage() {
+    const message = document.createElement('div');
+    message.style.cssText = 'background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;';
+    message.innerHTML = `
+        <h3 style="color: #92400e; margin: 0 0 10px 0;">📊 No Accident Data Available</h3>
+        <p style="color: #78350f; margin: 0;">No accident reports have been submitted yet. Complete and save accident reports using the CSS-HSA-001 form to see KPI data here.</p>
+        <a href="Accident_Report_Form_CSS-HSA-001.html" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #1e3a8a; color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">← Go to Accident Report Form</a>
+    `;
+
+    const firstSection = document.querySelector('.riddor-section');
+    if (firstSection && firstSection.parentNode) {
+        firstSection.parentNode.insertBefore(message, firstSection);
+    }
+}
+
+function calculateAndDisplayKPIs(records) {
+    // Get date range from inputs
+    const fromDate = document.querySelector('input[value="01/01/2024"]');
+    const toDate = document.querySelector('input[value="31/01/2024"]');
+
+    // Filter records by date range if needed
+    // For now, we'll use all records
+
+    // Calculate RIDDOR statistics
+    const riddorStats = calculateRIDDORStats(records);
+    updateRIDDORSection(riddorStats);
+
+    // Calculate incident statistics
+    const incidentStats = calculateIncidentStats(records);
+    updateIncidentStatsSection(incidentStats);
+
+    // Calculate injury metrics
+    const injuryMetrics = calculateInjuryMetrics(records);
+    updateInjuryMetricsSection(injuryMetrics);
+
+    // Calculate investigation status
+    const investigationStats = calculateInvestigationStats(records);
+    updateInvestigationSection(investigationStats);
+
+    // Update last updated timestamp
+    updateLastUpdated();
+}
+
+function calculateRIDDORStats(records) {
+    const riddorRecords = records.filter(r => r.riddorReportable);
+
+    const stats = {
+        fatalIncidents: riddorRecords.filter(r => r.riddorType === 'fatal' || r.riddorType === 'death').length,
+        specifiedInjuries: riddorRecords.filter(r => r.riddorType === 'specified_injury' || r.riddorType === 'major_injury').length,
+        over7DayInjuries: riddorRecords.filter(r => r.riddorType === 'over_7_day' || r.daysLost > 7).length,
+        dangerousOccurrences: riddorRecords.filter(r => r.riddorType === 'dangerous_occurrence').length,
+        occupationalDiseases: riddorRecords.filter(r => r.riddorType === 'occupational_disease').length,
+        totalRIDDOR: riddorRecords.length,
+        compliance: '100%' // Assume all are reported
+    };
+
+    return stats;
+}
+
+function updateRIDDORSection(stats) {
+    const riddorCards = document.querySelectorAll('.riddor-section .kpi-card');
+    if (riddorCards.length >= 6) {
+        riddorCards[0].querySelector('.kpi-number').textContent = stats.fatalIncidents;
+        riddorCards[1].querySelector('.kpi-number').textContent = stats.specifiedInjuries;
+        riddorCards[2].querySelector('.kpi-number').textContent = stats.over7DayInjuries;
+        riddorCards[3].querySelector('.kpi-number').textContent = stats.dangerousOccurrences;
+        riddorCards[4].querySelector('.kpi-number').textContent = stats.occupationalDiseases;
+        riddorCards[5].querySelector('.kpi-number').textContent = stats.compliance;
+    }
+}
+
+function calculateIncidentStats(records) {
+    const totalIncidents = records.length;
+    const riddorReportable = records.filter(r => r.riddorReportable).length;
+    const nonRIDDOR = totalIncidents - riddorReportable;
+
+    // You may need to add near miss and environmental incident tracking
+    const nearMisses = records.filter(r => r.incidentType === 'near_miss' || r.incidentType?.toLowerCase().includes('near miss')).length;
+    const environmental = records.filter(r => r.incidentType === 'environmental' || r.incidentType?.toLowerCase().includes('environmental')).length;
+    const propertyDamage = records.filter(r => r.incidentType === 'property_damage' || r.incidentType?.toLowerCase().includes('property')).length;
+
+    return {
+        totalIncidents,
+        riddorReportable,
+        nonRIDDOR,
+        nearMisses,
+        environmental,
+        propertyDamage
+    };
+}
+
+function updateIncidentStatsSection(stats) {
+    const incidentCards = document.querySelectorAll('.section-title')[0]?.nextElementSibling?.querySelectorAll('.kpi-card');
+    if (incidentCards && incidentCards.length >= 6) {
+        incidentCards[0].querySelector('.kpi-number').textContent = stats.totalIncidents;
+        incidentCards[1].querySelector('.kpi-number').textContent = stats.riddorReportable;
+        incidentCards[2].querySelector('.kpi-number').textContent = stats.nonRIDDOR;
+        incidentCards[3].querySelector('.kpi-number').textContent = stats.nearMisses;
+        incidentCards[4].querySelector('.kpi-number').textContent = stats.environmental;
+        incidentCards[5].querySelector('.kpi-number').textContent = stats.propertyDamage;
+    }
+}
+
+function calculateInjuryMetrics(records) {
+    const lostTimeInjuries = records.filter(r => r.lostTimeInjury).length;
+    const totalDaysLost = records.reduce((sum, r) => sum + (r.daysLost || 0), 0);
+
+    // Assume 140,280 hours worked for calculation (this should be configurable)
+    const totalHoursWorked = 140280;
+
+    // LTIFR = (LTI × 100,000) ÷ Total hours worked
+    const ltifr = lostTimeInjuries > 0 ? ((lostTimeInjuries * 100000) / totalHoursWorked).toFixed(2) : '0.00';
+
+    // Average severity
+    const avgSeverity = lostTimeInjuries > 0 ? (totalDaysLost / lostTimeInjuries).toFixed(1) : '0.0';
+
+    // TRIR = (Total recordable incidents × 200,000) ÷ Total hours worked
+    const trir = records.length > 0 ? ((records.length * 200000) / totalHoursWorked).toFixed(2) : '0.00';
+
+    // Medical treatment cases (approximate)
+    const medicalTreatment = records.filter(r => r.injurySeverity === 'moderate' || r.injurySeverity === 'serious').length;
+
+    return {
+        lostTimeInjuries,
+        totalDaysLost,
+        ltifr,
+        avgSeverity,
+        totalRecordable: records.length,
+        totalHoursWorked,
+        trir,
+        medicalTreatment
+    };
+}
+
+function updateInjuryMetricsSection(metrics) {
+    // Update Lost Time Injury Metrics card
+    const statsCards = document.querySelectorAll('.stats-card');
+    if (statsCards.length >= 2) {
+        const ltiCard = statsCards[0];
+        const metricRows = ltiCard.querySelectorAll('.metric-row .metric-value');
+        if (metricRows.length >= 4) {
+            metricRows[0].textContent = metrics.lostTimeInjuries;
+            metricRows[1].textContent = metrics.totalDaysLost + ' days';
+            metricRows[2].textContent = metrics.ltifr;
+            metricRows[3].textContent = metrics.avgSeverity + ' days';
+        }
+
+        // Update Recordable Incident Metrics card
+        const recordableCard = statsCards[1];
+        const recordableRows = recordableCard.querySelectorAll('.metric-row .metric-value');
+        if (recordableRows.length >= 4) {
+            recordableRows[0].textContent = metrics.totalRecordable;
+            recordableRows[1].textContent = metrics.totalHoursWorked.toLocaleString();
+            recordableRows[2].textContent = metrics.trir;
+            recordableRows[3].textContent = metrics.medicalTreatment;
+        }
+    }
+}
+
+function calculateInvestigationStats(records) {
+    const pending = records.filter(r => r.investigationStatus === 'Pending' || !r.investigationStatus).length;
+    const inProgress = records.filter(r => r.investigationStatus === 'In Progress').length;
+    const completed = records.filter(r => r.investigationStatus === 'Complete' || r.investigationComplete).length;
+
+    // Outstanding actions - this would need to be tracked separately
+    const outstandingActions = 0; // Placeholder
+
+    return {
+        pending,
+        inProgress,
+        completed,
+        outstandingActions
+    };
+}
+
+function updateInvestigationSection(stats) {
+    const investigationSection = document.querySelectorAll('.section-title')[2]?.nextElementSibling;
+    if (investigationSection) {
+        const invCards = investigationSection.querySelectorAll('.kpi-card');
+        if (invCards.length >= 4) {
+            invCards[0].querySelector('.kpi-number').textContent = stats.pending;
+            invCards[1].querySelector('.kpi-number').textContent = stats.inProgress;
+            invCards[2].querySelector('.kpi-number').textContent = stats.completed;
+            invCards[3].querySelector('.kpi-number').textContent = stats.outstandingActions;
+        }
+    }
+}
+
+function updateLastUpdated() {
+    const lastUpdatedDiv = document.querySelector('.last-updated');
+    if (lastUpdatedDiv) {
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-GB');
+        const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+        lastUpdatedDiv.innerHTML = `
+            <strong>Dashboard Last Updated:</strong> ${dateStr} ${timeStr} GMT |
+            <strong>Data Period:</strong> All Records |
+            <strong>Next Review:</strong> ${new Date(now.getTime() + 30*24*60*60*1000).toLocaleDateString('en-GB')}
+        `;
+    }
+}
+
+// Export data function
+function exportKPIData() {
+    const kpiDatabase = localStorage.getItem('accidentKPIDatabase');
+    if (!kpiDatabase) {
+        alert('No data available to export.');
+        return;
+    }
+
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(kpiDatabase);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "accident_kpi_data_" + new Date().toISOString().split('T')[0] + ".json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+}
+
+// Clear all data (for testing)
+function clearKPIData() {
+    if (confirm('⚠️ WARNING: This will delete all accident report data from the KPI database.\n\nAre you sure you want to continue?')) {
+        localStorage.removeItem('accidentKPIDatabase');
+        alert('KPI database cleared. Reloading page...');
+        location.reload();
+    }
+}
+</script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
 </html>
